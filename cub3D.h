@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/08/30 16:56:59 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/09/06 17:06:12 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,22 @@
 /* ************************************************************************** */
 /*									STRUCTURES								  */
 /* ************************************************************************** */
+
+typedef struct s_stack
+{
+	int	x;
+	int	y;
+	struct s_stack	*next;
+}	t_stack;
+
+
+typedef struct s_player
+{
+	int	flag;
+	int	x;
+	int	y;
+}	t_player;
+
 
 typedef	struct s_lst
 {
@@ -70,9 +86,17 @@ int		valid_line(char *line);
 
 int		add_node(char *line, t_lst	**lst);
 void	free_lst(t_lst *lst);
+void	free_map(char **map);
 void	free_get_next_line(int fd, char **line);
 //void	delete_node(t_lst **lst);
 int		parsing(char *filename, t_data *data);
+void	parse_map(t_lst *raw_map, t_data *data);
+int		check_player_and_width(char *line, int *width, t_player *player, int curr_height);
+void	create_map(t_lst *raw_map, t_data *data);
+int		valid_map(char **map, int width, int height, t_player player);
+void	push(t_stack *stack, int x, int y);
+void	pop(t_stack *stack, int *x, int *y);
 void	err_parsing(char **line, int fd, t_data *data);
+void	err_map(t_lst *raw_map, t_data *data);
 
 #endif

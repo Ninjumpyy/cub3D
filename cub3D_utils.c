@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:35:48 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/08/30 17:05:38 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/09/06 15:27:18 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,15 @@ void	check_arg(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		write(2, "Error: wrong number of arguments\n", 33);
+		if (write(2, "Error: wrong number of arguments\n", 33) == -1)
+			exit(1);
 		exit(1);
 	}
 	term = ft_strrchr(argv[1], '.');
 	if (ft_strcmp(term, ".cub") != 0)
 	{
-		write(2, "Error: .cub file required\n", 26);
+		if (write(2, "Error: .cub file required\n", 26) == -1)
+			exit(1);
 		exit(1);
 	}
 }
@@ -64,6 +66,19 @@ void	free_lst(t_lst *lst)
 		free(ptr->line);
 		free(ptr);
 	}
+}
+
+void	free_map(char **map)
+{
+	int	i;
+
+	i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	}
+	free(map);
 }
 
 void	free_get_next_line(int fd, char **line)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:19:17 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/08/30 16:56:51 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/09/06 15:28:18 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,17 @@ void	err_parsing(char **line, int fd, t_data *data)
 	if (*line)
 		free(*line);
 	close(fd);
-	write(2, "Error: .cub file\n", 21);
+	if (write(2, "Error: .cub file\n", 18) == -1)
+		exit(1);
+	exit(1);
+}
+
+void	err_map(t_lst *raw_map, t_data *data)
+{
+	free_data(data);
+	free_lst(raw_map);
+	if (write(2, "Error: .cub file\n", 18) == -1)
+		exit(1);
 	exit(1);
 }
 
@@ -27,7 +37,8 @@ void	check_fd(int fd)
 {
 	if (fd == -1)
 	{
-		write(2, "Error: can't open .cub file...\n", 31);
+		if (write(2, "Error: can't open .cub file...\n", 31) == -1)
+			exit(1);
 		exit (1);
 	}
 }
@@ -67,7 +78,7 @@ void	free_data(t_data *data)
 	}
 	if (data->map)
 	{
-		free(data->map);
+		free_map(data->map);
 		data->map = NULL;
 	}
 }
