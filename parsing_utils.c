@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:19:17 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/09 10:37:59 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:35:27 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	err_parsing(char **line, int fd, t_data *data)
 	if (*line)
 		free(*line);
 	close(fd);
-	if (write(2, "Error: .cub file\n", 18) == -1)
+	write(2, "Error: .cub file\n", 18);
 		exit(1);
 	exit(1);
 }

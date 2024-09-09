@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:36:47 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/09 11:35:01 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/09/09 13:48:48 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	parse_map(t_lst *raw_map, t_data *data)
 		err_map(raw_map, data);
 	create_map(raw_map, data);
 	free_lst(raw_map);
-	if (!map_closed(data->map, width, height, player))
+	if (!map_closed(data->map, width, height))
 	{
 		free_data(data);
 		if (write(2, "Error: .cub file\n", 18) == -1)
@@ -137,6 +137,32 @@ void	create_map(t_lst *raw_map, t_data *data)
 	}
 }
 
+int	map_closed(char **map, int width, int height)
+{
+	int	x;
+	int	y;
+	
+	y = 0;
+	while (y < height)
+	{
+		x = 0;
+		while (x < width)
+		{
+			if (map[y][x] == '0' || map[y][x] == 'N' || map[y][x] == 'S' || map[y][x] == 'W' || map[y][x] == 'E')
+			{
+				if (x == 0 || y == 0 || x == width - 1 || y == height - 1)
+					return (0);
+				else if (map[y-1][x] == ' ' || map[y+1][x] == ' ' || map[y][x-1] == ' ' || map[y][x+1] == ' ')
+					return (0);
+			}
+			x++;
+		}
+		y++;
+	}
+	return (1);
+}
+
+/*
 int	map_closed(char **map, int width, int height, t_player player)
 {
 	int	x;
@@ -148,6 +174,7 @@ int	map_closed(char **map, int width, int height, t_player player)
 	int	visited[height][width];
 	int	directions[4][2] = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
+	ft_printf("width : %i\nheight : %i\n", width, height);
 	stack = NULL;
 	ft_memset(visited, 0, sizeof(visited));
 	push(&stack, player.x, player.y);
@@ -214,3 +241,4 @@ void	delete_stack(t_stack **stack)
 		*stack = tmp;
 	}
 }
+*/
