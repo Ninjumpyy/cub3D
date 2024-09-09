@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/06 17:06:12 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/09 11:24:19 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,10 @@ int		parsing(char *filename, t_data *data);
 void	parse_map(t_lst *raw_map, t_data *data);
 int		check_player_and_width(char *line, int *width, t_player *player, int curr_height);
 void	create_map(t_lst *raw_map, t_data *data);
-int		valid_map(char **map, int width, int height, t_player player);
-void	push(t_stack *stack, int x, int y);
-void	pop(t_stack *stack, int *x, int *y);
+int		map_closed(char **map, int width, int height, t_player player);
+void	push(t_stack **stack, int x, int y);
+void	pop(t_stack **stack, int *x, int *y);
+void	delete_stack(t_stack **stack);
 void	err_parsing(char **line, int fd, t_data *data);
 void	err_map(t_lst *raw_map, t_data *data);
 

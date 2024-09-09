@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:36:47 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/06 17:17:44 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/09 11:35:01 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	parse_map(t_lst *raw_map, t_data *data)
 		err_map(raw_map, data);
 	create_map(raw_map, data);
 	free_lst(raw_map);
-	if (!valid_map(data->map, width, height, player))
+	if (!map_closed(data->map, width, height, player))
 	{
 		free_data(data);
 		if (write(2, "Error: .cub file\n", 18) == -1)
@@ -137,7 +137,7 @@ void	create_map(t_lst *raw_map, t_data *data)
 	}
 }
 
-int	valid_map(char **map, int width, int height, t_player player)
+int	map_closed(char **map, int width, int height, t_player player)
 {
 	int	x;
 	int	y;
@@ -150,28 +150,30 @@ int	valid_map(char **map, int width, int height, t_player player)
 
 	stack = NULL;
 	ft_memset(visited, 0, sizeof(visited));
-	push(stack, player.x, player.y);
+	push(&stack, player.x, player.y);
 	while (stack)
 	{
-		pop(stack, &x, &y);
-		if (x < 0 || y < 0 || x >= width || y >= height)
-			return (0);
-		if (map[y][x] == 1 || visited[y][x])
-			continue;
+		pop(&stack, &x, &y);
 		visited[y][x] = 1;
 		i = 0;
 		while (i < 4)
 		{
 			new_x = x + directions[i][0];
 			new_y = y + directions[i][1];
-			if (map[new_y][new_x] == 0)
-				push(stack, new_x, new_y);
+			if (new_x < 0 || new_y < 0 || new_x >= width || new_y >= height || map[new_y][new_x] == ' ' || map[new_y][new_x] == '\n' || map[new_y][new_x] == '\0')
+			{
+				delete_stack(&stack);
+				return (0);
+			}
+			else if (map[new_y][new_x] == '0' && !visited[new_y][new_x])
+				push(&stack, new_x, new_y);
+			i++;
 		}
 	}
 	return (1);
 }
 
-void	push(t_stack *stack, int x, int y)
+void	push(t_stack **stack, int x, int y)
 {
 	t_stack	*new;
 	t_stack	*tmp;
@@ -180,23 +182,35 @@ void	push(t_stack *stack, int x, int y)
 	new->x = x;
 	new->y = y;
 	new->next = NULL;
-	if (stack == NULL)
-		stack = new;
+	if (*stack == NULL)
+		*stack = new;
 	else
 	{
-		tmp = stack;
-		stack = new;
-		stack->next = tmp;
+		tmp = *stack;
+		*stack = new;
+		(*stack)->next = tmp;
 	}
 }
 
-void	pop(t_stack *stack, int *x, int *y)
+void	pop(t_stack **stack, int *x, int *y)
 {
 	t_stack	*tmp;
 
-	*x = stack->x;
-	*y = stack->y;
-	tmp = stack->next;
-	free(stack);
-	stack = tmp;
+	*x = (*stack)->x;
+	*y = (*stack)->y;
+	tmp = (*stack)->next;
+	free(*stack);
+	*stack = tmp;
+}
+
+void	delete_stack(t_stack **stack)
+{
+	t_stack	*tmp;
+
+	while (*stack)
+	{
+		tmp = (*stack)->next;
+		free(*stack);
+		*stack = tmp;
+	}
 }
