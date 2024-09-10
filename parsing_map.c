@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 14:56:27 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/08/30 16:36:16 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/09/10 11:05:09 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int	valid_line(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] == ' ' || line[i] == '0' || line[i] == '1' || line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+	while (line[i] == ' ' || line[i] == '0' || line[i] == '1' || \
+	line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
 		i++;
 	if (line[i] != '\n' && line[i] != '\0')
 		return (0);

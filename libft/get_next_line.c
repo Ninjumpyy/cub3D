@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 10:14:53 by rpandipe          #+#    #+#             */
-/*   Updated: 2024/08/29 14:48:41 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/09/10 11:05:55 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ char	*save_oldline(char *line)
 	free (line);
 	return (oldline);
 }
+
 char	*get_next_line(int fd)
 {
 	static char	*line;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing_info.c                                     :+:      :+:    :+:   */
+/*   parse_info_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:31:04 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/08/30 17:27:22 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/09/10 11:01:50 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	get_texture(char *line, char **path)
 int	get_color(char *line, t_color *element)
 {
 	int		i;
-	
+
 	i = 0;
 	line++;
 	while (*line == ' ')
@@ -122,12 +122,13 @@ int	get_color(char *line, t_color *element)
 int	extract_one_color(int *i, char *line, int *color_element)
 {
 	char	*color;
-	
+
 	if (!ft_isdigit(line[*i]))
 		return (1);
 	while (ft_isdigit(line[*i]) && *i < 4)
 		(*i)++;
-	if (line[*i] != ' ' && line[*i] != ',' && line[*i] != '\n' && line[*i] != '\0')
+	if (line[*i] != ' ' && line[*i] != ',' && line[*i] != '\n' && \
+	line[*i] != '\0')
 		return (1);
 	color = ft_substr(line, 0, *i);
 	*color_element = ft_atoi(color);

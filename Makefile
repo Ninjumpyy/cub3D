@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+         #
+#    By: thomas <thomas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 16:10:23 by tle-moel          #+#    #+#              #
-#    Updated: 2024/08/30 15:56:46 by tle-moel         ###   ########.fr        #
+#    Updated: 2024/09/10 10:41:16 by thomas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,8 @@ CFLAG += -Wall -Wextra -Werror
 LFLAG = -Llibft -lft
 LDFLAG = -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -LX11 -lm -lz
 RM = rm -rf
-SRCS = cub3D.c cub3D_utils.c parsing.c parsing_utils.c parsing_info.c parsing_map.c
+SRCS = cub3D.c cub3D_utils.c parsing.c parsing_utils.c parse_info_utils.c \
+	   parsing_map.c cub3D_err.c cub3D_free.c parse_map_utils.c
 OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
