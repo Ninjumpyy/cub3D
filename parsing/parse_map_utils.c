@@ -6,11 +6,11 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 10:40:59 by thomas            #+#    #+#             */
-/*   Updated: 2024/09/10 11:04:37 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/11 17:57:37 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../cub3D.h"
 
 void	init_player(t_player *player)
 {

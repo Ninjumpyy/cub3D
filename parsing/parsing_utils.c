@@ -6,11 +6,11 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:19:17 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/10 11:05:19 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/11 17:57:44 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../cub3D.h"
 
 void	check_fd(int fd)
 {
