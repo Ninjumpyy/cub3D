@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:35:48 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/10 10:35:33 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/16 16:30:43 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,9 @@ int	add_node(char *line, t_lst	**lst)
 		ptr->next = new;
 	}
 	return (0);
+}
+
+int	convert_color(int r, int g, int b)
+{
+	return (r << 16 | g << 8 | b);
 }

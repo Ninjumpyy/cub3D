@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/11 18:58:04 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/16 16:42:46 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include "libft/libft.h"
 # include <fcntl.h>
+# include "minilibx-linux/mlx.h"
+
+# define WIN_WIDTH	1024
+# define WIN_HEI	512
+# define IMG_WIDTH	512
+# define IMG_HEI	512
 
 /* ************************************************************************** */
 /*									STRUCTURES								  */
@@ -42,7 +48,7 @@ typedef struct s_color
 	int	b;
 }	t_color;
 
-typedef struct s_data
+typedef struct s_map_spec
 {
 	char	*no;
 	char	*so;
@@ -51,14 +57,29 @@ typedef struct s_data
 	t_color	floor;
 	t_color	ceiling;
 	char	**map;
-	
-	void	*mlx;
-	void	*mlx_win;
+	int		start_x;
+	int		start_y;
+	int		width;
+	int		height;
+}	t_map_spec;
+
+typedef struct s_img
+{
 	void	*img;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_size;
 	int		endian;
+}	t_img;
+
+
+typedef struct s_data
+{
+	void		*mlx;
+	void		*mlx_win;
+	t_img		minimap;
+	t_img		cub;
+	t_map_spec	*map_data;
 }	t_data;
 
 //scene
@@ -68,12 +89,12 @@ typedef struct s_data
 /* ************************************************************************** */
 
 void	check_arg(int argc, char **argv);
-void	check_fd(int fd);
-void	init_data(t_data *data);
-void	free_data(t_data *data);
-void	parse_info(char **line, int fd, t_data *data);
-int		check_info(char *line, t_data *data);
-int		check_texture(char *line, t_data *data);
+void	check_fd(int *fd, char *filename);
+void	init_data(t_map_spec *map_data);
+void	free_map_data(t_map_spec *data);
+void	parse_info(char **line, int fd, t_map_spec *data);
+int		check_info(char *line, t_map_spec *data);
+int		check_texture(char *line, t_map_spec *data);
 int		get_texture(char *line, char **path);
 int		get_color(char *line, t_color *element);
 int		extract_one_color(int *i, char *line, int *color_element);
@@ -83,17 +104,20 @@ int		empty_line(char *line);
 int		valid_line(char *line);
 int		add_node(char *line, t_lst	**lst);
 void	free_lst(t_lst *lst);
-void	free_map(t_data *data);
+void	free_map(t_map_spec *data);
 void	free_get_next_line(int fd, char **line);
-int		parsing(char *filename, t_data *data);
-void	parse_map(t_lst *raw_map, t_data *data);
-void	init_player(t_player *player);
-int		check_map(t_lst **ptr, int *width, t_player *player, int *height);
+void	parsing(char *filename, t_data *data);
+void	parse_map(t_lst *raw_map, t_map_spec *data);
+int		check_map(t_lst **ptr, int *width, int *height, t_map_spec *map_data);
 int		check_player_and_width(char *line, int *width, t_player *player, \
 int curr_height);
-void	create_map(t_lst *raw_map, t_data *data);
+void	create_map(t_lst *raw_map, t_map_spec *data);
 int		map_closed(char **map, int width, int height);
-void	err_parsing(char **line, int fd, t_data *data);
-void	err_map(t_lst *raw_map, t_data *data);
+void	err_parsing(char **line, int fd, t_map_spec *data);
+void	err_map(t_lst *raw_map, t_map_spec *data);
+void	err_malloc(int fd);
+
+void	cub_init(t_data *data);
+int		convert_color(int r, int g, int b);
 
 #endif

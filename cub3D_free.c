@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 10:35:07 by thomas            #+#    #+#             */
-/*   Updated: 2024/09/10 10:36:02 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/16 13:04:29 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	free_lst(t_lst *lst)
 	}
 }
 
-void	free_map(t_data *data)
+void	free_map(t_map_spec *map_data)
 {
 	int	i;
 
 	i = 0;
-	while (data->map[i])
+	while (map_data->map[i])
 	{
-		free(data->map[i]);
+		free(map_data->map[i]);
 		i++;
 	}
-	free(data->map);
+	free(map_data->map);
 }
 
 void	free_get_next_line(int fd, char **line)
@@ -47,31 +47,31 @@ void	free_get_next_line(int fd, char **line)
 	}
 }
 
-void	free_data(t_data *data)
+void	free_map_data(t_map_spec *map_data)
 {
-	if (data->no)
+	if (map_data->no)
 	{
-		free(data->no);
-		data->no = NULL;
+		free(map_data->no);
+		map_data->no = NULL;
 	}
-	if (data->so)
+	if (map_data->so)
 	{
-		free(data->so);
-		data->so = NULL;
+		free(map_data->so);
+		map_data->so = NULL;
 	}
-	if (data->we)
+	if (map_data->we)
 	{
-		free(data->we);
-		data->we = NULL;
+		free(map_data->we);
+		map_data->we = NULL;
 	}
-	if (data->ea)
+	if (map_data->ea)
 	{
-		free(data->ea);
-		data->ea = NULL;
+		free(map_data->ea);
+		map_data->ea = NULL;
 	}
-	if (data->map)
+	if (map_data->map)
 	{
-		free_map(data);
-		data->map = NULL;
+		free_map(map_data);
+		map_data->map = NULL;
 	}
 }

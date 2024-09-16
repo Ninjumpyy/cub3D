@@ -6,13 +6,13 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 11:31:04 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/11 17:57:37 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/16 13:06:32 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-int	check_info(char *line, t_data *data)
+int	check_info(char *line, t_map_spec *map_data)
 {
 	int	res;
 
@@ -20,47 +20,47 @@ int	check_info(char *line, t_data *data)
 		line++;
 	if (*line == '\n' || *line == '\0')
 		return (0);
-	res = check_texture(line, data);
+	res = check_texture(line, map_data);
 	if (res != 0)
 		return (res);
 	if (ft_strncmp(line, "F ", 2) == 0)
 	{
-		if (data->floor.flag || get_color(line, &data->floor))
+		if (map_data->floor.flag || get_color(line, &map_data->floor))
 			return (-1);
 		return (1);
 	}
 	if (ft_strncmp(line, "C ", 2) == 0)
 	{
-		if (data->ceiling.flag || get_color(line, &data->ceiling))
+		if (map_data->ceiling.flag || get_color(line, &map_data->ceiling))
 			return (-1);
 		return (1);
 	}
 	return (-1);
 }
 
-int	check_texture(char *line, t_data *data)
+int	check_texture(char *line, t_map_spec *map_data)
 {
 	if (ft_strncmp(line, "NO ", 3) == 0)
 	{
-		if (data->no != NULL || get_texture(line, &data->no))
+		if (map_data->no != NULL || get_texture(line, &map_data->no))
 			return (-1);
 		return (1);
 	}
 	if (ft_strncmp(line, "SO ", 3) == 0)
 	{
-		if (data->so != NULL || get_texture(line, &data->so))
+		if (map_data->so != NULL || get_texture(line, &map_data->so))
 			return (-1);
 		return (1);
 	}
 	if (ft_strncmp(line, "WE ", 3) == 0)
 	{
-		if (data->we != NULL || get_texture(line, &data->we))
+		if (map_data->we != NULL || get_texture(line, &map_data->we))
 			return (-1);
 		return (1);
 	}
 	if (ft_strncmp(line, "EA ", 3) == 0)
 	{
-		if (data->ea != NULL || get_texture(line, &data->ea))
+		if (map_data->ea != NULL || get_texture(line, &map_data->ea))
 			return (-1);
 		return (1);
 	}

@@ -1,0 +1,6 @@
+{
+    "makefile.configureOnOpen": false,
+    "files.associations": {
+        "mlx.h": "c"
+    }
+}

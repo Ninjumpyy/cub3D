@@ -6,7 +6,7 @@
 #    By: thomas <thomas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 16:10:23 by tle-moel          #+#    #+#              #
-#    Updated: 2024/09/11 17:56:40 by thomas           ###   ########.fr        #
+#    Updated: 2024/09/16 13:34:37 by thomas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ LIBFT = libft.a
 CC = cc
 CFLAG += -Wall -Wextra -Werror
 LFLAG = -Llibft -lft
-LDFLAG = -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -LX11 -lm -lz
+LDFLAG = -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -lz
 RM = rm -rf
 SRCS = cub3D.c cub3D_utils.c cub3D_err.c cub3D_free.c \
 	   parsing/parse_map_utils.c parsing/parsing.c parsing/parsing_utils.c \

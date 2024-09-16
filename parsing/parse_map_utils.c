@@ -6,28 +6,30 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 10:40:59 by thomas            #+#    #+#             */
-/*   Updated: 2024/09/11 17:57:37 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/16 15:51:21 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-void	init_player(t_player *player)
+int	check_map(t_lst **ptr, int *width, int *height, t_map_spec *map_data)
 {
-	player->flag = 0;
-	player->x = -1;
-	player->y = -1;
-}
+	t_player	player;
 
-int	check_map(t_lst **ptr, int *width, t_player *player, int *height)
-{
+	player.flag = 0;
 	while (*ptr)
 	{
-		if (check_player_and_width((*ptr)->line, width, player, *height))
+		if (check_player_and_width((*ptr)->line, width, &player, *height))
 			return (1);
 		(*height)++;
 		*ptr = (*ptr)->next;
 	}
+	if (player.flag == 0)
+		return (1);
+	map_data->start_x = player.x;
+	map_data->start_y = player.y;
+	map_data->width = *width;
+	map_data->height = *height;
 	return (0);
 }
 
@@ -45,8 +47,8 @@ int curr_height)
 			if (player->flag == 1)
 				return (1);
 			player->flag = 1;
-			player->x = i;
-			player->y = curr_height;
+			player->x = i + 1;
+			player->y = curr_height + 1;
 		}
 		i++;
 	}
@@ -55,7 +57,7 @@ int curr_height)
 	return (0);
 }
 
-void	create_map(t_lst *raw_map, t_data *data)
+void	create_map(t_lst *raw_map, t_map_spec *data)
 {
 	t_lst	*ptr;
 	int		i;
@@ -73,6 +75,7 @@ void	create_map(t_lst *raw_map, t_data *data)
 		ptr = ptr->next;
 		i++;
 	}
+	free_lst(raw_map);
 }
 
 int	map_closed(char **map, int width, int height)
