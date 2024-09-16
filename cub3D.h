@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/10 11:07:58 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/11 18:58:04 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,15 @@ typedef struct s_data
 	char	*ea;
 	t_color	floor;
 	t_color	ceiling;
-	char	**map;		
+	char	**map;
+	
+	void	*mlx;
+	void	*mlx_win;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
 }	t_data;
 
 //scene

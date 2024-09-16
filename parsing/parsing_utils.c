@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 16:19:17 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/11 17:57:44 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/11 18:08:18 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ void	init_data(t_data *data)
 	data->ea = NULL;
 	data->floor.flag = 0;
 	data->ceiling.flag = 0;
+	/*
 	data->map = NULL;
+	data->mlx = NULL;
+	data->mlx_win = NULL;
+	data->img = NULL;
+	data->addr = NULL;*/
 }
 
 int	go_next_color(int *i, char **line)
