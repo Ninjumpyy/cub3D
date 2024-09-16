@@ -6,11 +6,11 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 13:36:47 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/10 11:04:54 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/11 17:57:48 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "../cub3D.h"
 
 int	parsing(char *filename, t_data *data)
 {

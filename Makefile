@@ -6,7 +6,7 @@
 #    By: thomas <thomas@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 16:10:23 by tle-moel          #+#    #+#              #
-#    Updated: 2024/09/10 10:41:16 by thomas           ###   ########.fr        #
+#    Updated: 2024/09/11 17:56:40 by thomas           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,9 @@ CFLAG += -Wall -Wextra -Werror
 LFLAG = -Llibft -lft
 LDFLAG = -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -LX11 -lm -lz
 RM = rm -rf
-SRCS = cub3D.c cub3D_utils.c parsing.c parsing_utils.c parse_info_utils.c \
-	   parsing_map.c cub3D_err.c cub3D_free.c parse_map_utils.c
+SRCS = cub3D.c cub3D_utils.c cub3D_err.c cub3D_free.c \
+	   parsing/parse_map_utils.c parsing/parsing.c parsing/parsing_utils.c \
+	   parsing/parse_info_utils.c parsing/parsing_map.c
 OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
 
