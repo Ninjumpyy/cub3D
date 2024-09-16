@@ -6,7 +6,7 @@
 #    By: rpandipe <rpandie@student.42luxembourg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/11 10:23:22 by rpandipe          #+#    #+#              #
-#    Updated: 2024/09/11 10:38:46 by rpandipe         ###   ########.fr        #
+#    Updated: 2024/09/16 14:50:19 by rpandipe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ LIBFT		= libft.a
 CC			= cc
 CFLAG		= -Wall -Werror -Wextra -g
 RM 			= rm -rf
-SRCS		= raytracing.c
+SRCS		= raytracing.c raymath.c
 OBJS		= $(SRCS:.c=.o)
 
 all : $(NAME)

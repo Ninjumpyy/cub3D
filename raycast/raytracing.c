@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandie@student.42luxembourg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 10:13:58 by rpandipe          #+#    #+#             */
-/*   Updated: 2024/09/16 10:51:22 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/09/17 00:38:49 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,12 @@ void	init_player(t_data *data)
 	data->player->size = 10;
 	data->player->speed = 10;
 	data->player->rot_speed = 0.1;
-	data->player->pa = 90;
+	data->player->pa = 3 * PI / 2;
 	data->player->pdx = cos (data->player->pa) * data->player->speed;
 	data->player->pdy = sin (data->player->pa) * data->player->speed;
-	data->player->line = 10;
+	data->player->line = 2;
+	data->rays_count = 100;
+	data->fov = 60 * (PI / 180);
 	y = 0;
 	while (y < data->map_y)
 	{
@@ -178,7 +180,7 @@ void draw_line(t_data *data, int x0, int y0)
     while (1)
     {
         if (x0 >= 0 && x0 < WINDOW_WIDTH && y0 >= 0 && y0 < WINDOW_HEIGHT)
-            data->img_bfr[(int)y0 * WINDOW_WIDTH + (int)x0] = 0xFFFFFF;
+            data->img_bfr[(int)y0 * WINDOW_WIDTH + (int)x0] = 0xFF0000;
 
         if (x0 == x1 && y0 == y1)
             break;
@@ -247,6 +249,7 @@ void	draw_map(t_data *data)
 		y++;
 	}
 	draw_player(data);
+	raytrace(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img_ptr, 0, 0);
 }
 

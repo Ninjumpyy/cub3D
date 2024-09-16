@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandie@student.42luxembourg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/11 10:53:15 by rpandipe          #+#    #+#             */
-/*   Updated: 2024/09/16 10:26:31 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/09/16 16:08:39 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,11 @@ typedef struct	s_data
 	double		dis_h;
 	double		dis_v;
 	int			*map;
+	int			rays_count;
+	double		fov;
 	t_player	*player;
 }	t_data;
 
 void	draw_map(t_data *data);
+void	draw_line(t_data *data, int x0, int y0);
+void	raytrace(t_data *data);
