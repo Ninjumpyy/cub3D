@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 10:40:59 by thomas            #+#    #+#             */
-/*   Updated: 2024/09/16 15:51:21 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/17 15:47:22 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ int	check_map(t_lst **ptr, int *width, int *height, t_map_spec *map_data)
 	}
 	if (player.flag == 0)
 		return (1);
-	map_data->start_x = player.x;
-	map_data->start_y = player.y;
+	map_data->player_x = player.x;
+	map_data->player_y = player.y;
 	map_data->width = *width;
 	map_data->height = *height;
 	return (0);
@@ -68,7 +68,7 @@ void	create_map(t_lst *raw_map, t_map_spec *data)
 	while (ptr)
 	{
 		len = ft_strlen(ptr->line);
-		data->map[i] = malloc((len + 1) * sizeof(char));
+		data->map[i] = ft_calloc((data->width + 1), sizeof(char));
 		if (data->map[i] == NULL)
 			err_map(raw_map, data);
 		ft_strlcpy(data->map[i], ptr->line, len + 1);

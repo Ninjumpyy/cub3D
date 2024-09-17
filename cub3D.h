@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/16 16:42:46 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/17 12:44:30 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 
 # define WIN_WIDTH	1024
 # define WIN_HEI	512
-# define IMG_WIDTH	512
-# define IMG_HEI	512
+
+# define MINIMAP_WIDTH	512
+# define MINIMAP_HEI	512
+
+# define CELL_SIZE	32 // 32pi x 32pi each cell
+# define VIEWPORT_CELLS	16 //16x16 grid for minimap
 
 /* ************************************************************************** */
 /*									STRUCTURES								  */
@@ -57,8 +61,8 @@ typedef struct s_map_spec
 	t_color	floor;
 	t_color	ceiling;
 	char	**map;
-	int		start_x;
-	int		start_y;
+	int		player_x;
+	int		player_y;
 	int		width;
 	int		height;
 }	t_map_spec;
@@ -119,5 +123,8 @@ void	err_malloc(int fd);
 
 void	cub_init(t_data *data);
 int		convert_color(int r, int g, int b);
+void	draw_pixel(t_img *img, int x, int y, int color);
+void	draw_cell(t_data *data, int map_x, int map_y);
+void	render_minimap(t_data *data, int player_x, int player_y);
 
 #endif
