@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 17:05:05 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/17 15:54:15 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/09/17 17:06:51 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,81 @@ int	main(int argc, char **argv)
 
 	cub_init(&data);
 	render_minimap(&data, data.map_data->player_x, data.map_data->player_y);
+	draw_player(&data, data.map_data->player_x, data.map_data->player_y);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.minimap.img, 0, 0);
-	//ft_printf("After render minimap\n");
-	//draw_pixel(&(data.minimap), data.map_data->player_x, data.map_data->player_y, convert_color(255, 255, 0));
+	mlx_hook(data.mlx_win, 2, 1L << 0, cub_key, &data);
+	mlx_hook(data.mlx_win, 17, 1L << 17, cub_close, &data);
 	mlx_loop(data.mlx);
 	return (0);
+}
+
+int	cub_key(int keycode, void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	if (keycode == XK_Escape)
+		cub_escape(data);
+	return (0);
+}
+
+void	cub_escape(t_data *data)
+{
+	free_map_data(data->map_data);
+	free(data->map_data);
+	mlx_destroy_image(data->mlx, data->minimap.img);
+	mlx_destroy_window(data->mlx, data->mlx_win);
+	mlx_loop_end(data->mlx);
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
+	exit(0);
+}
+
+int	cub_close(void *param)
+{
+	t_data	*data;
+
+	data = (t_data *)param;
+	if (data->map_data)
+	{
+		free_map_data(data->map_data);
+		free(data->map_data);
+	}
+	if (data->minimap.img)
+		mlx_destroy_image(data->mlx, data->minimap.img);
+	/*if (data->cub.img)
+		mlx_destroy_image(data->mlx, data->cub.img);*/
+	if (data->mlx_win && data->mlx)
+		mlx_destroy_window(data->mlx, data->mlx_win);
+	if (data->mlx)
+	{
+		mlx_loop_end(data->mlx);
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
+	exit(0);
+}
+
+void	draw_player(t_data *data, int player_x, int player_y)
+{
+	int	x;
+	int	y;
+	int	i;
+	int	j;
+
+	x = player_x * CELL_SIZE + (CELL_SIZE / 4);
+	y = player_y * CELL_SIZE + (CELL_SIZE / 4);
+	j = 0;
+	while (j < PLAYER_SIZE)
+	{
+		i = 0;
+		while (i < PLAYER_SIZE)
+		{
+			draw_pixel(&(data)->minimap, x + i, y + j, convert_color(255, 255, 0));
+			i++;
+		}
+		j++;
+	}
 }
 
 void	cub_init(t_data *data)
@@ -38,71 +108,6 @@ void	cub_init(t_data *data)
 		&data->minimap.line_size, &data->minimap.endian);
 }
 
-void	render_minimap(t_data *data, int player_x, int player_y)
-{
-	int	start_x;
-	int	start_y;
-	int	x;
-	int	y;
-	int	map_x;
-	int	map_y;
-
-	start_x = player_x - (VIEWPORT_CELLS / 2);
-	start_y = player_y - (VIEWPORT_CELLS / 2);
-	if (start_x + VIEWPORT_CELLS > data->map_data->width)
-		start_x = data->map_data->width - VIEWPORT_CELLS;
-	if (start_y + VIEWPORT_CELLS > data->map_data->height)
-		start_y = data->map_data->height - VIEWPORT_CELLS;
-	if (start_x < 0)
-		start_x = 0;
-	if (start_y < 0)
-		start_y = 0;
-	y = 0;
-	//ft_printf("render minimap...\n");
-	//ft_printf("start_x : %i, start_y : %i\n", start_x, start_y);
-	while (y < VIEWPORT_CELLS)
-	{
-		x = 0;
-		while (x < VIEWPORT_CELLS)
-		{
-			map_x = start_x + x;
-			map_y = start_y + y;
-			draw_cell(data, map_x, map_y);
-			x++;
-		}
-		y++;
-	}
-}
-
-void	draw_cell(t_data *data, int map_x, int map_y)
-{
-	int	i;
-	int	j;
-	int color;
-
-	//ft_printf("\nDraw_cell...\n");
-	//ft_printf("map_x : %i, map_y : %i\n", map_x, map_y);
-	//ft_printf("[map_y][map_x] : %c\n", data->map_data->map[map_y][map_x]);
-	if (map_x > data->map_data->width - 1 || map_y > data->map_data->height - 1)
-		color = convert_color(169, 169, 169);
-	else if (data->map_data->map[map_y][map_x] == ' ' || data->map_data->map[map_y][map_x] == '\0' || data->map_data->map[map_y][map_x] == '\n')
-		color = convert_color(169, 169, 169);
-	else if (data->map_data->map[map_y][map_x] == '1')
-		color = convert_color(250, 250, 250);
-	else
-		color = convert_color(0, 0, 0);
-	j = 0;
-	while (j < CELL_SIZE)
-	{
-		i = 0;
-		while (i < CELL_SIZE)
-		{
-			draw_pixel(&(data)->minimap, (map_x * CELL_SIZE) + i, (map_y * CELL_SIZE) + j, color);
-			i++;
-		}
-		j++;
-	}
-}
 void	draw_pixel(t_img *img, int x, int y, int color)
 {
 	char	*dst;

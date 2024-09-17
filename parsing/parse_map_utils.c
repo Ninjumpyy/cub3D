@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/10 10:40:59 by thomas            #+#    #+#             */
-/*   Updated: 2024/09/17 15:47:22 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:38:26 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	check_map(t_lst **ptr, int *width, int *height, t_map_spec *map_data)
 	t_player	player;
 
 	player.flag = 0;
+	player.x = -1;
+	player.y = -1;
 	while (*ptr)
 	{
 		if (check_player_and_width((*ptr)->line, width, &player, *height))
@@ -47,8 +49,8 @@ int curr_height)
 			if (player->flag == 1)
 				return (1);
 			player->flag = 1;
-			player->x = i + 1;
-			player->y = curr_height + 1;
+			player->x = i;
+			player->y = curr_height;
 		}
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/17 12:44:30 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/09/17 16:58:55 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft/libft.h"
 # include <fcntl.h>
 # include "minilibx-linux/mlx.h"
+# include <X11/keysym.h>
 
 # define WIN_WIDTH	1024
 # define WIN_HEI	512
@@ -25,6 +26,7 @@
 
 # define CELL_SIZE	32 // 32pi x 32pi each cell
 # define VIEWPORT_CELLS	16 //16x16 grid for minimap
+# define PLAYER_SIZE 8 // 8pi x 8pi for the player
 
 /* ************************************************************************** */
 /*									STRUCTURES								  */
@@ -82,7 +84,7 @@ typedef struct s_data
 	void		*mlx;
 	void		*mlx_win;
 	t_img		minimap;
-	t_img		cub;
+	//t_img		cub;
 	t_map_spec	*map_data;
 }	t_data;
 
@@ -126,5 +128,9 @@ int		convert_color(int r, int g, int b);
 void	draw_pixel(t_img *img, int x, int y, int color);
 void	draw_cell(t_data *data, int map_x, int map_y);
 void	render_minimap(t_data *data, int player_x, int player_y);
+void	draw_player(t_data *data, int player_x, int player_y);
+int		cub_close(void *param);
+int		cub_key(int keycode, void *param);
+void	cub_escape(t_data *data);
 
 #endif
