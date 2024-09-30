@@ -1,2 +1,0 @@
-This is a test.
-This is not a valid file for cub3D.

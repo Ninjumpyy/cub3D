@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/29 16:19:17 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/16 12:43:15 by thomas           ###   ########.fr       */
+/*   Created: 2024/09/19 11:05:52 by thomas            #+#    #+#             */
+/*   Updated: 2024/09/29 10:32:02 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,28 @@ void	check_fd(int *fd, char *filename)
 	*fd = open(filename, O_RDONLY);
 	if (*fd == -1)
 	{
-		if (write(2, "Error: can't open .cub file...\n", 31) == -1)
-			exit(1);
-		exit (1);
+		ft_error("Error: can't open .cub file...\n");
+		exit(EXIT_FAILURE);
 	}
 }
 
-void	init_data(t_map_spec *map_data)
+int	extract_one_color(int *i, char *line, int *color_elem)
 {
-	map_data->no = NULL;
-	map_data->so = NULL;
-	map_data->we = NULL;
-	map_data->ea = NULL;
-	map_data->floor.flag = 0;
-	map_data->ceiling.flag = 0;
+	char	*color;
+
+	if (!ft_isdigit(line[*i]))
+		return (0);
+	while (ft_isdigit(line[*i]) && *i < 4)
+		(*i)++;
+	if (line[*i] != ' ' && line[*i] != ',' && line[*i] != '\n' && \
+	line[*i] != '\0')
+		return (0);
+	color = ft_substr(line, 0, *i);
+	*color_elem = ft_atoi(color);
+	free(color);
+	if (*color_elem > 255 || *color_elem < 0)
+		return (0);
+	return (1);
 }
 
 int	go_next_color(int *i, char **line)
@@ -45,4 +53,29 @@ int	go_next_color(int *i, char **line)
 	*line += *i;
 	*i = 0;
 	return (0);
+}
+
+int	empty_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] == ' ')
+		i++;
+	if (line[i] == '\n' || line[i] == '\0')
+		return (1);
+	return (0);
+}
+
+int	valid_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] == ' ' || line[i] == '0' || line[i] == '1' || \
+	line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+		i++;
+	if (line[i] != '\n' && line[i] != '\0')
+		return (0);
+	return (1);
 }

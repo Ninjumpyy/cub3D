@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/29 13:35:48 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/16 16:30:43 by thomas           ###   ########.fr       */
+/*   Created: 2024/09/19 10:04:39 by thomas            #+#    #+#             */
+/*   Updated: 2024/09/29 10:18:28 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,44 +18,26 @@ void	check_arg(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		if (write(2, "Error: wrong number of arguments\n", 33) == -1)
-			exit(1);
-		exit(1);
+		ft_error("Error: wrong number of arguments\n");
+		exit(EXIT_FAILURE);
 	}
 	term = ft_strrchr(argv[1], '.');
-	if (ft_strcmp(term, ".cub") != 0)
+	if (!term || ft_strcmp(term, ".cub") != 0)
 	{
-		if (write(2, "Error: .cub file required\n", 26) == -1)
-			exit(1);
-		exit(1);
+		ft_error("Error: .cub file required\n");
+		exit(EXIT_FAILURE);
 	}
 }
 
-int	add_node(char *line, t_lst	**lst)
+void	ft_error(const char *str)
 {
-	t_lst	*new;
-	t_lst	*ptr;
-
-	new = malloc(sizeof(t_lst));
-	if (new == NULL)
-		return (1);
-	new->next = NULL;
-	new->prev = NULL;
-	new->line = line;
-	if (*lst == NULL)
-		*lst = new;
-	else
+	while (*str)
 	{
-		ptr = *lst;
-		while (ptr->next)
-			ptr = ptr->next;
-		new->prev = ptr;
-		ptr->next = new;
+		if (write(2, str, 1) == -1)
+		{
+			perror("Failed to write error message");
+			exit(EXIT_FAILURE);
+		}
+		str++;
 	}
-	return (0);
-}
-
-int	convert_color(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
 }

@@ -5,73 +5,80 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 10:35:07 by thomas            #+#    #+#             */
-/*   Updated: 2024/09/16 13:04:29 by thomas           ###   ########.fr       */
+/*   Created: 2024/09/19 11:46:39 by thomas            #+#    #+#             */
+/*   Updated: 2024/09/30 12:23:38 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	free_lst(t_lst *lst)
+void	free_get_next_line(int fd, char **line)
 {
-	t_lst	*ptr;
-
-	while (lst)
+	if (*line)
 	{
-		ptr = lst;
-		lst = lst->next;
-		free(ptr->line);
-		free(ptr);
+		while (*line != NULL)
+		{
+			free(*line);
+			*line = get_next_line(fd);
+		}
 	}
 }
 
-void	free_map(t_map_spec *map_data)
+void	free_env(t_data *data)
+{
+	if (data->env.no_texture)
+	{
+		free(data->env.no_texture);
+		data->env.no_texture = NULL;
+	}
+	if (data->env.so_texture)
+	{
+		free(data->env.so_texture);
+		data->env.so_texture = NULL;
+	}
+	if (data->env.we_texture)
+	{
+		free(data->env.we_texture);
+		data->env.we_texture = NULL;
+	}
+	if (data->env.ea_texture)
+	{
+		free(data->env.ea_texture);
+		data->env.ea_texture = NULL;
+	}
+	if (data->env.map)
+	{
+		free_map(data);
+		data->env.map = NULL;
+	}
+}
+
+void	free_map(t_data *data)
 {
 	int	i;
 
 	i = 0;
-	while (map_data->map[i])
+	while (data->env.map[i])
 	{
-		free(map_data->map[i]);
+		free(data->env.map[i]);
 		i++;
 	}
-	free(map_data->map);
+	free(data->env.map);
 }
 
-void	free_get_next_line(int fd, char **line)
+void	free_lst(t_lst **map_lst)
 {
-	while (*line != NULL)
-	{
-		free(*line);
-		*line = get_next_line(fd);
-	}
-}
+	t_lst	*ptr;
 
-void	free_map_data(t_map_spec *map_data)
-{
-	if (map_data->no)
+	if (map_lst && *map_lst)
 	{
-		free(map_data->no);
-		map_data->no = NULL;
-	}
-	if (map_data->so)
-	{
-		free(map_data->so);
-		map_data->so = NULL;
-	}
-	if (map_data->we)
-	{
-		free(map_data->we);
-		map_data->we = NULL;
-	}
-	if (map_data->ea)
-	{
-		free(map_data->ea);
-		map_data->ea = NULL;
-	}
-	if (map_data->map)
-	{
-		free_map(map_data);
-		map_data->map = NULL;
+		while (*map_lst)
+		{
+			ptr = *map_lst;
+			*map_lst = (*map_lst)->next;
+			free(ptr->line);
+			free(ptr);
+		}
+		*map_lst = NULL;
 	}
 }

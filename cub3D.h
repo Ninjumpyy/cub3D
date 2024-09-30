@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/17 16:58:55 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/09/30 12:33:12 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,60 +14,49 @@
 # define CUB3D_H
 
 # include "libft/libft.h"
-# include <fcntl.h>
 # include "minilibx-linux/mlx.h"
+# include <stdio.h>
+# include <errno.h>
+# include <fcntl.h>
 # include <X11/keysym.h>
-
-# define WIN_WIDTH	1024
-# define WIN_HEI	512
-
-# define MINIMAP_WIDTH	512
-# define MINIMAP_HEI	512
-
-# define CELL_SIZE	32 // 32pi x 32pi each cell
-# define VIEWPORT_CELLS	16 //16x16 grid for minimap
-# define PLAYER_SIZE 8 // 8pi x 8pi for the player
 
 /* ************************************************************************** */
 /*									STRUCTURES								  */
 /* ************************************************************************** */
 
-typedef struct s_player
-{
-	int	flag;
-	int	x;
-	int	y;
-}	t_player;
-
 typedef struct s_lst
 {
 	struct s_lst	*next;
-	struct s_lst	*prev;
 	char			*line;
 }	t_lst;
 
+
+typedef struct s_player
+{
+	int		is_found;
+	float	x;
+	float	y;
+	float	speed;
+}	t_player;
+
 typedef struct s_color
 {
-	int	flag;
+	int	is_set;
 	int	r;
 	int	g;
 	int	b;
 }	t_color;
 
-typedef struct s_map_spec
+typedef struct s_env
 {
-	char	*no;
-	char	*so;
-	char	*we;
-	char	*ea;
-	t_color	floor;
-	t_color	ceiling;
-	char	**map;
-	int		player_x;
-	int		player_y;
-	int		width;
-	int		height;
-}	t_map_spec;
+	char		*no_texture;
+	char		*so_texture;
+	char		*we_texture;
+	char		*ea_texture;
+	t_color		floor;
+	t_color		ceiling;
+	char		**map;
+}	t_env;
 
 typedef struct s_img
 {
@@ -78,59 +67,55 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-
 typedef struct s_data
 {
 	void		*mlx;
 	void		*mlx_win;
 	t_img		minimap;
-	//t_img		cub;
-	t_map_spec	*map_data;
+	t_img		cub;
+	t_env		env;
+	t_player	player;
+	int			map_width;
+	int			map_height;
 }	t_data;
-
-//scene
 
 /* ************************************************************************** */
 /*									PROTOTYPES								  */
 /* ************************************************************************** */
 
 void	check_arg(int argc, char **argv);
-void	check_fd(int *fd, char *filename);
-void	init_data(t_map_spec *map_data);
-void	free_map_data(t_map_spec *data);
-void	parse_info(char **line, int fd, t_map_spec *data);
-int		check_info(char *line, t_map_spec *data);
-int		check_texture(char *line, t_map_spec *data);
-int		get_texture(char *line, char **path);
-int		get_color(char *line, t_color *element);
-int		extract_one_color(int *i, char *line, int *color_element);
-int		go_next_color(int *i, char **line);
-int		get_raw_map(char **line, int fd, t_lst **raw_map);
-int		empty_line(char *line);
-int		valid_line(char *line);
-int		add_node(char *line, t_lst	**lst);
-void	free_lst(t_lst *lst);
-void	free_map(t_map_spec *data);
+void    ft_error(const char *str);
+/* ************************************************************************** */
+void	err_parsing(char **line, int fd, t_data *data, t_lst **map_lst);
+/* ************************************************************************** */
 void	free_get_next_line(int fd, char **line);
-void	parsing(char *filename, t_data *data);
-void	parse_map(t_lst *raw_map, t_map_spec *data);
-int		check_map(t_lst **ptr, int *width, int *height, t_map_spec *map_data);
+void	free_env(t_data *data);
+void	free_map(t_data *data);
+void	free_lst(t_lst **map_lst);
+/* ************************************************************************** */
+void    parsing_file(char *filename, t_data *data);
+void	parse_texture_color(char **line, int fd, t_data *data);
+void	parse_map(char **line, int fd, t_lst **map_lst, t_data *data);
+/* ************************************************************************** */
+int		check_elem(char *line, t_env *env);
+int		check_texture(char *line, t_env *env);
+int		get_texture(char *line, char **path);
+int		check_color(char *line, t_env *env);
+int		get_color(char *line, t_color *elem);
+/* ************************************************************************** */
+int		check_map(t_lst **ptr, int *width, int *height, t_data *data);
 int		check_player_and_width(char *line, int *width, t_player *player, \
 int curr_height);
-void	create_map(t_lst *raw_map, t_map_spec *data);
+int		create_map(t_lst **map_lst, t_data *data);
 int		map_closed(char **map, int width, int height);
-void	err_parsing(char **line, int fd, t_map_spec *data);
-void	err_map(t_lst *raw_map, t_map_spec *data);
-void	err_malloc(int fd);
-
-void	cub_init(t_data *data);
-int		convert_color(int r, int g, int b);
-void	draw_pixel(t_img *img, int x, int y, int color);
-void	draw_cell(t_data *data, int map_x, int map_y);
-void	render_minimap(t_data *data, int player_x, int player_y);
-void	draw_player(t_data *data, int player_x, int player_y);
-int		cub_close(void *param);
-int		cub_key(int keycode, void *param);
-void	cub_escape(t_data *data);
+/* ************************************************************************** */
+int		add_node(char *line, t_lst **map_lst);
+int		get_map_lst(char **line, int fd, t_lst **map_lst);
+/* ************************************************************************** */
+void	check_fd(int *fd, char *filename);
+int		extract_one_color(int *i, char *line, int *color_elem);
+int		go_next_color(int *i, char **line);
+int		empty_line(char *line);
+int		valid_line(char *line);
 
 #endif

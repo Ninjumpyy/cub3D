@@ -1,6 +1,7 @@
 {
     "makefile.configureOnOpen": false,
     "files.associations": {
-        "mlx.h": "c"
-    }
+		"mlx.h": "c",
+		"cub3d.h": "c"
+	}
 }

@@ -5,40 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 10:36:31 by thomas            #+#    #+#             */
-/*   Updated: 2024/09/16 13:13:01 by thomas           ###   ########.fr       */
+/*   Created: 2024/09/19 11:43:49 by thomas            #+#    #+#             */
+/*   Updated: 2024/09/30 12:23:45 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-void	err_parsing(char **line, int fd, t_map_spec *map_data)
+void	err_parsing(char **line, int fd, t_data *data, t_lst **map_lst)
 {
 	free_get_next_line(fd, line);
-	free_map_data(map_data);
-	free(map_data);
-	if (*line)
-		free(*line);
+	free_env(data);
+	free_lst(map_lst);
 	close(fd);
-	if (write(2, "Error: .cub file\n", 18) == -1)
-		exit(1);
-	exit(1);
-}
-
-void	err_map(t_lst *raw_map, t_map_spec *map_data)
-{
-	free_map_data(map_data);
-	free(map_data);
-	free_lst(raw_map);
-	if (write(2, "Error: .cub file\n", 18) == -1)
-		exit(1);
-	exit(1);
-}
-
-void	err_malloc(int fd)
-{
-	close(fd);
-	if (write(2, "Error: .cub file\n", 18) == -1)
-		exit(1);
-	exit(1);
+	ft_error("Error: .cub file\n");
+	exit(EXIT_FAILURE);
 }
