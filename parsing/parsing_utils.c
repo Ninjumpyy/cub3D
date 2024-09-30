@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 11:05:52 by thomas            #+#    #+#             */
-/*   Updated: 2024/09/29 10:32:02 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/30 16:32:44 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	check_fd(int *fd, char *filename)
 	*fd = open(filename, O_RDONLY);
 	if (*fd == -1)
 	{
-		ft_error("Error: can't open .cub file...\n");
+		ft_error("Error\nCan't open .cub file...\n");
 		exit(EXIT_FAILURE);
 	}
 }

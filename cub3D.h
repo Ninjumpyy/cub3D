@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/09/30 12:33:12 by thomas           ###   ########.fr       */
+/*   Updated: 2024/09/30 18:26:55 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,12 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <X11/keysym.h>
+
+# define WIN_WIDTH	1024
+# define WIN_HEIGHT	512
+# define MINIMAP_WIDTH	512
+# define MINIMAP_HEIGHT	512
+# define CELL_SIZE	32
 
 /* ************************************************************************** */
 /*									STRUCTURES								  */
@@ -85,6 +91,8 @@ typedef struct s_data
 
 void	check_arg(int argc, char **argv);
 void    ft_error(const char *str);
+int		convert_color(int r, int g, int b);
+int		find_color(int x, int y, t_data *data);
 /* ************************************************************************** */
 void	err_parsing(char **line, int fd, t_data *data, t_lst **map_lst);
 /* ************************************************************************** */
@@ -92,6 +100,7 @@ void	free_get_next_line(int fd, char **line);
 void	free_env(t_data *data);
 void	free_map(t_data *data);
 void	free_lst(t_lst **map_lst);
+void	free_cub3d(t_data *data);
 /* ************************************************************************** */
 void    parsing_file(char *filename, t_data *data);
 void	parse_texture_color(char **line, int fd, t_data *data);
@@ -117,5 +126,14 @@ int		extract_one_color(int *i, char *line, int *color_elem);
 int		go_next_color(int *i, char **line);
 int		empty_line(char *line);
 int		valid_line(char *line);
+/* ************************************************************************** */
+void	init_data(t_data *data);
+/* ************************************************************************** */
+int		key_event(int keycode, void *param);
+int		close_event(void *param);
+/* ************************************************************************** */
+void	draw_pixel(t_img *img, int x, int y, int color);
+void	draw_minimap(t_data *data);
+void	draw_grid(t_data *data);
 
 #endif
