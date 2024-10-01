@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:04:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/09/30 18:18:19 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/01 13:01:19 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,4 @@ void	ft_error(const char *str)
 		}
 		str++;
 	}
-}
-
-int	convert_color(int r, int g, int b)
-{
-	return (r << 16 | g << 8 | b);
-}
-
-int	find_color(int x, int y, t_data *data)
-{
-	int	map_x;
-	int	map_y;
-
-	map_x = x / CELL_SIZE;
-	map_y = y / CELL_SIZE;
-	if (data->env.map[map_y][map_x] == '1')
-		return(convert_color(250, 250, 250));
-	else if (data->env.map[map_y][map_x] == ' ' || data->env.map[map_y][map_x] == '\0' || data->env.map[map_y][map_x] == '\n')
-		return(convert_color(169, 169, 169));
-	else
-		return(convert_color(0, 0, 0));
 }
