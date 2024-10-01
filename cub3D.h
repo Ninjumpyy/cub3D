@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/01 12:49:49 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/01 15:04:19 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define MINIMAP_HEIGHT		512
 # define PIXELS_PER_CELL	32 // minimap size (x,y) / number of cells in my map : 512/16
 # define CELLS_PER_PIXEL	0.03125 // number of cells in my map / minimap size (x,y) : 512/16
+# define SIZE_PIXEL_PLAYER	7
+# define SPEED				5
 
 /* ************************************************************************** */
 /*									STRUCTURES								  */
@@ -136,5 +138,9 @@ int		close_event(void *param);
 void	draw_pixel(t_img *img, int x, int y, int color);
 void	draw_minimap(t_data *data);
 void	draw_grid(t_data *data);
+void	draw_player(t_data *data);
+
+void	move_player(int keycode, t_data *data);
+void	redraw_minimap(t_data *data);
 
 #endif
