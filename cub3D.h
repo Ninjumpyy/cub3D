@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/01 15:04:19 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/02 11:26:56 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <X11/keysym.h>
+# include <math.h>
 
 # define WIN_WIDTH			1024
 # define WIN_HEIGHT			512
@@ -28,6 +29,7 @@
 # define CELLS_PER_PIXEL	0.03125 // number of cells in my map / minimap size (x,y) : 512/16
 # define SIZE_PIXEL_PLAYER	7
 # define SPEED				5
+# define PI					3.1415926535
 
 /* ************************************************************************** */
 /*									STRUCTURES								  */
