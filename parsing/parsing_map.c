@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:11:18 by thomas            #+#    #+#             */
-/*   Updated: 2024/09/30 12:42:25 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/02 17:04:39 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ int	check_map(t_lst **ptr, int *width, int *height, t_data *data)
 	return (1);
 }
 
+float	init_player_angle(char *line, int i)
+{
+	if (line[i] == 'N')
+		return (PI / 2);
+	else if (line[i] == 'S')
+		return ((3 * PI) / 2);
+	else if (line[i] == 'W')
+		return (PI);
+	else
+		return (0);
+}
+
 int	check_player_and_width(char *line, int *width, t_player *player, \
 int curr_height)
 {
@@ -42,6 +54,7 @@ int curr_height)
 			player->is_found = 1;
 			player->x = (float)i + 0.5;
 			player->y = (float)curr_height + 0.5;
+			player->angle = init_player_angle(line, i);
 		}
 		i++;
 	}
