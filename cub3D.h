@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/02 19:05:16 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/03 19:35:33 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@
 # define MOVE_SPEED			5
 # define ROTATION_SPEED		0.1
 # define PI					3.1415926535
+# define LINE_LENGTH		25
 
 /* ************************************************************************** */
 /*									STRUCTURES								  */
@@ -42,6 +43,12 @@ typedef struct s_lst
 	char			*line;
 }	t_lst;
 
+typedef struct s_ray
+{
+	float	x;
+	float	y;
+	float	angle;
+}	t_ray;
 
 typedef struct s_player
 {
@@ -142,7 +149,8 @@ void	draw_pixel(t_img *img, int x, int y, int color);
 void	draw_minimap(t_data *data);
 void	draw_grid(t_data *data);
 void	draw_player(t_data *data);
-void	draw_player_orientation(t_data *data);
+void	draw_player_orientation(t_data *data, float dx, float dy);
+void	draw_rays(t_data *data);
 /* ************************************************************************** */
 void	move_player(int keycode, t_data *data);
 void	move_forward(t_data *data);
@@ -152,6 +160,6 @@ void	move_right(t_data *data);
 /* ************************************************************************** */
 void	redraw_minimap(t_data *data);
 void	rotate_player(int keycode, t_data *data);
-void	draw_line(t_data *data);
+void	draw_line(t_data *data, float x_increment, float y_increment, int steps);
 
 #endif

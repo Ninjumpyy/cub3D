@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:49:33 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/02 18:10:49 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/03 10:28:28 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	move_left(t_data *data)
 	float	limit;
 
 	new_x = data->player.x - sin(data->player.angle) * (MOVE_SPEED * CELLS_PER_PIXEL);
-	new_y = data->player.y + cos(data->player.angle) * (MOVE_SPEED * CELLS_PER_PIXEL);
+	new_y = data->player.y - cos(data->player.angle) * (MOVE_SPEED * CELLS_PER_PIXEL);
 	limit = ((SIZE_PIXEL_PLAYER / 2) * CELLS_PER_PIXEL);
 	if (data->env.map[(int)(new_y + limit)][(int)(new_x - limit)] != '1' &&
 		data->env.map[(int)(new_y - limit)][(int)(new_x - limit)] != '1')
@@ -85,7 +85,7 @@ void	move_right(t_data *data)
 	float	limit;
 
 	new_x = data->player.x + sin(data->player.angle) * (MOVE_SPEED * CELLS_PER_PIXEL);
-	new_y = data->player.y - cos(data->player.angle) * (MOVE_SPEED * CELLS_PER_PIXEL);
+	new_y = data->player.y + cos(data->player.angle) * (MOVE_SPEED * CELLS_PER_PIXEL);
 	limit = ((SIZE_PIXEL_PLAYER / 2) * CELLS_PER_PIXEL);
 	if (data->env.map[(int)(new_y + limit)][(int)(new_x + limit)] != '1' &&
 		data->env.map[(int)(new_y - limit)][(int)(new_x + limit)] != '1')
