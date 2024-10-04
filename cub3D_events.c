@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:36:34 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/03 19:38:31 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/04 16:08:46 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	rotate_player(int keycode, t_data *data)
 void	redraw_minimap(t_data *data)
 {
 	draw_minimap(data);
-	draw_grid(data);
 	draw_player(data);
 	draw_rays(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->minimap.img, 0, 0);

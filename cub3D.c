@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:03:18 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/03 19:35:54 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/04 16:08:38 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	main(int argc, char **argv)
 
 	init_data(&data);
 	draw_minimap(&data);
-	draw_grid(&data);
 	draw_player(&data);
 	draw_rays(&data);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.minimap.img, 0, 0);
