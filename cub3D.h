@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/04 16:12:49 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/04 17:13:33 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,7 +151,6 @@ void	draw_grid(t_data *data);
 int		find_cell_color(int x, int y, t_data *data);
 /* ************************************************************************** */
 void	draw_player(t_data *data);
-void	draw_player_orientation(t_data *data, float dx, float dy);
 void	draw_rays(t_data *data);
 /* ************************************************************************** */
 void	move_player(int keycode, t_data *data);
@@ -162,7 +161,9 @@ void	move_right(t_data *data);
 /* ************************************************************************** */
 void	redraw_minimap(t_data *data);
 void	rotate_player(int keycode, t_data *data);
-void	draw_line(t_data *data, float x_increment, float y_increment, int steps);
-void	draw_line_bresenham(t_data *data, int x0, int y0, int x1, int y1, int color);
+/* ************************************************************************** */
+void	draw_line(t_data *data, int x_final, int y_final, int color);
+void	draw_gradual(t_data *data, int dx, int dy, int color);
+void	draw_steep(t_data *data, int dx, int dy, int color);
 
 #endif
