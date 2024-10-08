@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:03:18 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/04 18:04:01 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:27:03 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,13 @@ int	main(int argc, char **argv)
 	//print_debug(data);
 
 	init_data(&data);
+	draw_ceiling(&data);
+	draw_floor(&data);
 	draw_minimap(&data);
 	draw_player(&data);
-	draw_rays(&data);
+	cast_rays(&data);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.minimap.img, 0, 0);
+	mlx_put_image_to_window(data.mlx, data.mlx_win, data.cub.img, 512, 0);
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_event, &data);
 	mlx_hook(data.mlx_win, 17, 1L << 17, close_event, &data);
 	mlx_loop(data.mlx);

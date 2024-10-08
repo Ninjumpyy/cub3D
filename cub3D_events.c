@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:36:34 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/04 18:04:15 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:53:01 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,28 @@ void	rotate_player(int keycode, t_data *data)
 {
 	if (keycode == 65363) //right
 	{
-		data->player.angle -= ROTATION_SPEED;
-		if (data->player.angle < 0)
-			data->player.angle += (2 * PI);
-	}
-	if (keycode == 65361) //left
-	{
 		data->player.angle += ROTATION_SPEED;
 		if (data->player.angle > (2 * PI))
 			data->player.angle -= (2 * PI);
+	}
+	if (keycode == 65361) //left
+	{
+		data->player.angle -= ROTATION_SPEED;
+		if (data->player.angle < 0)
+			data->player.angle += (2 * PI);
 	}
 	redraw_minimap(data);
 }
 
 void	redraw_minimap(t_data *data)
 {
+	draw_ceiling(data);
+	draw_floor(data);
 	draw_minimap(data);
 	draw_player(data);
-	draw_rays(data);
+	cast_rays(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->minimap.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->cub.img, 512, 0);
 }
 
 int	close_event(void *param)

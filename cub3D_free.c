@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 11:46:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/09/30 17:43:52 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/08 15:39:49 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	free_cub3d(t_data *data)
 	free_env(data);
 	mlx_loop_end(data->mlx);
 	mlx_destroy_image(data->mlx, data->minimap.img);
+	mlx_destroy_image(data->mlx, data->cub.img);
 	mlx_destroy_window(data->mlx, data->mlx_win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);

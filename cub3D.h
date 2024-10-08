@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/05 11:14:24 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:51:58 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define WIN_HEIGHT			512
 # define MINIMAP_WIDTH		512
 # define MINIMAP_HEIGHT		512
+# define CUB_WIDTH			512
+# define CUB_HEIGHT			512
 # define PIXELS_PER_CELL	32 // minimap size (x,y) / number of cells in my map : 512/16
 # define CELLS_PER_PIXEL	0.03125 // number of cells in my map / minimap size (x,y) : 512/16
 # define SIZE_PIXEL_PLAYER	9
@@ -33,6 +35,8 @@
 # define PI					3.1415926535
 # define LINE_LENGTH		25
 # define DR					0.0174533
+# define TILE_SIZE			64
+# define NUM_RAYS			64
 
 /* ************************************************************************** */
 /*									STRUCTURES								  */
@@ -152,7 +156,7 @@ void	draw_grid(t_data *data);
 int		find_cell_color(int x, int y, t_data *data);
 /* ************************************************************************** */
 void	draw_player(t_data *data);
-void	draw_rays(t_data *data);
+void	cast_rays(t_data *data);
 /* ************************************************************************** */
 void	move_player(int keycode, t_data *data);
 void	move_forward(t_data *data);
@@ -166,5 +170,8 @@ void	rotate_player(int keycode, t_data *data);
 void	draw_line(t_data *data, int x_final, int y_final, int color);
 void	draw_gradual(t_data *data, int dx, int dy, int color);
 void	draw_steep(t_data *data, int dx, int dy, int color);
+void	draw_ceiling(t_data *data);
+void	draw_floor(t_data *data);
+void	draw_cub(t_data *data, float dist, int r, float ray_angle, int color);
 
 #endif

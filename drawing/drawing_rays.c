@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:14:26 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/05 12:05:51 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/08 16:51:45 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ float	calculate_distance(t_data *data, t_ray ray)
 	return (sqrt((ray.x - px) * (ray.x - px) + (ray.y - py) * (ray.y - py)));
 }
 
-void	draw_rays(t_data *data)
+void	cast_rays(t_data *data)
 {
 	int		r;
 	int		dof;
@@ -49,10 +49,9 @@ void	draw_rays(t_data *data)
 		ray_h.angle -= (2 * PI);
 	ray_v.angle = ray_h.angle;
 	r = 0;
-	while (r < 60)
+	while (r < NUM_RAYS)
 	{
 		cotan = 1 / tan(ray_h.angle);
-		printf("angle : %f  %f\n", ray_h.angle, ray_v.angle);
 		// ---Check Horizontal Lines---
 		
 		dof = 0;
@@ -167,16 +166,15 @@ void	draw_rays(t_data *data)
 			}
 		}
 		dist_v = calculate_distance(data, ray_v);
-		printf("distH : %f, distV : %f\n", dist_h, dist_v);
 		if (dist_v < dist_h)
 		{
-			printf("ray_v.x : %f, ray_v.y : %f\n", ray_v.x, ray_v.y);
 			draw_line(data, (int)ray_v.x, (int)ray_v.y, convert_color(0, 128, 0));
+			draw_cub(data, dist_v, r, ray_v.angle, convert_color(255, 0, 0));
 		}
 		else
 		{
-			printf("ray_h.x : %f, ray_h.y : %f\n", ray_h.x, ray_h.y);
 			draw_line(data, (int)ray_h.x, (int)ray_h.y, convert_color(0, 128, 0));
+			draw_cub(data, dist_h, r, ray_h.angle, convert_color(128, 0, 0));
 		}
 		r++;
 		ray_h.angle += DR;
@@ -185,5 +183,76 @@ void	draw_rays(t_data *data)
 		if (ray_h.angle > 2 * PI)
 			ray_h.angle -= (2 * PI);
 		ray_v.angle = ray_h.angle;
+	}
+}
+
+void	draw_ceiling(t_data *data)
+{
+	int	x;
+	int	y;
+	int	max_height;
+
+	max_height = CUB_HEIGHT / 2;
+	y = 0;
+	while (y < max_height)
+	{
+		x = 0;
+		while (x < CUB_WIDTH)
+		{
+			draw_pixel(&(data)->cub, x, y, convert_color(data->env.ceiling.r, data->env.ceiling.g, data->env.ceiling.b));
+			x++;
+		}
+		y++;
+	}
+}
+
+void	draw_floor(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = CUB_HEIGHT / 2;
+	while (y < CUB_HEIGHT)
+	{
+		x = 0;
+		while (x < CUB_WIDTH)
+		{
+			draw_pixel(&(data)->cub, x, y, convert_color(data->env.floor.r, data->env.floor.g, data->env.floor.b));
+			x++;
+		}
+		y++;
+	}
+}
+
+void	draw_cub(t_data *data, float dist, int r, float ray_angle, int color)
+{
+	float	line_height;
+	float	line_offset;
+	int		tile_width;
+	int		x_start;
+	int		x_end;
+	int		y_start;
+	int		y_end;
+
+	line_height = (TILE_SIZE * CUB_HEIGHT) / (dist * cos(data->player.angle - ray_angle));
+	if (line_height > CUB_HEIGHT)
+		line_height = CUB_HEIGHT;
+	line_offset = (CUB_HEIGHT / 2) - (line_height / 2);
+	tile_width = CUB_WIDTH / NUM_RAYS;
+
+	x_start = r * tile_width;
+	x_end = x_start + tile_width;
+	y_start = (int)line_offset;
+	y_end = (int)(line_offset + line_height);
+
+	while (y_start < y_end)
+	{
+		x_start = r * tile_width;
+		while (x_start < x_end)
+		{
+			draw_pixel(&(data)->cub, x_start, y_start, color);
+			x_start++;
+		}
+		y_start++;
 	}
 }
