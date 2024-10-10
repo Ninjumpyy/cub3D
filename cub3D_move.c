@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_move.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:49:33 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/04 18:00:29 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/10 13:19:10 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	move_player(int keycode, t_data *data)
 	if (keycode == 115) // S
 		move_backward(data);
 	if (keycode == 97) // A
-		move_left(data);
-	if (keycode == 100) // D
 		move_right(data);
+	if (keycode == 100) // D
+		move_left(data);
 }
 
 void	move_forward(t_data *data)

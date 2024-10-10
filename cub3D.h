@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/08 16:51:58 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/10 14:01:42 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,32 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
+typedef struct s_text
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
+	int		width;
+	int		height;
+}	t_text;
+
+typedef struct s_texture
+{
+	t_text		north;
+	t_text		south;
+	t_text		east;
+	t_text		west;	
+}	t_texture;
+
 typedef struct s_data
 {
 	void		*mlx;
 	void		*mlx_win;
 	t_img		minimap;
 	t_img		cub;
+	t_texture	texture;
 	t_env		env;
 	t_player	player;
 	int			map_width;
