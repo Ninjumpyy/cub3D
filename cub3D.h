@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/10 14:01:42 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:15:36 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include <stdio.h>
+# include <stdlib.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <X11/keysym.h>
@@ -37,6 +38,9 @@
 # define DR					0.0174533
 # define TILE_SIZE			64
 # define NUM_RAYS			64
+# define M_SENSITIVITY		10
+# define CROSSHAIR_LEN		10
+# define CROSSHAIR_COLOR	0xFFFFFF
 
 /* ************************************************************************** */
 /*									STRUCTURES								  */
@@ -60,6 +64,8 @@ typedef struct s_player
 	int		is_found;
 	float	x;
 	float	y;
+	int		mouse_x;
+	int		mouse_y;
 	float	angle;
 }	t_player;
 
@@ -166,10 +172,12 @@ int		valid_line(char *line);
 void	init_data(t_data *data);
 /* ************************************************************************** */
 int		key_event(int keycode, void *param);
+int		mouse_event(int x, int y, void *param);
 int		close_event(void *param);
 /* ************************************************************************** */
 void	draw_pixel(t_img *img, int x, int y, int color);
 int		convert_color(int r, int g, int b);
+void	draw_crosshair(t_data *data);
 /* ************************************************************************** */
 void	draw_minimap(t_data *data);
 void	draw_grid(t_data *data);

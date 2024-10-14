@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:03:18 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/10 14:33:17 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:19:26 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,18 @@ int	main(int argc, char **argv)
 	ft_memset(&data, 0, sizeof(t_data));
 	parsing_file(argv[1], &data);
 	//print_debug(data);
-
-	
-	
 	init_data(&data);
 	draw_ceiling(&data);
 	draw_floor(&data);
 	draw_minimap(&data);
 	draw_player(&data);
 	cast_rays(&data);
+	draw_crosshair(&data);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.minimap.img, 0, 0);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.cub.img, 512, 0);
+	mlx_mouse_hide(data.mlx, data.mlx_win);
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_event, &data);
+	mlx_hook(data.mlx_win, 6, 1L << 6, mouse_event, &data);
 	mlx_hook(data.mlx_win, 17, 1L << 17, close_event, &data);
 	mlx_loop(data.mlx);
 	return (0);

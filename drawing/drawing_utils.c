@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:04:36 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/04 17:12:18 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/14 16:14:22 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,4 +23,22 @@ void	draw_pixel(t_img *img, int x, int y, int color)
 int	convert_color(int r, int g, int b)
 {
 	return (r << 16 | g << 8 | b);
+}
+
+void	draw_crosshair(t_data *data)
+{
+	int	i;
+
+	i = -CROSSHAIR_LEN;
+	while (i < CROSSHAIR_LEN)
+	{
+		draw_pixel(&(data)->cub, data->player.mouse_x + i, data->player.mouse_y, CROSSHAIR_COLOR);
+		i++;
+	}
+	i = -CROSSHAIR_LEN;
+	while (i < CROSSHAIR_LEN)
+	{
+		draw_pixel(&(data)->cub, data->player.mouse_x, data->player.mouse_y + i, CROSSHAIR_COLOR);
+		i++;
+	}
 }
