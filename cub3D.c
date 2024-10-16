@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:03:18 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/16 11:23:38 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/16 12:57:08 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	main(int argc, char **argv)
 	draw_ceiling(&data);
 	draw_floor(&data);
 	draw_minimap(&data);
-	draw_player(&data);
 	cast_rays(&data);
+	draw_player(&data);
 	draw_crosshair(&data);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.minimap.img, 0, 0);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.cub.img, 512, 0);
