@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/16 15:48:26 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:50:30 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define CUB_WIDTH			512
 # define CUB_HEIGHT			512
 # define PIXELS_PER_CELL	32 // minimap size (x,y) / number of cells in my map : 512/16
-# define CELLS_PER_PIXEL	0.03125 // number of cells in my map / minimap size (x,y) : 512/16
+# define CELLS_PER_PIXEL	0.03125 // number of cells in my map / minimap size (x,y) : 16/512
 # define SIZE_PIXEL_PLAYER	9
 # define MOVE_SPEED			4
 # define ROTATION_SPEED		2
