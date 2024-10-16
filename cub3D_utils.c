@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:04:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/10 15:14:22 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/16 14:42:19 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,29 @@ void	ft_error(const char *str)
 	}
 }
 
+double	get_time(void)
+{
+	struct timeval tv;
+
+    if (gettimeofday(&tv, NULL) == -1)
+        write(2, "gettimeofday() error\n", 22);
+    return (tv.tv_sec + (double)tv.tv_usec / 1000000);
+}
+
+double	update_time(t_data *data)
+{
+	double	current_time;
+	double	delta_time;
+	
+	current_time = get_time();
+	delta_time = current_time - data->last_frame_time;
+	data->last_frame_time = current_time;
+	return (delta_time);
+}
+
 void	init_data(t_data *data)
 {
+	data->last_frame_time = get_time();
 	data->mlx = mlx_init();
 	data->mlx_win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
 	data->minimap.img = mlx_new_image(data->mlx, MINIMAP_WIDTH, MINIMAP_HEIGHT);

@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/10 14:01:42 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/16 15:48:26 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@
 # include <fcntl.h>
 # include <X11/keysym.h>
 # include <math.h>
+# include <sys/time.h>
 
+# define PI					3.1415926535
 # define WIN_WIDTH			1024
 # define WIN_HEIGHT			512
 # define MINIMAP_WIDTH		512
@@ -30,9 +32,8 @@
 # define PIXELS_PER_CELL	32 // minimap size (x,y) / number of cells in my map : 512/16
 # define CELLS_PER_PIXEL	0.03125 // number of cells in my map / minimap size (x,y) : 512/16
 # define SIZE_PIXEL_PLAYER	9
-# define MOVE_SPEED			5
-# define ROTATION_SPEED		0.1
-# define PI					3.1415926535
+# define MOVE_SPEED			4
+# define ROTATION_SPEED		2
 # define LINE_LENGTH		25
 # define DR					0.0174533
 # define TILE_SIZE			64
@@ -110,6 +111,16 @@ typedef struct s_texture
 	t_text		west;	
 }	t_texture;
 
+typedef struct s_keys
+{
+	int	w;
+	int	s;
+	int	a;
+	int	d;
+	int	left;
+	int	right;
+}	t_keys;
+
 typedef struct s_data
 {
 	void		*mlx;
@@ -121,6 +132,8 @@ typedef struct s_data
 	t_player	player;
 	int			map_width;
 	int			map_height;
+	t_keys		key;
+	double		last_frame_time;
 }	t_data;
 
 /* ************************************************************************** */
@@ -129,6 +142,9 @@ typedef struct s_data
 
 void	check_arg(int argc, char **argv);
 void    ft_error(const char *str);
+double	get_time(void);
+double	update_time(t_data *data);
+void	init_data(t_data *data);
 /* ************************************************************************** */
 void	err_parsing(char **line, int fd, t_data *data, t_lst **map_lst);
 /* ************************************************************************** */
@@ -138,7 +154,7 @@ void	free_map(t_data *data);
 void	free_lst(t_lst **map_lst);
 void	free_cub3d(t_data *data);
 /* ************************************************************************** */
-void    parsing_file(char *filename, t_data *data);
+void	parsing_file(char *filename, t_data *data);
 void	parse_texture_color(char **line, int fd, t_data *data);
 void	parse_map(char **line, int fd, t_lst **map_lst, t_data *data);
 /* ************************************************************************** */
@@ -163,13 +179,14 @@ int		go_next_color(int *i, char **line);
 int		empty_line(char *line);
 int		valid_line(char *line);
 /* ************************************************************************** */
-void	init_data(t_data *data);
-/* ************************************************************************** */
-int		key_event(int keycode, void *param);
+int		key_pressed(int keycode, void *param);
+int		key_released(int keycode, void *param);
+int		player_event(t_data *data);
 int		close_event(void *param);
 /* ************************************************************************** */
 void	draw_pixel(t_img *img, int x, int y, int color);
 int		convert_color(int r, int g, int b);
+void	redraw_minimap(t_data *data);
 /* ************************************************************************** */
 void	draw_minimap(t_data *data);
 void	draw_grid(t_data *data);
@@ -178,14 +195,9 @@ int		find_cell_color(int x, int y, t_data *data);
 void	draw_player(t_data *data);
 void	cast_rays(t_data *data);
 /* ************************************************************************** */
-void	move_player(int keycode, t_data *data);
-void	move_forward(t_data *data);
-void	move_backward(t_data *data);
-void	move_left(t_data *data);
-void	move_right(t_data *data);
-/* ************************************************************************** */
-void	redraw_minimap(t_data *data);
-void	rotate_player(int keycode, t_data *data);
+void	move_player(t_data *data, double delta_time);
+void	compute_directional_movement(t_data *data, double *move_x, double *move_y, double move_speed);
+int		can_move_to(double move_x, double move_y, t_data *data);
 /* ************************************************************************** */
 void	draw_line(t_data *data, int x_final, int y_final, int color);
 void	draw_gradual(t_data *data, int dx, int dy, int color);
