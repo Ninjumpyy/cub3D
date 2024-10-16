@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:03:18 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/14 16:19:26 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:23:38 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	main(int argc, char **argv)
 	parsing_file(argv[1], &data);
 	//print_debug(data);
 	init_data(&data);
+	printf("loaded player\n");
 	draw_ceiling(&data);
 	draw_floor(&data);
 	draw_minimap(&data);

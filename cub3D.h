@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/14 16:15:36 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:06:49 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,35 @@ typedef struct s_ray
 	float	angle;
 }	t_ray;
 
-typedef struct s_player
+typedef struct s_img
 {
-	int		is_found;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
+	int		width;
+	int		height;
+}	t_img;
+
+typedef struct s_sprite
+{
 	float	x;
 	float	y;
-	int		mouse_x;
-	int		mouse_y;
-	float	angle;
+	int		visible;
+	float	distance;
+	t_img	img;
+}	t_sprite;
+
+typedef struct s_player
+{
+	int			is_found;
+	float		x;
+	float		y;
+	int			mouse_x;
+	int			mouse_y;
+	float		angle;
+	t_sprite	sprite;
 }	t_player;
 
 typedef struct s_color
@@ -87,15 +108,6 @@ typedef struct s_env
 	t_color		ceiling;
 	char		**map;
 }	t_env;
-
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_size;
-	int		endian;
-}	t_img;
 
 typedef struct s_text
 {

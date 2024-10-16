@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:36:34 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/14 16:17:45 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/16 10:19:38 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,25 @@
 int	mouse_event(int x, int y, void *param)
 {
 	t_data	*data;
-	int	prev_x;
 	int			delta_x;
 
 	data = (t_data *)param;
-	prev_x = data->player.mouse_x;
-	printf("position = %d\n", prev_x);
-	if (prev_x != CUB_WIDTH / 2)
+	delta_x = x - (CUB_WIDTH / 2);
+	//printf("position = %d\n", prev_x);
+	if (delta_x != 0)
 	{
-		printf("in here\n");
-		delta_x = x - prev_x;
+		//printf("in here\n");
 		data->player.angle += delta_x * ROTATION_SPEED / M_SENSITIVITY;
 		if (data->player.angle > (2 * PI))
 			data->player.angle -= (2 * PI);
 		if (data->player.angle < 0)
 			data->player.angle += (2 * PI);
 		redraw_minimap(data);
+		mlx_mouse_move(data->mlx, data->mlx_win, CUB_WIDTH / 2, CUB_HEIGHT / 2);
 	}
-	data->player.mouse_x = x;
-	data->player.mouse_y = y;
-	//printf("Mouse moved to: x = %d, y = %d\n", x, y);
+	//data->player.mouse_x = x;
+	//data->player.mouse_y = y;
+	printf("Mouse moved to: x = %d, y = %d\n", x, y);
 	return (0);
 }
 

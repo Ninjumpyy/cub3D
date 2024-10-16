@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:04:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/14 15:55:52 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/16 11:54:29 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,17 @@ void	init_data(t_data *data)
 	data->minimap.img = mlx_new_image(data->mlx, MINIMAP_WIDTH, MINIMAP_HEIGHT);
 	data->minimap.addr = mlx_get_data_addr(data->minimap.img, &data->minimap.bits_per_pixel, &data->minimap.line_size, &data->minimap.endian);
 	data->cub.img = mlx_new_image(data->mlx, CUB_WIDTH, CUB_HEIGHT);
+	if (!data->cub.img)
+	{
+		printf("Error: Failed to create cub image\n");
+		exit(1);
+	}
 	data->cub.addr = mlx_get_data_addr(data->cub.img, &data->cub.bits_per_pixel, &data->cub.line_size, &data->cub.endian);
+	if (!data->cub.addr)
+	{
+		printf("Error: Failed to get cub image data address\n");
+		exit(1);
+	}
 	data->texture.north.img = mlx_xpm_file_to_image(data->mlx, data->env.no_texture, &data->texture.north.width, &data->texture.north.height);
 	data->texture.north.addr = mlx_get_data_addr(data->texture.north.img, &data->texture.north.bits_per_pixel, &data->texture.north.line_size, &data->texture.north.endian);
 	data->texture.south.img = mlx_xpm_file_to_image(data->mlx, data->env.no_texture, &data->texture.south.width, &data->texture.south.height);
@@ -67,4 +77,18 @@ void	init_data(t_data *data)
 	data->texture.west.addr = mlx_get_data_addr(data->texture.west.img, &data->texture.west.bits_per_pixel, &data->texture.west.line_size, &data->texture.west.endian);
 	data->player.mouse_x = CUB_WIDTH / 2;
 	data->player.mouse_y = CUB_HEIGHT / 2;
+	data->player.sprite.img.width = 512;
+	data->player.sprite.img.height = 512;
+	data->player.sprite.img.img = mlx_xpm_file_to_image(data->mlx, "./textures/player.xpm", &(data->player.sprite.img.width), &(data->player.sprite.img.height));
+	if (!data->player.sprite.img.img)
+	{
+    	printf("Error: Failed to load player sprite image\n");
+    	exit(1);
+	}
+	data->player.sprite.img.addr = mlx_get_data_addr(data->player.sprite.img.img, &data->player.sprite.img.bits_per_pixel, &data->player.sprite.img.line_size, &data->player.sprite.img.endian);
+	if (!data->player.sprite.img.addr)
+	{
+		printf("Error: Failed to get data address of player sprite\n");
+		exit(1);
+	}
 }
