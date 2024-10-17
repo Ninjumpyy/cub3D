@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/16 15:50:30 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/17 15:29:35 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft/libft.h"
 # include "minilibx-linux/mlx.h"
 # include <stdio.h>
+# include <stdlib.h>
 # include <errno.h>
 # include <fcntl.h>
 # include <X11/keysym.h>
@@ -38,6 +39,9 @@
 # define DR					0.0174533
 # define TILE_SIZE			64
 # define NUM_RAYS			64
+# define M_SENSITIVITY		10
+# define CROSSHAIR_LEN		10
+# define CROSSHAIR_COLOR	0xFFFFFF
 
 /* ************************************************************************** */
 /*									STRUCTURES								  */
@@ -56,12 +60,35 @@ typedef struct s_ray
 	float	angle;
 }	t_ray;
 
-typedef struct s_player
+typedef struct s_img
 {
-	int		is_found;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_size;
+	int		endian;
+	int		width;
+	int		height;
+}	t_img;
+
+typedef struct s_sprite
+{
 	float	x;
 	float	y;
-	float	angle;
+	int		visible;
+	float	distance;
+	t_img	img;
+}	t_sprite;
+
+typedef struct s_player
+{
+	int			is_found;
+	float		x;
+	float		y;
+	int			mouse_x;
+	int			mouse_y;
+	float		angle;
+	t_sprite	sprite;
 }	t_player;
 
 typedef struct s_color
@@ -82,15 +109,6 @@ typedef struct s_env
 	t_color		ceiling;
 	char		**map;
 }	t_env;
-
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_size;
-	int		endian;
-}	t_img;
 
 typedef struct s_text
 {
@@ -181,11 +199,13 @@ int		valid_line(char *line);
 /* ************************************************************************** */
 int		key_pressed(int keycode, void *param);
 int		key_released(int keycode, void *param);
+int		mouse_event(int x, int y, void *param);
 int		player_event(t_data *data);
 int		close_event(void *param);
 /* ************************************************************************** */
 void	draw_pixel(t_img *img, int x, int y, int color);
 int		convert_color(int r, int g, int b);
+void	draw_crosshair(t_data *data);
 void	redraw_minimap(t_data *data);
 /* ************************************************************************** */
 void	draw_minimap(t_data *data);
