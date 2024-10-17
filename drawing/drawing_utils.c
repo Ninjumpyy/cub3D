@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:04:36 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/17 15:25:21 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/17 15:50:01 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,25 @@ void	redraw_minimap(t_data *data)
 	draw_minimap(data);
 	draw_player(data);
 	cast_rays(data);
+	draw_crosshair(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->minimap.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->cub.img, 512, 0);
+}
+
+void	draw_crosshair(t_data *data)
+{
+	int	i;
+
+	i = -CROSSHAIR_LEN;
+	while (i < CROSSHAIR_LEN)
+	{
+		draw_pixel(&(data)->cub, data->player.mouse_x + i, data->player.mouse_y, CROSSHAIR_COLOR);
+		i++;
+	}
+	i = -CROSSHAIR_LEN;
+	while (i < CROSSHAIR_LEN)
+	{
+		draw_pixel(&(data)->cub, data->player.mouse_x, data->player.mouse_y + i, CROSSHAIR_COLOR);
+		i++;
+	}
 }
