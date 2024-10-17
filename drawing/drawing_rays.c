@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_rays.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:14:26 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/08 16:51:45 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/17 15:33:30 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	cast_rays(t_data *data)
 	float	cotan;
 	float	dist_h;
 	float	dist_v;
+	float	da;
 
 	xo = 0;
 	yo = 0;
@@ -43,13 +44,14 @@ void	cast_rays(t_data *data)
 	ray_h.x = px;
 	ray_h.y = py;
 	ray_h.angle = data->player.angle - (DR * 30);
+	da = (DR * 60) / CUB_WIDTH;
 	if (ray_h.angle < 0)
 		ray_h.angle += (2 * PI);
 	if (ray_h.angle > 2 * PI)
 		ray_h.angle -= (2 * PI);
 	ray_v.angle = ray_h.angle;
 	r = 0;
-	while (r < NUM_RAYS)
+	while (r < CUB_WIDTH)
 	{
 		cotan = 1 / tan(ray_h.angle);
 		// ---Check Horizontal Lines---
@@ -169,15 +171,15 @@ void	cast_rays(t_data *data)
 		if (dist_v < dist_h)
 		{
 			draw_line(data, (int)ray_v.x, (int)ray_v.y, convert_color(0, 128, 0));
-			draw_cub(data, dist_v, r, ray_v.angle, convert_color(255, 0, 0));
+			draw_cub(data, dist_v, r, ray_v, 1);
 		}
 		else
 		{
 			draw_line(data, (int)ray_h.x, (int)ray_h.y, convert_color(0, 128, 0));
-			draw_cub(data, dist_h, r, ray_h.angle, convert_color(128, 0, 0));
+			draw_cub(data, dist_h, r, ray_h, 0);
 		}
 		r++;
-		ray_h.angle += DR;
+		ray_h.angle += da;
 		if (ray_h.angle < 0)
 			ray_h.angle += (2 * PI);
 		if (ray_h.angle > 2 * PI)
@@ -224,35 +226,72 @@ void	draw_floor(t_data *data)
 	}
 }
 
-void	draw_cub(t_data *data, float dist, int r, float ray_angle, int color)
+void	draw_cub(t_data *data, float dist, int r, t_ray ray, int vertical)
 {
 	float	line_height;
-	float	line_offset;
-	int		tile_width;
-	int		x_start;
-	int		x_end;
 	int		y_start;
 	int		y_end;
+	int		y;
+	float	wall_hit_x;
+	int		tex_x;
+	int		tex_y;
+	float	tex_pos;
+	float	tex_step;
+	int		color;
 
-	line_height = (TILE_SIZE * CUB_HEIGHT) / (dist * cos(data->player.angle - ray_angle));
+	line_height = (TILE_SIZE * CUB_HEIGHT) / (dist * cos(data->player.angle - ray.angle));
+	tex_step = (float)data->texture.north.height / line_height;
 	if (line_height > CUB_HEIGHT)
-		line_height = CUB_HEIGHT;
-	line_offset = (CUB_HEIGHT / 2) - (line_height / 2);
-	tile_width = CUB_WIDTH / NUM_RAYS;
-
-	x_start = r * tile_width;
-	x_end = x_start + tile_width;
-	y_start = (int)line_offset;
-	y_end = (int)(line_offset + line_height);
-
-	while (y_start < y_end)
 	{
-		x_start = r * tile_width;
-		while (x_start < x_end)
-		{
-			draw_pixel(&(data)->cub, x_start, y_start, color);
-			x_start++;
-		}
-		y_start++;
+		tex_pos = (line_height - CUB_HEIGHT) / 2 * tex_step;
+		line_height = CUB_HEIGHT;
+	}
+	else
+		tex_pos = 0;
+	
+	y_start = (CUB_HEIGHT - line_height) / 2;
+	if (y_start < 0)
+    {
+        tex_pos += -y_start * tex_step;
+        y_start = 0;
+    }
+	y_end = y_start + line_height;
+	if (y_end > CUB_HEIGHT)
+		y_end = CUB_HEIGHT;
+
+	if (vertical)
+	{
+		ray.y /= 32;
+		wall_hit_x = ray.y - (int)ray.y;
+	}
+	else
+	{
+		ray.x /= 32;
+		wall_hit_x = ray.x - (int)ray.x;
+	}
+
+	tex_x = (int)(wall_hit_x * data->texture.north.width);
+	
+	y = y_start;
+	while (y < y_end)
+	{
+		tex_y = (int)tex_pos % data->texture.north.height;
+		tex_pos += tex_step;
+
+		color = get_texture_color(&data->texture.north, tex_x, tex_y);
+		draw_pixel(&(data)->cub, r, y, color);
+		y++;
 	}
 }
+
+
+int get_texture_color(t_text *texture, int x, int y)
+{
+    char    *pixel;
+    int     color;
+
+    pixel = texture->addr + (y * texture->line_size + x * (texture->bits_per_pixel / 8));
+    color = *(int *)pixel;
+    return (color);
+}
+

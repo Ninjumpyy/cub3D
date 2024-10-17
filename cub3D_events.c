@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:36:34 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/16 15:47:49 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/17 14:22:58 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	player_event(t_data *data)
 	delta_time = update_time(data);
 	if (data->key.w == 1 || data->key.s == 1 || data->key.a == 1 || data->key.d == 1)
 		move_player(data, delta_time);
-		
 	if (data->key.right == 1) //right
 	{
 		data->player.angle += delta_time * ROTATION_SPEED;

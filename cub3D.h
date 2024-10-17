@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/16 15:50:30 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/17 14:15:41 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,6 +204,7 @@ void	draw_gradual(t_data *data, int dx, int dy, int color);
 void	draw_steep(t_data *data, int dx, int dy, int color);
 void	draw_ceiling(t_data *data);
 void	draw_floor(t_data *data);
-void	draw_cub(t_data *data, float dist, int r, float ray_angle, int color);
+void	draw_cub(t_data *data, float dist, int r, t_ray ray, int vertical);
+int 	get_texture_color(t_text *texture, int x, int y);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:49:33 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/16 15:46:20 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/17 10:41:55 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	can_move_to(double move_x, double move_y, t_data *data)
 
 	new_x = data->player.x + move_x;
 	new_y = data->player.y + move_y;
-	limit = ((SIZE_PIXEL_PLAYER / 2) * CELLS_PER_PIXEL);
+	limit = (SIZE_PIXEL_PLAYER * CELLS_PER_PIXEL);
 	if (data->env.map[(int)(new_y - limit)][(int)(new_x - limit)] != '1' &&
 		data->env.map[(int)(new_y - limit)][(int)(new_x + limit)] != '1' &&
 		data->env.map[(int)(new_y + limit)][(int)(new_x - limit)] != '1' &&
