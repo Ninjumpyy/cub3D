@@ -3,14 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_events.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:36:34 by thomas            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/10/17 14:22:58 by tle-moel         ###   ########.fr       */
+=======
+/*   Updated: 2024/10/17 15:27:35 by rpandipe         ###   ########.fr       */
+>>>>>>> 06c27b039411caa22129a8ad50fcb3caa8b2abea
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+int	mouse_event(int x, int y, void *param)
+{
+	t_data	*data;
+	int			delta_x;
+
+	data = (t_data *)param;
+	delta_x = x - (CUB_WIDTH / 2);
+	//printf("position = %d\n", prev_x);
+	if (delta_x != 0)
+	{
+		//printf("in here\n");
+		data->player.angle += delta_x * ROTATION_SPEED / M_SENSITIVITY;
+		if (data->player.angle > (2 * PI))
+			data->player.angle -= (2 * PI);
+		if (data->player.angle < 0)
+			data->player.angle += (2 * PI);
+		redraw_minimap(data);
+		mlx_mouse_move(data->mlx, data->mlx_win, CUB_WIDTH / 2, CUB_HEIGHT / 2);
+	}
+	//data->player.mouse_x = x;
+	//data->player.mouse_y = y;
+	printf("Mouse moved to: x = %d, y = %d\n", x, y);
+	return (0);
+}
+
+int	mouse_event(int x, int y, void *param)
+{
+	t_data	*data;
+	int			delta_x;
+
+	data = (t_data *)param;
+	delta_x = x - (CUB_WIDTH / 2);
+	//printf("position = %d\n", prev_x);
+	if (delta_x != 0)
+	{
+		//printf("in here\n");
+		data->player.angle += delta_x * ROTATION_SPEED / M_SENSITIVITY;
+		if (data->player.angle > (2 * PI))
+			data->player.angle -= (2 * PI);
+		if (data->player.angle < 0)
+			data->player.angle += (2 * PI);
+		redraw_minimap(data);
+		mlx_mouse_move(data->mlx, data->mlx_win, CUB_WIDTH / 2, CUB_HEIGHT / 2);
+	}
+	//data->player.mouse_x = x;
+	//data->player.mouse_y = y;
+	printf("Mouse moved to: x = %d, y = %d\n", x, y);
+	return (0);
+}
 
 int	key_pressed(int keycode, void *param)
 {
@@ -77,7 +131,19 @@ int	player_event(t_data *data)
 			data->player.angle += (2 * PI);
 	}
 	redraw_minimap(data);
-	return (0);
+}
+
+void	redraw_minimap(t_data *data)
+{
+	mlx_clear_window(data->mlx, data->mlx_win);
+	draw_ceiling(data);
+	draw_floor(data);
+	draw_minimap(data);
+	draw_player(data);
+	cast_rays(data);
+	draw_crosshair(data);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->minimap.img, 0, 0);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->cub.img, 512, 0);
 }
 
 int	close_event(void *param)
