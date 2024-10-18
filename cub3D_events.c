@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:36:34 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/17 15:55:26 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/18 16:33:56 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	mouse_event(int x, int y, void *param)
 	t_data	*data;
 	int			delta_x;
 
+	(void)y;
 	data = (t_data *)param;
 	delta_x = x - (CUB_WIDTH / 2);
 	//printf("position = %d\n", prev_x);
@@ -33,7 +34,7 @@ int	mouse_event(int x, int y, void *param)
 	}
 	//data->player.mouse_x = x;
 	//data->player.mouse_y = y;
-	printf("Mouse moved to: x = %d, y = %d\n", x, y);
+	//printf("Mouse moved to: x = %d, y = %d\n", x, y);
 	return (0);
 }
 

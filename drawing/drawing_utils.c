@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:04:36 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/17 15:50:01 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/18 14:17:28 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	redraw_minimap(t_data *data)
 	draw_floor(data);
 	draw_minimap(data);
 	draw_player(data);
-	cast_rays(data);
+	//cast_rays(data);
+	draw_cub_scene(data);
 	draw_crosshair(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->minimap.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->cub.img, 512, 0);
@@ -54,4 +55,12 @@ void	draw_crosshair(t_data *data)
 		draw_pixel(&(data)->cub, data->player.mouse_x, data->player.mouse_y + i, CROSSHAIR_COLOR);
 		i++;
 	}
+}
+
+void	normalize_angle(t_ray *ray)
+{
+	if (ray->angle < 0)
+		ray->angle += (2 * PI);
+	if (ray->angle > 2 * PI)
+		ray->angle -= (2 * PI);
 }

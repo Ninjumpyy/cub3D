@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/17 15:45:44 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/18 15:24:55 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 # define MOVE_SPEED			4
 # define ROTATION_SPEED		2
 # define LINE_LENGTH		25
+# define FOV				60
 # define DR					0.0174533
 # define TILE_SIZE			64
 # define NUM_RAYS			64
@@ -47,18 +48,17 @@
 /*									STRUCTURES								  */
 /* ************************************************************************** */
 
+typedef enum e_type
+{
+	VERTICAL,
+	HORIZONTAL,
+}	t_type;
+
 typedef struct s_lst
 {
 	struct s_lst	*next;
 	char			*line;
 }	t_lst;
-
-typedef struct s_ray
-{
-	float	x;
-	float	y;
-	float	angle;
-}	t_ray;
 
 typedef struct s_img
 {
@@ -120,6 +120,19 @@ typedef struct s_text
 	int		width;
 	int		height;
 }	t_text;
+
+typedef struct s_ray
+{
+	float	x;
+	float	y;
+	float	angle;
+	float	dist;
+	float	xo;
+	float	yo;
+	int		dof;
+	t_text	text;
+	t_type	type;
+}	t_ray;
 
 typedef struct s_texture
 {
@@ -213,7 +226,7 @@ void	draw_grid(t_data *data);
 int		find_cell_color(int x, int y, t_data *data);
 /* ************************************************************************** */
 void	draw_player(t_data *data);
-void	cast_rays(t_data *data);
+
 /* ************************************************************************** */
 void	move_player(t_data *data, double delta_time);
 void	compute_directional_movement(t_data *data, double *move_x, double *move_y, double move_speed);
@@ -224,7 +237,16 @@ void	draw_gradual(t_data *data, int dx, int dy, int color);
 void	draw_steep(t_data *data, int dx, int dy, int color);
 void	draw_ceiling(t_data *data);
 void	draw_floor(t_data *data);
-void	draw_cub(t_data *data, float dist, int r, t_ray ray, int vertical);
+void	draw_cub(t_data *data, t_ray ray, int r);
 int 	get_texture_color(t_text *texture, int x, int y);
+
+void	draw_cub_scene(t_data *data);
+void	process_and_draw_wall_slice(t_data *data, t_ray ray_v, t_ray ray_h, int r);
+void	init_ray_data(t_data *data, t_ray *ray, int reinit, t_type type);
+void	init_horizontal_ray(t_data *data, t_ray *ray, int px, int py);
+void	init_vertical_ray(t_data *data, t_ray *ray, int px, int py);
+void	determine_hit_ray(t_data *data, t_ray *ray);
+void	calculate_distance(t_data *data, t_ray *ray);
+void	normalize_angle(t_ray *ray);
 
 #endif
