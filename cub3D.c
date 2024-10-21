@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:03:18 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/18 16:29:37 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/21 10:59:23 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	main(int argc, char **argv)
 	init_data(&data);
 	
 	
-	draw_ceiling(&data);
-	draw_floor(&data);
+	draw_background(&data);
 	draw_minimap(&data);
 	draw_player(&data);
 	draw_cub_scene(&data);

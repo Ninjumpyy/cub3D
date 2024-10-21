@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:04:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/18 16:24:04 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:32:11 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ double	get_time(void)
 	struct timeval tv;
 
     if (gettimeofday(&tv, NULL) == -1)
-        write(2, "gettimeofday() error\n", 22);
+	{
+		if (write(2, "Error\ngettimeofday() error\n", 27))
+			perror("Error\nFailed to write error message");
+	}
     return (tv.tv_sec + (double)tv.tv_usec / 1000000);
 }
 
@@ -88,14 +91,14 @@ void	init_data(t_data *data)
 		printf("Error: Failed to get cub image data address\n");
 		exit(1);
 	}
-	data->texture.north.img = mlx_xpm_file_to_image(data->mlx, data->env.no_texture, &data->texture.north.width, &data->texture.north.height);
-	data->texture.north.addr = mlx_get_data_addr(data->texture.north.img, &data->texture.north.bits_per_pixel, &data->texture.north.line_size, &data->texture.north.endian);
-	data->texture.south.img = mlx_xpm_file_to_image(data->mlx, data->env.so_texture, &data->texture.south.width, &data->texture.south.height);
-	data->texture.south.addr = mlx_get_data_addr(data->texture.south.img, &data->texture.south.bits_per_pixel, &data->texture.south.line_size, &data->texture.south.endian);
-	data->texture.east.img = mlx_xpm_file_to_image(data->mlx, data->env.ea_texture, &data->texture.east.width, &data->texture.east.height);
-	data->texture.east.addr = mlx_get_data_addr(data->texture.east.img, &data->texture.east.bits_per_pixel, &data->texture.east.line_size, &data->texture.east.endian);
-	data->texture.west.img = mlx_xpm_file_to_image(data->mlx, data->env.we_texture, &data->texture.west.width, &data->texture.west.height);
-	data->texture.west.addr = mlx_get_data_addr(data->texture.west.img, &data->texture.west.bits_per_pixel, &data->texture.west.line_size, &data->texture.west.endian);
+	data->text_data.north.img = mlx_xpm_file_to_image(data->mlx, data->env.no_texture, &data->text_data.north.width, &data->text_data.north.height);
+	data->text_data.north.addr = mlx_get_data_addr(data->text_data.north.img, &data->text_data.north.bits_per_pixel, &data->text_data.north.line_size, &data->text_data.north.endian);
+	data->text_data.south.img = mlx_xpm_file_to_image(data->mlx, data->env.so_texture, &data->text_data.south.width, &data->text_data.south.height);
+	data->text_data.south.addr = mlx_get_data_addr(data->text_data.south.img, &data->text_data.south.bits_per_pixel, &data->text_data.south.line_size, &data->text_data.south.endian);
+	data->text_data.east.img = mlx_xpm_file_to_image(data->mlx, data->env.ea_texture, &data->text_data.east.width, &data->text_data.east.height);
+	data->text_data.east.addr = mlx_get_data_addr(data->text_data.east.img, &data->text_data.east.bits_per_pixel, &data->text_data.east.line_size, &data->text_data.east.endian);
+	data->text_data.west.img = mlx_xpm_file_to_image(data->mlx, data->env.we_texture, &data->text_data.west.width, &data->text_data.west.height);
+	data->text_data.west.addr = mlx_get_data_addr(data->text_data.west.img, &data->text_data.west.bits_per_pixel, &data->text_data.west.line_size, &data->text_data.west.endian);
 	data->player.mouse_x = CUB_WIDTH / 2;
 	data->player.mouse_y = CUB_HEIGHT / 2;
 	data->player.sprite.img.width = 512;

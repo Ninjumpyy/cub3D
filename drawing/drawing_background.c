@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_background.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:58:35 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/18 13:59:12 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/21 10:59:02 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../cub3D.h"
+
+void	draw_background(t_data *data)
+{
+	draw_ceiling(data);
+	draw_floor(data);
+}
 
 void	draw_ceiling(t_data *data)
 {

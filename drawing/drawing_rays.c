@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_rays.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:59:37 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/18 16:16:56 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/21 11:30:44 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	init_ray_data(t_data *data, t_ray *ray, int reinit, t_type type)
 		ray->angle = data->player.angle - (DR * (FOV / 2));
 		normalize_angle(ray);
 		ray->type = type;
-		ft_memset(&(ray->text), 0, sizeof(t_text));
+		ft_memset(&(ray->texture), 0, sizeof(t_texture));
 	}
 	ray->dist = 1000000;
 	ray->xo = 0;
@@ -40,7 +40,7 @@ void	init_horizontal_ray(t_data *data, t_ray *ray, int px, int py)
 		ray->x = (ray->y - py) * -1 * cotan + px;
 		ray->yo = - PIXELS_PER_CELL;
 		ray->xo = ray->yo * (-1 * cotan);
-		ray->text = data->texture.south;
+		ray->texture = data->text_data.south;
 		//printf("SOUTH: %p\n", data->texture.south.img);
 	}
 	else if (ray->angle > PI) // Looking down
@@ -49,7 +49,7 @@ void	init_horizontal_ray(t_data *data, t_ray *ray, int px, int py)
 		ray->x = (ray->y - py) * -1 * cotan + px;
 		ray->yo = PIXELS_PER_CELL;
 		ray->xo = ray->yo * (-1 * cotan);
-		ray->text = data->texture.north;
+		ray->texture = data->text_data.north;
 		//printf("NORTH: %p\n", data->texture.north.img);
 	}
 	if (ray->angle == 0 || ray->angle == PI) // Looking straight left or right
@@ -68,7 +68,7 @@ void	init_vertical_ray(t_data *data, t_ray *ray, int px, int py)
 			ray->y = (ray->x - px) * -1 * tan(ray->angle) + py;
 			ray->xo = PIXELS_PER_CELL;
 			ray->yo = ray->xo * -1 * tan(ray->angle); 
-			ray->text = data->texture.west;
+			ray->texture = data->text_data.west;
 			//printf("WEST: %p\n", data->texture.west.img);
 		}
 		else if (ray->angle > (PI / 2) && ray->angle < (3 * PI / 2)) // Looking left
@@ -77,7 +77,7 @@ void	init_vertical_ray(t_data *data, t_ray *ray, int px, int py)
 			ray->y = (ray->x - px) * -1 * tan(ray->angle) + py;
 			ray->xo = - PIXELS_PER_CELL;
 			ray->yo = ray->xo * -1 * tan(ray->angle);
-			ray->text = data->texture.east;
+			ray->texture = data->text_data.east;
 			//printf("EAST: %p\n", data->texture.east.img);
 		}
 		if (ray->angle == (PI / 2) || ray->angle == (3 * PI / 2)) // Looking up or down
