@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:04:36 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/18 14:17:28 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:28:40 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,9 @@ int	convert_color(int r, int g, int b)
 void	redraw_minimap(t_data *data)
 {
 	mlx_clear_window(data->mlx, data->mlx_win);
-	draw_ceiling(data);
-	draw_floor(data);
+	draw_background(data);
 	draw_minimap(data);
 	draw_player(data);
-	//cast_rays(data);
 	draw_cub_scene(data);
 	draw_crosshair(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->minimap.img, 0, 0);

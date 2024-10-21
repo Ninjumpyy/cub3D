@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:46:43 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/21 12:12:12 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/21 12:43:34 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	draw_wall_slice(t_data *data, t_ray ray, int r)
 	t_texture_info	tex_info;
 
 	wall_height = (TILE_SIZE * CUB_HEIGHT) / (ray.dist * cos(data->player.angle - ray.angle));
-	calculate_texture_scaling(&tex_info, wall_height, ray);
+	calculate_texture_scaling(&tex_info, &wall_height, ray);
 	determine_wall_slice_bounds(&y, &y_end, wall_height);
 	calculate_texture_x_coordinate(&ray, &tex_info);
 	while (y < y_end)
@@ -34,13 +34,13 @@ void	draw_wall_slice(t_data *data, t_ray ray, int r)
 	}
 }
 
-void	calculate_texture_scaling(t_texture_info *tex_info, float wall_height, t_ray ray)
+void	calculate_texture_scaling(t_texture_info *tex_info, float *wall_height, t_ray ray)
 {
-	tex_info->tex_step = (float)ray.texture.height / wall_height;
-	if (wall_height > CUB_HEIGHT)
+	tex_info->tex_step = (float)ray.texture.height / *wall_height;
+	if (*wall_height > CUB_HEIGHT)
 	{
-		tex_info->tex_pos = (wall_height - CUB_HEIGHT) / 2 * tex_info->tex_step;
-		wall_height = CUB_HEIGHT;
+		tex_info->tex_pos = (*wall_height - CUB_HEIGHT) / 2 * tex_info->tex_step;
+		*wall_height = CUB_HEIGHT;
 	}
 	else
 		tex_info->tex_pos = 0;

@@ -6,7 +6,7 @@
 /*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/21 12:12:19 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/21 12:43:22 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,13 @@
 # define PI					3.1415926535
 # define WIN_WIDTH			1024
 # define WIN_HEIGHT			512
+
 # define MINIMAP_WIDTH		512
 # define MINIMAP_HEIGHT		512
+
 # define CUB_WIDTH			512
 # define CUB_HEIGHT			512
+
 # define PIXELS_PER_CELL	32 // minimap size (x,y) / number of cells in my map : 512/16
 # define CELLS_PER_PIXEL	0.03125 // number of cells in my map / minimap size (x,y) : 16/512
 # define SIZE_PIXEL_PLAYER	9
@@ -260,7 +263,7 @@ void	draw_cub_scene(t_data *data);
 void	process_and_draw_wall_slice(t_data *data, t_ray ray_v, t_ray ray_h, int r);
 /* ****************************drawing_wall_slice******************************* */
 void	draw_wall_slice(t_data *data, t_ray ray, int r);
-void	calculate_texture_scaling(t_texture_info *tex_info, float wall_height, t_ray ray);
+void	calculate_texture_scaling(t_texture_info *tex_info, float *wall_height, t_ray ray);
 void	determine_wall_slice_bounds(int *y, int *y_end, float wall_height);
 void	calculate_texture_x_coordinate(t_ray *ray, t_texture_info *tex_info);
 int 	get_texture_color(t_texture *texture, int x, int y);
