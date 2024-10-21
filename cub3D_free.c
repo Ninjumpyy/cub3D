@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 11:46:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/10 15:14:28 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/21 12:16:44 by thomas           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,10 +89,10 @@ void	free_cub3d(t_data *data)
 	mlx_loop_end(data->mlx);
 	mlx_destroy_image(data->mlx, data->minimap.img);
 	mlx_destroy_image(data->mlx, data->cub.img);
-	mlx_destroy_image(data->mlx, data->texture.north.img);
-	mlx_destroy_image(data->mlx, data->texture.south.img);
-	mlx_destroy_image(data->mlx, data->texture.east.img);
-	mlx_destroy_image(data->mlx, data->texture.west.img);
+	mlx_destroy_image(data->mlx, data->text_data.north.img);
+	mlx_destroy_image(data->mlx, data->text_data.south.img);
+	mlx_destroy_image(data->mlx, data->text_data.east.img);
+	mlx_destroy_image(data->mlx, data->text_data.west.img);
 	mlx_destroy_window(data->mlx, data->mlx_win);
 	mlx_destroy_display(data->mlx);
 	free(data->mlx);
