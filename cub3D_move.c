@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:49:33 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/18 11:25:20 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/22 16:16:53 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ void	compute_directional_movement(t_data *data, double *move_x, double *move_y, 
 	}
 	if (data->key.a == 1) // A
 	{
-		*move_x += sin(data->player.angle) * move_speed;
-		*move_y += cos(data->player.angle) * move_speed;
+		*move_x -= sin(data->player.angle) * move_speed;
+		*move_y -= cos(data->player.angle) * move_speed;
 	}
 	if (data->key.d == 1) // D
 	{
-		*move_x -= sin(data->player.angle) * move_speed;
-		*move_y -= cos(data->player.angle) * move_speed;
+		*move_x += sin(data->player.angle) * move_speed;
+		*move_y += cos(data->player.angle) * move_speed;
 	}
 }
 
@@ -68,7 +68,7 @@ int	can_move_to(double move_x, double move_y, t_data *data)
 
 	new_x = data->player.x + move_x;
 	new_y = data->player.y + move_y;
-	limit = (SIZE_PIXEL_PLAYER * CELLS_PER_PIXEL);
+	limit = (SIZE_PIXEL_PLAYER / 2 * CELLS_PER_PIXEL);
 	if (data->env.map[(int)(new_y - limit)][(int)(new_x - limit)] != '1' &&
 		data->env.map[(int)(new_y - limit)][(int)(new_x + limit)] != '1' &&
 		data->env.map[(int)(new_y + limit)][(int)(new_x - limit)] != '1' &&

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:04:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/21 11:32:11 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/22 13:14:49 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,28 +69,11 @@ void	init_data(t_data *data)
 {
 	data->last_frame_time = get_time();
 	data->mlx = mlx_init();
-	if (!data->mlx)
-		exit (EXIT_FAILURE);
 	data->mlx_win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
-	if (!data->mlx_win)
-	{
-		free(data->mlx);
-		exit (EXIT_FAILURE);
-	}
 	data->minimap.img = mlx_new_image(data->mlx, MINIMAP_WIDTH, MINIMAP_HEIGHT);
 	data->minimap.addr = mlx_get_data_addr(data->minimap.img, &data->minimap.bits_per_pixel, &data->minimap.line_size, &data->minimap.endian);
 	data->cub.img = mlx_new_image(data->mlx, CUB_WIDTH, CUB_HEIGHT);
-	if (!data->cub.img)
-	{
-		printf("Error: Failed to create cub image\n");
-		exit(1);
-	}
 	data->cub.addr = mlx_get_data_addr(data->cub.img, &data->cub.bits_per_pixel, &data->cub.line_size, &data->cub.endian);
-	if (!data->cub.addr)
-	{
-		printf("Error: Failed to get cub image data address\n");
-		exit(1);
-	}
 	data->text_data.north.img = mlx_xpm_file_to_image(data->mlx, data->env.no_texture, &data->text_data.north.width, &data->text_data.north.height);
 	data->text_data.north.addr = mlx_get_data_addr(data->text_data.north.img, &data->text_data.north.bits_per_pixel, &data->text_data.north.line_size, &data->text_data.north.endian);
 	data->text_data.south.img = mlx_xpm_file_to_image(data->mlx, data->env.so_texture, &data->text_data.south.width, &data->text_data.south.height);
@@ -104,15 +87,5 @@ void	init_data(t_data *data)
 	data->player.sprite.img.width = 512;
 	data->player.sprite.img.height = 512;
 	data->player.sprite.img.img = mlx_xpm_file_to_image(data->mlx, "./textures/player.xpm", &(data->player.sprite.img.width), &(data->player.sprite.img.height));
-	if (!data->player.sprite.img.img)
-	{
-    	printf("Error: Failed to load player sprite image\n");
-    	exit(1);
-	}
 	data->player.sprite.img.addr = mlx_get_data_addr(data->player.sprite.img.img, &data->player.sprite.img.bits_per_pixel, &data->player.sprite.img.line_size, &data->player.sprite.img.endian);
-	if (!data->player.sprite.img.addr)
-	{
-		printf("Error: Failed to get data address of player sprite\n");
-		exit(1);
-	}
 }

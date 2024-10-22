@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_events.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:36:34 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/21 11:06:52 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/22 13:19:21 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	mouse_event(int x, int y, void *param)
 	if (delta_x != 0)
 	{
 		//printf("in here\n");
-		data->player.angle += delta_x * 0.02 / M_SENSITIVITY;
+		data->player.angle -= delta_x * 0.02 / M_SENSITIVITY;
 		if (data->player.angle > (2 * PI))
 			data->player.angle -= (2 * PI);
 		if (data->player.angle < 0)
@@ -92,15 +92,15 @@ int	player_event(t_data *data)
 		move_player(data, delta_time);
 	if (data->key.right == 1) //right
 	{
-		data->player.angle += delta_time * ROTATION_SPEED;
-		if (data->player.angle > (2 * PI))
-			data->player.angle -= (2 * PI);
-	}
-	if (data->key.left == 1) //left
-	{
 		data->player.angle -= delta_time * ROTATION_SPEED;
 		if (data->player.angle < 0)
 			data->player.angle += (2 * PI);
+	}
+	if (data->key.left == 1) //left
+	{
+		data->player.angle += delta_time * ROTATION_SPEED;
+		if (data->player.angle > (2 * PI))
+			data->player.angle -= (2 * PI);
 	}
 	redraw_minimap(data);
 	return (0);

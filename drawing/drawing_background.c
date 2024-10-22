@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_background.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:58:35 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/21 10:59:02 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/22 13:03:16 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	draw_ceiling(t_data *data)
 		x = 0;
 		while (x < CUB_WIDTH)
 		{
-			draw_pixel(&(data)->cub, x, y, convert_color(data->env.ceiling.r, data->env.ceiling.g, data->env.ceiling.b));
+			draw_pixel(&(data)->cub, x, y, convert_color(255, data->env.ceiling.r, data->env.ceiling.g, data->env.ceiling.b));
 			x++;
 		}
 		y++;
@@ -49,7 +49,7 @@ void	draw_floor(t_data *data)
 		x = 0;
 		while (x < CUB_WIDTH)
 		{
-			draw_pixel(&(data)->cub, x, y, convert_color(data->env.floor.r, data->env.floor.g, data->env.floor.b));
+			draw_pixel(&(data)->cub, x, y, convert_color(255, data->env.floor.r, data->env.floor.g, data->env.floor.b));
 			x++;
 		}
 		y++;

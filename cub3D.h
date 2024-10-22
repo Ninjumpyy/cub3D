@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/21 12:43:22 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/22 16:28:13 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,24 @@
 # include <sys/time.h>
 
 # define PI					3.1415926535
-# define WIN_WIDTH			1024
-# define WIN_HEIGHT			512
+# define DR					0.0174533
 
-# define MINIMAP_WIDTH		512
-# define MINIMAP_HEIGHT		512
+# define WIN_WIDTH			1080
+# define WIN_HEIGHT			720
 
-# define CUB_WIDTH			512
-# define CUB_HEIGHT			512
+# define MINIMAP_WIDTH		128
+# define MINIMAP_HEIGHT		128
+# define PIXELS_PER_CELL	8 // minimap size (x,y) / number of cells in my map : 128/16
+# define CELLS_PER_PIXEL	0.125 // number of cells in my map / minimap size (x,y) : 16/128
 
-# define PIXELS_PER_CELL	32 // minimap size (x,y) / number of cells in my map : 512/16
-# define CELLS_PER_PIXEL	0.03125 // number of cells in my map / minimap size (x,y) : 16/512
-# define SIZE_PIXEL_PLAYER	9
+# define CUB_WIDTH			1080
+# define CUB_HEIGHT			720
+
+# define SIZE_PIXEL_PLAYER	5
 # define MOVE_SPEED			4
 # define ROTATION_SPEED		2
-# define LINE_LENGTH		25
+# define LINE_LENGTH		10
 # define FOV				60
-# define DR					0.0174533
 # define TILE_SIZE			64
 # define NUM_RAYS			64
 # define M_SENSITIVITY		10
@@ -230,7 +231,7 @@ int		player_event(t_data *data);
 int		close_event(void *param);
 /* ****************************drawing_utils********************************* */
 void	draw_pixel(t_img *img, int x, int y, int color);
-int		convert_color(int r, int g, int b);
+int		convert_color(int t, int r, int g, int b);
 void	draw_crosshair(t_data *data);
 void	redraw_minimap(t_data *data);
 void	normalize_angle(t_ray *ray);
@@ -238,8 +239,7 @@ void	normalize_angle(t_ray *ray);
 void	draw_minimap(t_data *data);
 void	draw_grid(t_data *data);
 int		find_cell_color(int x, int y, t_data *data);
-/* ****************************drawing_player********************************* */
-void	draw_player(t_data *data);
+void	draw_player(t_data *data, int x_start, int y_start);
 /* ****************************cub3D_move************************************* */
 void	move_player(t_data *data, double delta_time);
 void	compute_directional_movement(t_data *data, double *move_x, double *move_y, double move_speed);

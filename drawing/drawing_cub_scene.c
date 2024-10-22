@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_cub_scene.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:14:26 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/21 11:47:47 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/22 12:52:15 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	process_and_draw_wall_slice(t_data *data, t_ray ray_v, t_ray ray_h, int r)
 {
 	if (ray_v.dist < ray_h.dist)
 	{
-		draw_line(data, (int)ray_v.x, (int)ray_v.y, convert_color(0, 128, 0));
+		//draw_line(data, (int)ray_v.x, (int)ray_v.y, convert_color(0, 128, 0));
 		draw_wall_slice(data, ray_v, r);
 	}
 	else
 	{
-		draw_line(data, (int)ray_h.x, (int)ray_h.y, convert_color(0, 128, 0));
+		//draw_line(data, (int)ray_h.x, (int)ray_h.y, convert_color(0, 128, 0));
 		draw_wall_slice(data, ray_h, r);
 	}
 }

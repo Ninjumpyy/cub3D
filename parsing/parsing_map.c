@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:11:18 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/10 14:59:46 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/22 11:21:10 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ float	init_player_angle(char *line, int i)
 	else if (line[i] == 'W')
 		return (PI);
 	else
-		return (0);
+		return (0.0);
 }
 
 int	check_player_and_width(char *line, int *width, t_player *player, \
