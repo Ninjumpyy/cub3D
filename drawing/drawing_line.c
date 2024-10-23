@@ -6,13 +6,13 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:20:53 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/22 13:19:55 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:35:50 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
 
-void	draw_line(t_data *data, int x_final, int y_final, int color)
+void	draw_line(t_data *data, float x_final, float y_final, int color)
 {
 	int	dx;
 	int	dy;
@@ -23,7 +23,6 @@ void	draw_line(t_data *data, int x_final, int y_final, int color)
 		draw_gradual(data, dx, dy, color);
 	else
 		draw_steep(data, dx, dy, color);
-	//printf("px : %i, py : %i\n", (int)(data->player.x * PIXELS_PER_CELL), (int)(data->player.y * PIXELS_PER_CELL));
 }
 
 void	draw_gradual(t_data *data, int dx, int dy, int color)
@@ -35,8 +34,8 @@ void	draw_gradual(t_data *data, int dx, int dy, int color)
 
 	i = 0;
 	d = 2 * abs(dy) - abs(dx);
-	px = (data->player.x * PIXELS_PER_CELL);
-	py = (data->player.y * PIXELS_PER_CELL);
+	px = (data->player.x * PIXELS_PER_CELL) - data->player.offset_x;
+	py = (data->player.y * PIXELS_PER_CELL) - data->player.offset_y;
 	draw_pixel(&(data)->minimap, px, py, color);
 	while (i < abs(dx))
 	{
@@ -68,8 +67,8 @@ void	draw_steep(t_data *data, int dx, int dy, int color)
 
 	i = 0;
 	d = 2 * abs(dx) - abs(dy);
-	px = (data->player.x * PIXELS_PER_CELL);
-	py = (data->player.y * PIXELS_PER_CELL);
+	px = (data->player.x * PIXELS_PER_CELL) - data->player.offset_x;
+	py = (data->player.y * PIXELS_PER_CELL) - data->player.offset_y;
 	draw_pixel(&(data)->minimap, px, py, color);
 	while (i < abs(dy))
 	{

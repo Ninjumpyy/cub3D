@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:04:36 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/22 13:21:42 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:34:15 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	redraw_minimap(t_data *data)
 	mlx_clear_window(data->mlx, data->mlx_win);
 	draw_background(data);
 	draw_minimap(data);
-	//draw_cub_scene(data);
+	draw_cub_scene(data);
 	//draw_crosshair(data);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->minimap.img, 0, 0);
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->cub.img, 512, 0);
+	mlx_put_image_to_window(data->mlx, data->mlx_win, data->cub.img, 128, 128);
 }
 
 void	draw_crosshair(t_data *data)

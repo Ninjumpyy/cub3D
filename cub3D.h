@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/22 16:28:13 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/23 14:34:03 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # define PIXELS_PER_CELL	8 // minimap size (x,y) / number of cells in my map : 128/16
 # define CELLS_PER_PIXEL	0.125 // number of cells in my map / minimap size (x,y) : 16/128
 
-# define CUB_WIDTH			1080
-# define CUB_HEIGHT			720
+# define CUB_WIDTH			512
+# define CUB_HEIGHT			512
 
 # define SIZE_PIXEL_PLAYER	5
 # define MOVE_SPEED			4
@@ -108,6 +108,8 @@ typedef struct s_player
 	int			is_found;
 	float		x;
 	float		y;
+	float		offset_x;
+	float		offset_y;
 	int			mouse_x;
 	int			mouse_y;
 	float		angle;
@@ -237,9 +239,8 @@ void	redraw_minimap(t_data *data);
 void	normalize_angle(t_ray *ray);
 /* ****************************drawing_minimap******************************** */
 void	draw_minimap(t_data *data);
-void	draw_grid(t_data *data);
 int		find_cell_color(int x, int y, t_data *data);
-void	draw_player(t_data *data, int x_start, int y_start);
+void	draw_player(t_data *data);
 /* ****************************cub3D_move************************************* */
 void	move_player(t_data *data, double delta_time);
 void	compute_directional_movement(t_data *data, double *move_x, double *move_y, double move_speed);
@@ -249,7 +250,7 @@ void	draw_background(t_data *data);
 void	draw_ceiling(t_data *data);
 void	draw_floor(t_data *data);
 /* ****************************drawing_line*********************************** */
-void	draw_line(t_data *data, int x_final, int y_final, int color);
+void	draw_line(t_data *data, float x_final, float y_final, int color);
 void	draw_gradual(t_data *data, int dx, int dy, int color);
 void	draw_steep(t_data *data, int dx, int dy, int color);
 /* ****************************drawing_rays*********************************** */
