@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:14:26 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/23 14:35:48 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:59:19 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ void	draw_cub_scene(t_data *data)
 	{
 		init_ray_data(data, &ray_h, 1, HORIZONTAL);
 		init_ray_data(data, &ray_v, 1, VERTICAL);
-		init_horizontal_ray(data, &ray_h, data->player.x * PIXELS_PER_CELL - data->player.offset_x, data->player.y * PIXELS_PER_CELL - data->player.offset_y);
+		init_horizontal_ray(data, &ray_h, data->player.x, data->player.y);
 		determine_hit_ray(data, &ray_h);
 		calculate_distance(data, &ray_h);
-		init_vertical_ray(data, &ray_v, data->player.x * PIXELS_PER_CELL - data->player.offset_x, data->player.y * PIXELS_PER_CELL - data->player.offset_y);
+		init_vertical_ray(data, &ray_v, data->player.x, data->player.y);
 		determine_hit_ray(data, &ray_v);
 		calculate_distance(data, &ray_v);
 		process_and_draw_wall_slice(data, ray_v, ray_h, r);
@@ -43,14 +43,18 @@ void	draw_cub_scene(t_data *data)
 
 void	process_and_draw_wall_slice(t_data *data, t_ray ray_v, t_ray ray_h, int r)
 {
+	(void)r;
+	//printf("ray n°%i\n", r);
 	if (ray_v.dist < ray_h.dist)
 	{
-		draw_line(data, (int)ray_v.x, (int)ray_v.y, convert_color(0, 0, 128, 0));
-		draw_wall_slice(data, ray_v, r);
+		//printf("ray_x : %f, ray_y : %f\n", ray_v.x, ray_v.y);
+		draw_line(data, ray_v.x * PIXELS_PER_CELL, ray_v.y * PIXELS_PER_CELL, convert_color(0, 0, 128, 0));
+		//draw_wall_slice(data, ray_v, r);
 	}
 	else
 	{
-		draw_line(data, (int)ray_h.x, (int)ray_h.y, convert_color(0, 0, 128, 0));
-		draw_wall_slice(data, ray_h, r);
+		//printf("ray_x : %f, ray_y : %f\n", ray_h.x, ray_h.y);
+		draw_line(data, ray_h.x * PIXELS_PER_CELL, ray_h.y * PIXELS_PER_CELL, convert_color(0, 0, 128, 0));
+		//draw_wall_slice(data, ray_h, r);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:46:43 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/23 14:37:07 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:33:15 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ void	calculate_texture_x_coordinate(t_ray *ray, t_texture_info *tex_info)
 	
 	if (ray->type == VERTICAL)
 	{
-		ray->y /= 32;
+		//ray->y /= 32;
 		wall_hit_x = ray->y - (int)ray->y;
 	}
 	else
 	{
-		ray->x /= 32;
+		//ray->x /= 32;
 		wall_hit_x = ray->x - (int)ray->x;
 	}
 	tex_info->tex_x = (int)(wall_hit_x * ray->texture.width);

@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/23 14:34:03 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/23 16:29:12 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@
 # define M_SENSITIVITY		10
 # define CROSSHAIR_LEN		10
 # define CROSSHAIR_COLOR	0xFFFFFF
+# define SCALING			100
 
 /* ************************************************************************** */
 /*									STRUCTURES								  */
