@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpandipe <rpandie@student.42luxembourg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:04:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/22 13:14:49 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:33:26 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,8 @@ void	init_data(t_data *data)
 	data->last_frame_time = get_time();
 	data->mlx = mlx_init();
 	data->mlx_win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
-	data->minimap.img = mlx_new_image(data->mlx, MINIMAP_WIDTH, MINIMAP_HEIGHT);
-	data->minimap.addr = mlx_get_data_addr(data->minimap.img, &data->minimap.bits_per_pixel, &data->minimap.line_size, &data->minimap.endian);
+	//data->minimap.img = mlx_new_image(data->mlx, MINIMAP_WIDTH, MINIMAP_HEIGHT);
+	//data->minimap.addr = mlx_get_data_addr(data->minimap.img, &data->minimap.bits_per_pixel, &data->minimap.line_size, &data->minimap.endian);
 	data->cub.img = mlx_new_image(data->mlx, CUB_WIDTH, CUB_HEIGHT);
 	data->cub.addr = mlx_get_data_addr(data->cub.img, &data->cub.bits_per_pixel, &data->cub.line_size, &data->cub.endian);
 	data->text_data.north.img = mlx_xpm_file_to_image(data->mlx, data->env.no_texture, &data->text_data.north.width, &data->text_data.north.height);
@@ -84,8 +84,6 @@ void	init_data(t_data *data)
 	data->text_data.west.addr = mlx_get_data_addr(data->text_data.west.img, &data->text_data.west.bits_per_pixel, &data->text_data.west.line_size, &data->text_data.west.endian);
 	data->player.mouse_x = CUB_WIDTH / 2;
 	data->player.mouse_y = CUB_HEIGHT / 2;
-	data->player.sprite.img.width = 512;
-	data->player.sprite.img.height = 512;
-	data->player.sprite.img.img = mlx_xpm_file_to_image(data->mlx, "./textures/player.xpm", &(data->player.sprite.img.width), &(data->player.sprite.img.height));
+	data->player.sprite.img.img = mlx_xpm_file_to_image(data->mlx, "./textures/weapon.xpm", &(data->player.sprite.img.width), &(data->player.sprite.img.height));
 	data->player.sprite.img.addr = mlx_get_data_addr(data->player.sprite.img.img, &data->player.sprite.img.bits_per_pixel, &data->player.sprite.img.line_size, &data->player.sprite.img.endian);
 }

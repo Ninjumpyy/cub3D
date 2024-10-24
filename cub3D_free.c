@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rpandipe <rpandie@student.42luxembourg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 11:46:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/21 12:16:44 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/23 16:27:59 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	free_cub3d(t_data *data)
 {
 	free_env(data);
 	mlx_loop_end(data->mlx);
-	mlx_destroy_image(data->mlx, data->minimap.img);
+	//mlx_destroy_image(data->mlx, data->minimap.img);
 	mlx_destroy_image(data->mlx, data->cub.img);
 	mlx_destroy_image(data->mlx, data->text_data.north.img);
 	mlx_destroy_image(data->mlx, data->text_data.south.img);
