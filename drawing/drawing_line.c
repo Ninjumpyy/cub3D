@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:20:53 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/23 16:29:33 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/24 10:38:16 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	draw_gradual(t_data *data, int dx, int dy, int color)
 	d = 2 * abs(dy) - abs(dx);
 	px = (data->player.x * PIXELS_PER_CELL) - data->player.offset_x;
 	py = (data->player.y * PIXELS_PER_CELL) - data->player.offset_y;
-	draw_pixel(&(data)->minimap, px, py, color);
+	draw_pixel(&(data)->cub, px, py, color);
 	while (i < abs(dx))
 	{
 		if (dx > 0)
@@ -138,7 +138,7 @@ void	draw_steep(t_data *data, int dx, int dy, int color)
 	d = 2 * abs(dx) - abs(dy);
 	px = (data->player.x * PIXELS_PER_CELL) - data->player.offset_x;
 	py = (data->player.y * PIXELS_PER_CELL) - data->player.offset_y;
-	draw_pixel(&(data)->minimap, px, py, color);
+	draw_pixel(&(data)->cub, px, py, color);
 	while (i < abs(dy))
 	{
 		if (dy > 0)

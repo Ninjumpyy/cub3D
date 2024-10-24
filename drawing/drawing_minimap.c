@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_minimap.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpandipe <rpandie@student.42luxembourg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:06:13 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/23 14:35:46 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/23 17:10:21 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,29 @@ void	determine_x_offset(t_data *data, int *x_end)
 	}
 }
 
+void	draw_minimap_on_cub(t_data *data)
+{
+	int	x;
+	int	y;
+	int	y_end;
+	int	x_end;
+
+	determine_y_offset(data, &y_end);
+	determine_x_offset(data, &x_end);
+	y = data->player.offset_y;
+	while (y < y_end)
+	{
+		x = data->player.offset_x;
+		while (x < x_end)
+		{
+			draw_pixel(&(data)->cub, (x - data->player.offset_x), (y - data->player.offset_y), find_cell_color(x, y, data));
+			x++;
+		}
+		y++;
+	}
+	draw_player(data);
+}
+
 void	draw_minimap(t_data *data)
 {
 	int	x;
@@ -65,7 +88,7 @@ void	draw_minimap(t_data *data)
 		x = data->player.offset_x;
 		while (x < x_end)
 		{
-			draw_pixel(&(data)->minimap, (x - data->player.offset_x), (y - data->player.offset_y), find_cell_color(x, y, data));
+			draw_pixel(&(data)->cub, (x - data->player.offset_x), (y - data->player.offset_y), find_cell_color(x, y, data));
 			x++;
 		}
 		y++;
@@ -88,25 +111,3 @@ int	find_cell_color(int x, int y, t_data *data)
 		return(convert_color(122, 0, 0, 0));
 }
 
-void	draw_player(t_data *data)
-{
-	float	px;
-	float	py;
-	int		i;
-	int		j;
-
-	px = (data->player.x * PIXELS_PER_CELL) - data->player.offset_x - (SIZE_PIXEL_PLAYER / 2);
-	py = (data->player.y * PIXELS_PER_CELL) - data->player.offset_y - (SIZE_PIXEL_PLAYER / 2);
-	j = 0;
-	while (j < SIZE_PIXEL_PLAYER)
-	{
-		i = 0;
-		while (i < SIZE_PIXEL_PLAYER)
-		{
-			draw_pixel(&(data)->minimap, (int)px + i, (int)py + j, convert_color(122, 255, 255, 0));
-			i++;
-		}
-		j++;
-	}
-	//draw_line(data, (data->player.x * PIXELS_PER_CELL) + (cos(data->player.angle) * LINE_LENGTH), (data->player.y * PIXELS_PER_CELL) + (-sin(data->player.angle) * LINE_LENGTH), convert_color(122, 255, 255, 0));
-}

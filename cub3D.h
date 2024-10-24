@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/23 16:29:12 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/24 10:37:29 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@
 # define PIXELS_PER_CELL	8 // minimap size (x,y) / number of cells in my map : 128/16
 # define CELLS_PER_PIXEL	0.125 // number of cells in my map / minimap size (x,y) : 16/128
 
-# define CUB_WIDTH			512
-# define CUB_HEIGHT			512
+# define CUB_WIDTH			1080
+# define CUB_HEIGHT			720
 
 # define SIZE_PIXEL_PLAYER	5
 # define MOVE_SPEED			4
@@ -241,7 +241,9 @@ void	normalize_angle(t_ray *ray);
 /* ****************************drawing_minimap******************************** */
 void	draw_minimap(t_data *data);
 int		find_cell_color(int x, int y, t_data *data);
+/* ****************************drawing_player******************************** */
 void	draw_player(t_data *data);
+void	draw_player_sprite(t_data *data);
 /* ****************************cub3D_move************************************* */
 void	move_player(t_data *data, double delta_time);
 void	compute_directional_movement(t_data *data, double *move_x, double *move_y, double move_speed);
