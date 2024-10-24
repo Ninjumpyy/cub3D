@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandie@student.42luxembourg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:53:15 by rpandipe          #+#    #+#             */
-/*   Updated: 2024/10/23 18:12:40 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/24 06:03:38 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	draw_player_sprite(t_data *data)
 			{
 				if (((color >> 24) & 0xFF) == 0)
 				{
-					printf("drawn = %d\n", color);
 					dst_pixel = data->cub.addr + ((int)(py + y) * data->cub.line_size + (int)(px + x) * (data->cub.bits_per_pixel / 8));
 					*(unsigned int *)dst_pixel = color;
 				}
