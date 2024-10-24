@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_minimap.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpandipe <rpandie@student.42luxembourg.    +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:06:13 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/23 17:10:21 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:34:12 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	draw_minimap_on_cub(t_data *data)
 		x = data->player.offset_x;
 		while (x < x_end)
 		{
-			draw_pixel(&(data)->cub, (x - data->player.offset_x), (y - data->player.offset_y), find_cell_color(x, y, data));
+			draw_pixel(&(data)->minimap, (x - data->player.offset_x), (y - data->player.offset_y), find_cell_color(x, y, data));
 			x++;
 		}
 		y++;
@@ -88,7 +88,7 @@ void	draw_minimap(t_data *data)
 		x = data->player.offset_x;
 		while (x < x_end)
 		{
-			draw_pixel(&(data)->cub, (x - data->player.offset_x), (y - data->player.offset_y), find_cell_color(x, y, data));
+			draw_pixel(&(data)->minimap, (x - data->player.offset_x), (y - data->player.offset_y), find_cell_color(x, y, data));
 			x++;
 		}
 		y++;

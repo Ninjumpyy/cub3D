@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:59:37 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/23 16:30:38 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:34:14 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_ray_data(t_data *data, t_ray *ray, int reinit, t_type type)
 	ray->dof = 0;
 }
 
-void	init_horizontal_ray(t_data *data, t_ray *ray, int px, int py)
+void	init_horizontal_ray(t_data *data, t_ray *ray, float px, float py)
 {
 	float	cotan;
 
@@ -58,7 +58,7 @@ void	init_horizontal_ray(t_data *data, t_ray *ray, int px, int py)
 	}
 }
 
-void	init_vertical_ray(t_data *data, t_ray *ray, int px, int py)
+void	init_vertical_ray(t_data *data, t_ray *ray, float px, float py)
 {
 	if (ray->angle < (PI / 2) || ray->angle > (3 * PI / 2)) // Looking right
 		{
@@ -76,7 +76,7 @@ void	init_vertical_ray(t_data *data, t_ray *ray, int px, int py)
 			ray->yo = ray->xo * -1 * tan(ray->angle);
 			ray->texture = data->text_data.east;
 		}
-		if (ray->angle == (PI / 2) || ray->angle == (3 * PI / 2)) // Looking up or down
+		if ((ray->angle == (PI / 2)) || (ray->angle == (3 * PI / 2))) // Looking up or down
 		{
 			ray->x = px;
 			ray->y = py;
@@ -108,6 +108,29 @@ void	determine_hit_ray(t_data *data, t_ray *ray)
 		}
 	}
 }
+/*
+void	determine_hit_ray(t_data *data, t_ray *ray)
+{
+	while (ray->dof < 16)
+	{
+		if (ray->x < 0 || ray->x >= data->map_width || ray->y < 0 || ray->y >= data->map_height)
+		{
+			ray->dof = 16;
+			break;
+		}
+		else if (data->env.map[(int)ray->y][(int)ray->x] == '1')
+		{
+			ray->dof = 16;
+			break;
+		}
+		else
+		{
+			ray->x += ray->xo;
+			ray->y += ray->yo;
+			ray->dof += 1;
+		}
+	}
+}*/
 
 void	calculate_distance(t_data *data, t_ray *ray)
 {

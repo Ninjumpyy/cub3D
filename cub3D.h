@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/24 10:37:29 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:34:08 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define PI					3.1415926535
 # define DR					0.0174533
 
-# define WIN_WIDTH			1080
-# define WIN_HEIGHT			720
+# define WIN_WIDTH			1208
+# define WIN_HEIGHT			848
 
 # define MINIMAP_WIDTH		128
 # define MINIMAP_HEIGHT		128
@@ -47,7 +47,8 @@
 # define M_SENSITIVITY		10
 # define CROSSHAIR_LEN		10
 # define CROSSHAIR_COLOR	0xFFFFFF
-# define SCALING			100
+# define SCALING			30
+# define EPSILON			0.0001
 
 /* ************************************************************************** */
 /*									STRUCTURES								  */
@@ -258,8 +259,8 @@ void	draw_gradual(t_data *data, int dx, int dy, int color);
 void	draw_steep(t_data *data, int dx, int dy, int color);
 /* ****************************drawing_rays*********************************** */
 void	init_ray_data(t_data *data, t_ray *ray, int reinit, t_type type);
-void	init_horizontal_ray(t_data *data, t_ray *ray, int px, int py);
-void	init_vertical_ray(t_data *data, t_ray *ray, int px, int py);
+void	init_horizontal_ray(t_data *data, t_ray *ray, float px, float py);
+void	init_vertical_ray(t_data *data, t_ray *ray, float px, float py);
 void	determine_hit_ray(t_data *data, t_ray *ray);
 void	calculate_distance(t_data *data, t_ray *ray);
 /* ****************************drawing_cub_scene******************************* */

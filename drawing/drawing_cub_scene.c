@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:14:26 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/23 16:59:19 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:34:11 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,14 @@ void	draw_cub_scene(t_data *data)
 void	process_and_draw_wall_slice(t_data *data, t_ray ray_v, t_ray ray_h, int r)
 {
 	(void)r;
-	//printf("ray n°%i\n", r);
 	if (ray_v.dist < ray_h.dist)
 	{
-		//printf("ray_x : %f, ray_y : %f\n", ray_v.x, ray_v.y);
 		draw_line(data, ray_v.x * PIXELS_PER_CELL, ray_v.y * PIXELS_PER_CELL, convert_color(0, 0, 128, 0));
-		//draw_wall_slice(data, ray_v, r);
+		draw_wall_slice(data, ray_v, r);
 	}
 	else
 	{
-		//printf("ray_x : %f, ray_y : %f\n", ray_h.x, ray_h.y);
 		draw_line(data, ray_h.x * PIXELS_PER_CELL, ray_h.y * PIXELS_PER_CELL, convert_color(0, 0, 128, 0));
-		//draw_wall_slice(data, ray_h, r);
+		draw_wall_slice(data, ray_h, r);
 	}
 }

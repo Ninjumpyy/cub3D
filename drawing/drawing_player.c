@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpandipe <rpandie@student.42luxembourg.    +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:53:15 by rpandipe          #+#    #+#             */
-/*   Updated: 2024/10/24 06:03:38 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/24 14:34:13 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	draw_player(t_data *data)
 		i = 0;
 		while (i < SIZE_PIXEL_PLAYER)
 		{
-			draw_pixel(&(data)->cub, (int)px + i, (int)py + j, convert_color(122, 255, 255, 0));
+			draw_pixel(&(data)->minimap, (int)px + i, (int)py + j, convert_color(122, 255, 255, 0));
 			i++;
 		}
 		j++;
