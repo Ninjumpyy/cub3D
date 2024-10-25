@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:36:34 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 17:20:44 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:43:25 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,21 @@ int	mouse_event(int x, int y, void *param)
 		//redraw_minimap(data);
 		mlx_mouse_move(data->mlx, data->mlx_win, CUB_WIDTH / 2, CUB_HEIGHT / 2);
 	}
-	//data->player.mouse_x = x;
-	//data->player.mouse_y = y;
-	//printf("Mouse moved to: x = %d, y = %d\n", x, y);
+	return (0);
+}
+
+int	button_pressed(int button, int x, int y, void *param)
+{
+	t_data	*data;
+
+	(void) x;
+	(void) y;
+	data = (t_data *)param;
+	if (button == 1)
+	{
+		data->key.mouse_left = 1;
+		data->animation_time = get_time();
+	}
 	return (0);
 }
 
@@ -105,11 +117,12 @@ int	player_event(t_data *data)
 		data->player.angle -= delta_time * ROTATION_SPEED;
 		if (data->player.angle < 0)
 			data->player.angle += (2 * PI);
-		
 	}
 	if (data->key.space == 1)
 		open_door(data);
 	update_doors(data, delta_time);
+	if (data->key.mouse_left == 1)
+		play_animation(data, &data->player.current_sprite, draw_player_sprite, delta_time);
 	redraw_minimap(data);
 	return (0);
 }

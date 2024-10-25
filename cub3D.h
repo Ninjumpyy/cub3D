@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/25 17:27:00 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:44:38 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,11 +99,12 @@ typedef struct s_texture
 
 typedef struct s_sprite
 {
-	float	x;
-	float	y;
-	int		visible;
-	float	distance;
-	t_img	img;
+	float			x;
+	float			y;
+	int				visible;
+	float			distance;
+	t_img			img;
+	struct s_sprite	*next;
 }	t_sprite;
 
 typedef struct s_player
@@ -117,6 +118,8 @@ typedef struct s_player
 	int			mouse_y;
 	float		angle;
 	t_sprite	sprite;
+	t_sprite	animation;
+	t_sprite	current_sprite;
 }	t_player;
 
 typedef struct s_color
@@ -171,6 +174,7 @@ typedef struct s_keys
 	int	left;
 	int	right;
 	int	space;
+	int	mouse_left;
 }	t_keys;
 
 typedef struct s_door
@@ -197,6 +201,7 @@ typedef struct s_data
 	t_keys		key;
 	double		last_frame_time;
 	t_door		*doors;
+	double		animation_time;
 }	t_data;
 
 /* ************************************************************************** */
@@ -245,6 +250,8 @@ int		empty_line(char *line);
 int		valid_line(char *line);
 /* ****************************cub3D_events********************************** */
 int		mouse_event(int x, int y, void *param);
+int		button_pressed(int button, int x, int y, void *param);
+int		button_released(int button, int x, int y, void *param);
 int		key_pressed(int keycode, void *param);
 int		key_released(int keycode, void *param);
 int		player_event(t_data *data);
@@ -260,7 +267,7 @@ void	draw_minimap(t_data *data);
 int		find_cell_color(int x, int y, t_data *data);
 /* ****************************drawing_player******************************** */
 void	draw_player(t_data *data);
-void	draw_player_sprite(t_data *data);
+void	draw_player_sprite(t_data *data, t_img *img);
 /* ****************************cub3D_move************************************* */
 void	move_player(t_data *data, double delta_time);
 void	compute_directional_movement(t_data *data, double *move_x, double *move_y, double move_speed);
@@ -296,5 +303,8 @@ void	add_door(t_data *data, int x, int y);
 void	init_door(t_data *data);
 void	update_doors(t_data *data, double delta_time);
 void	open_door(t_data *data);
+/* ****************************drawing_animation******************************* */
+void	load_animation(t_data *data);
+void	play_animation(t_data *data, t_sprite *ptr, void (*draw_asset)(t_data *, t_img *), double delta_time);
 
 #endif

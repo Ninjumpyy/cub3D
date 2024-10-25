@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:03:18 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 17:23:32 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:43:42 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ int	main(int argc, char **argv)
 	draw_minimap(&data);
 	draw_cub_scene(&data);
 	draw_crosshair(&data);
-	draw_player_sprite(&data);
+	draw_player_sprite(&data, &data.player.sprite.img);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.cub.img, 0, 0);
 	mlx_put_image_to_window(data.mlx, data.mlx_win, data.minimap.img, 10, 7);
 	mlx_mouse_hide(data.mlx, data.mlx_win);
 	mlx_hook(data.mlx_win, 6, 1L << 6, mouse_event, &data);
+	mlx_hook(data.mlx_win, 4, 1L << 2, button_pressed, &data);
+	//mlx_hook(data.mlx_win, 5, 1L << 3, button_released, &data);
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_pressed, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 1, key_released, &data);
 
