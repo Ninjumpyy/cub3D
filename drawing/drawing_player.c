@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:53:15 by rpandipe          #+#    #+#             */
-/*   Updated: 2024/10/24 15:02:38 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 14:00:46 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	draw_player(t_data *data)
 	//draw_line(data, (data->player.x * PIXELS_PER_CELL) + (cos(data->player.angle) * LINE_LENGTH), (data->player.y * PIXELS_PER_CELL) + (-sin(data->player.angle) * LINE_LENGTH), convert_color(122, 255, 255, 0));
 }
 
-void	draw_player_sprite(t_data *data)
+void	draw_player_sprite(t_data *data, t_img *img)
 {
 	int		x;
 	int		y;
@@ -46,19 +46,19 @@ void	draw_player_sprite(t_data *data)
 	int		color;
 
 	y = 0;
-	px = (CUB_WIDTH / 2) - (data->player.sprite.img.width / 2);
-	py = (CUB_HEIGHT) - (data->player.sprite.img.height);
+	px = (CUB_WIDTH / 2) - (img->width / 2);
+	py = (CUB_HEIGHT) - (img->height);
 	if (px < 0 || px >= CUB_WIDTH || py < 0 || py >= CUB_HEIGHT)
 	{
 		printf("Player position is out of bounds, px: %f, py: %f\n", px, py);
         return;
 	}
-	while (y < data->player.sprite.img.height)
+	while (y < img->height)
 	{
 		x = 0;
-		while (x < data->player.sprite.img.width)
+		while (x < img->width)
 		{
-			src_pixel = data->player.sprite.img.addr + (y * data->player.sprite.img.line_size + x * (data->player.sprite.img.bits_per_pixel / 8));
+			src_pixel = img->addr + (y * img->line_size + x * (img->bits_per_pixel / 8));
 			color = *(unsigned int *)src_pixel;
 			int dst_x = (int)(px + x);
             int dst_y = (int)(py + y);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:04:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 11:30:44 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 16:27:52 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,12 @@ double	update_time(t_data *data)
 	double	current_time;
 	double	delta_time;
 	
+	//printf("in t1 %d\n", data->key.mouse_left);
 	current_time = get_time();
+	//printf("in t2 %d\n", data->key.mouse_left);
 	delta_time = current_time - data->last_frame_time;
 	data->last_frame_time = current_time;
+	//printf("in t3 %d\n", data->key.mouse_left);
 	return (delta_time);
 }
 
@@ -88,7 +91,6 @@ void	init_data(t_data *data)
 	}
 	data->player.mouse_x = CUB_WIDTH / 2;
 	data->player.mouse_y = CUB_HEIGHT / 2;
-	data->player.sprite.img.img = mlx_xpm_file_to_image(data->mlx, "./textures/weapon.xpm", &(data->player.sprite.img.width), &(data->player.sprite.img.height));
-	data->player.sprite.img.addr = mlx_get_data_addr(data->player.sprite.img.img, &data->player.sprite.img.bits_per_pixel, &data->player.sprite.img.line_size, &data->player.sprite.img.endian);
+	load_animation(data);
 	data->last_frame_time = get_time();
 }

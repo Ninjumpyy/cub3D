@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:04:36 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 11:33:32 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 16:36:05 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	redraw_minimap(t_data *data)
 	draw_minimap(data);
 	draw_cub_scene(data);
 	draw_crosshair(data);
-	draw_player_sprite(data);
+	draw_player_sprite(data, &data->player.sprite.img);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->cub.img, 0, 0);
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->minimap.img, 10, 7);
 }
