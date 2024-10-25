@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:59:37 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/25 13:15:27 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:28:52 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	init_ray_data(t_data *data, t_ray *ray, int reinit, t_type type)
 	ray->xo = 0;
 	ray->yo = 0;
 	ray->dof = 0;
+	ray->open_amount = -1.0;
 }
 
 void	init_horizontal_ray(t_data *data, t_ray *ray, float px, float py)
@@ -54,7 +55,7 @@ void	init_horizontal_ray(t_data *data, t_ray *ray, float px, float py)
 	{
 		ray->x = px;
 		ray->y = py;
-		ray->dof = 16;
+		ray->dof = DOF_MAX;
 	}
 }
 
@@ -80,17 +81,17 @@ void	init_vertical_ray(t_data *data, t_ray *ray, float px, float py)
 		{
 			ray->x = px;
 			ray->y = py;
-			ray->dof = 16;
+			ray->dof = DOF_MAX;
 		}
 }
 
 void	determine_hit_ray(t_data *data, t_ray *ray)
 {
-	while (ray->dof < 16)
+	while (ray->dof < DOF_MAX)
 	{
-		if (ray->x < 0 || ray->x >= data->map_width || ray->y < 0 || ray->y >= data->map_height || data->env.map[(int)ray->y][(int)ray->x] == '1' || data->env.map[(int)ray->y][(int)ray->x] == '2')
+		if (ray->x < 0 || ray->x >= data->map_width || ray->y < 0 || ray->y >= data->map_height || data->env.map[(int)ray->y][(int)ray->x] == '1')
 		{
-			ray->dof = 16;
+			ray->dof = DOF_MAX;
 			if (ray->x < 0)
 				ray->x = 0;
 			if (ray->x >= data->map_width)
@@ -99,8 +100,19 @@ void	determine_hit_ray(t_data *data, t_ray *ray)
 				ray->y = 0;
 			if (ray->y >= data->map_height)
 				ray->y = data->map_height - 1;
-			if (data->env.map[(int)ray->y][(int)ray->x] == '2')
-				ray->texture = data->text_data.door;
+		}
+		else if (data->env.map[(int)ray->y][(int)ray->x] == '2' && !is_open(data, ray))
+		{
+			ray->dof = DOF_MAX;
+			if (ray->x < 0)
+				ray->x = 0;
+			if (ray->x >= data->map_width)
+				ray->x = data->map_width - 1;
+			if (ray->y < 0)
+				ray->y = 0;
+			if (ray->y >= data->map_height)
+				ray->y = data->map_height - 1;
+			ray->texture = data->text_data.door;
 		}
 		else
 		{

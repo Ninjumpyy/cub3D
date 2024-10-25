@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:36:34 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/24 14:36:52 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:20:44 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int	key_pressed(int keycode, void *param)
 		data->key.right = 1;
 	if (keycode == 65361) // left
 		data->key.left = 1;
+	if (keycode == 32) // space
+		data->key.space = 1;
 	return (0);
 }
 
@@ -80,6 +82,8 @@ int	key_released(int keycode, void *param)
 		data->key.right = 0;
 	if (keycode == 65361) // left
 		data->key.left = 0;
+	if (keycode == 32) // space
+		data->key.space = 0;
 	return (0);
 }
 
@@ -103,6 +107,9 @@ int	player_event(t_data *data)
 			data->player.angle += (2 * PI);
 		
 	}
+	if (data->key.space == 1)
+		open_door(data);
+	update_doors(data, delta_time);
 	redraw_minimap(data);
 	return (0);
 }

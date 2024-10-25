@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:49:33 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/24 14:31:57 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 13:22:10 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,11 @@ int	can_move_to(double move_x, double move_y, t_data *data)
 	if (data->env.map[(int)(new_y - limit)][(int)(new_x - limit)] != '1' &&
 		data->env.map[(int)(new_y - limit)][(int)(new_x + limit)] != '1' &&
 		data->env.map[(int)(new_y + limit)][(int)(new_x - limit)] != '1' &&
-		data->env.map[(int)(new_y + limit)][(int)(new_x + limit)] != '1')
+		data->env.map[(int)(new_y + limit)][(int)(new_x + limit)] != '1' &&
+		data->env.map[(int)(new_y - limit)][(int)(new_x - limit)] != '2' &&
+		data->env.map[(int)(new_y - limit)][(int)(new_x + limit)] != '2' &&
+		data->env.map[(int)(new_y + limit)][(int)(new_x - limit)] != '2' &&
+		data->env.map[(int)(new_y + limit)][(int)(new_x + limit)] != '2')
 		return (1);
 	else
 		return (0);

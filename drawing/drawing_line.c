@@ -6,79 +6,11 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:20:53 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/24 15:02:36 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 15:55:47 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3D.h"
-/*
-void draw_line(t_data *data, float x_final, float y_final, int color)
-{
-    int x_start = (data->player.x * PIXELS_PER_CELL) - data->player.offset_x;
-    int y_start = (data->player.y * PIXELS_PER_CELL) - data->player.offset_y;
-    int x_end = (x_final) - data->player.offset_x;
-    int y_end = (y_final) - data->player.offset_y;
-
-    int dx = x_end - x_start;
-    int dy = y_end - y_start;
-
-    if (abs(dx) > abs(dy))
-        draw_gradual(data, x_start, y_start, x_end, y_end, color);
-    else
-        draw_steep(data, x_start, y_start, x_end, y_end, color);
-}
-
-void draw_gradual(t_data *data, int x_start, int y_start, int x_end, int y_end, int color)
-{
-    int dx = x_end - x_start;
-    int dy = y_end - y_start;
-    int xi = (dx > 0) ? 1 : -1;
-    dx = abs(dx);
-    int yi = (dy > 0) ? 1 : -1;
-    dy = abs(dy);
-    int D = 2 * dy - dx;
-    int y = y_start;
-
-    for (int x = x_start; x != x_end; x += xi)
-    {
-        if (x >= 0 && x < MINIMAP_WIDTH && y >= 0 && y < MINIMAP_HEIGHT)
-            draw_pixel(&(data->minimap), x, y, color);
-
-        if (D > 0)
-        {
-            y += yi;
-            D -= 2 * dx;
-        }
-        D += 2 * dy;
-    }
-}
-
-void draw_steep(t_data *data, int x_start, int y_start, int x_end, int y_end, int color)
-{
-    int dx = x_end - x_start;
-    int dy = y_end - y_start;
-    int xi = (dx > 0) ? 1 : -1;
-    dx = abs(dx);
-    int yi = (dy > 0) ? 1 : -1;
-    dy = abs(dy);
-    int D = 2 * dx - dy;
-    int x = x_start;
-
-    for (int y = y_start; y != y_end; y += yi)
-    {
-        if (y >= 0 && y < MINIMAP_HEIGHT && x >= 0 && x < MINIMAP_WIDTH)
-            draw_pixel(&(data->minimap), x, y, color);
-
-        if (D > 0)
-        {
-            x += xi;
-            D -= 2 * dy;
-        }
-        D += 2 * dx;
-    }
-}*/
-
-
 
 void	draw_line(t_data *data, float x_final, float y_final, int color)
 {

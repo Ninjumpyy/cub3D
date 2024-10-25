@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 11:46:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 11:30:44 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 14:35:51 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,22 @@ void	free_lst(t_lst **map_lst)
 	}
 }
 
+void	free_doors(t_data *data)
+{
+	t_door	*ptr;
+
+	while (data->doors)
+	{
+		ptr = data->doors->next;
+		free(data->doors);
+		data->doors = ptr;
+	}
+}
+
 void	free_cub3d(t_data *data)
 {
 	free_env(data);
+	free_doors(data);
 	mlx_loop_end(data->mlx);
 	//mlx_destroy_image(data->mlx, data->minimap.img);
 	mlx_destroy_image(data->mlx, data->cub.img);

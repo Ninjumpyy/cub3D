@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:03:18 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 11:31:07 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:23:32 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	main(int argc, char **argv)
 	parsing_file(argv[1], &data);
 	init_data(&data);
 
+	init_door(&data);
+	
 	draw_background(&data);
 	draw_minimap(&data);
 	draw_cub_scene(&data);
@@ -32,6 +34,7 @@ int	main(int argc, char **argv)
 	mlx_hook(data.mlx_win, 6, 1L << 6, mouse_event, &data);
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_pressed, &data);
 	mlx_hook(data.mlx_win, 3, 1L << 1, key_released, &data);
+
 	mlx_loop_hook(data.mlx, player_event, &data);
 	mlx_hook(data.mlx_win, 17, 1L << 17, close_event, &data);
 	mlx_loop(data.mlx);

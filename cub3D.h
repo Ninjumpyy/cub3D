@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/25 13:15:02 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 17:27:00 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@
 # define SIZE_PIXEL_PLAYER	5
 # define MOVE_SPEED			4
 # define ROTATION_SPEED		2
-# define LINE_LENGTH		10
 # define FOV				60
 # define TILE_SIZE			64
 # define NUM_RAYS			64
@@ -49,6 +48,8 @@
 # define CROSSHAIR_COLOR	0xFFFFFF
 # define SCALING			30
 # define EPSILON			0.0001
+# define DOF_MAX			32
+# define DOOR_OPEN_SPEED	1.5
 
 /* ************************************************************************** */
 /*									STRUCTURES								  */
@@ -147,6 +148,7 @@ typedef struct s_ray
 	float		xo;
 	float		yo;
 	int			dof;
+	float		open_amount;
 	t_texture	texture;
 	t_type	type;
 }	t_ray;
@@ -168,7 +170,18 @@ typedef struct s_keys
 	int	d;
 	int	left;
 	int	right;
+	int	space;
 }	t_keys;
+
+typedef struct s_door
+{
+	int				x;
+	int				y;
+	float			open_amount;
+	int				opening;
+	struct s_door	*next;
+}	t_door;
+
 
 typedef struct s_data
 {
@@ -183,6 +196,7 @@ typedef struct s_data
 	int			map_height;
 	t_keys		key;
 	double		last_frame_time;
+	t_door		*doors;
 }	t_data;
 
 /* ************************************************************************** */
@@ -272,7 +286,15 @@ void	process_and_draw_wall_slice(t_data *data, t_ray ray_v, t_ray ray_h, int r);
 void	draw_wall_slice(t_data *data, t_ray ray, int r);
 void	calculate_texture_scaling(t_texture_info *tex_info, float *wall_height, t_ray ray);
 void	determine_wall_slice_bounds(int *y, int *y_end, float wall_height);
-void	calculate_texture_x_coordinate(t_ray *ray, t_texture_info *tex_info);
+void	calculate_texture_x_coordinate(t_data *data, t_ray *ray, t_texture_info *tex_info);
 int 	get_texture_color(t_texture *texture, int x, int y);
+
+
+t_door	*find_door(t_data *data, int x, int y);
+int		is_open(t_data *data, t_ray *ray);
+void	add_door(t_data *data, int x, int y);
+void	init_door(t_data *data);
+void	update_doors(t_data *data, double delta_time);
+void	open_door(t_data *data);
 
 #endif
