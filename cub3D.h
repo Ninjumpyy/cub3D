@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/24 14:34:08 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/24 15:02:31 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define PI					3.1415926535
 # define DR					0.0174533
 
-# define WIN_WIDTH			1208
-# define WIN_HEIGHT			848
+# define WIN_WIDTH			1080
+# define WIN_HEIGHT			720
 
 # define MINIMAP_WIDTH		128
 # define MINIMAP_HEIGHT		128
