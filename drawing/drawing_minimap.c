@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:06:13 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/24 15:02:37 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 13:09:03 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,12 @@ int	find_cell_color(int x, int y, t_data *data)
 	map_x = x / PIXELS_PER_CELL;
 	map_y = y / PIXELS_PER_CELL;
 	if (data->env.map[map_y][map_x] == '1')
-		return(convert_color(122, 180, 180, 180));
+		return(convert_color(122, 242, 242, 242));
+	else if (data->env.map[map_y][map_x] == '2')
+		return(convert_color(122, 133, 255, 77));
 	else if (data->env.map[map_y][map_x] == ' ' || data->env.map[map_y][map_x] == '\0' || data->env.map[map_y][map_x] == '\n')
-		return(convert_color(122, 180, 180, 180));
+		return(convert_color(122, 242, 242, 242));
 	else
-		return(convert_color(122, 0, 0, 0));
+		return(convert_color(122, 38, 38, 38));
 }
 

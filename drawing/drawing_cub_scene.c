@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:14:26 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/24 15:02:35 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 13:03:24 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ void	process_and_draw_wall_slice(t_data *data, t_ray ray_v, t_ray ray_h, int r)
 	(void)r;
 	if (ray_v.dist < ray_h.dist)
 	{
-		draw_line(data, ray_v.x * PIXELS_PER_CELL, ray_v.y * PIXELS_PER_CELL, convert_color(0, 0, 128, 0));
+		draw_line(data, ray_v.x * PIXELS_PER_CELL, ray_v.y * PIXELS_PER_CELL, convert_color(0, 238, 255, 230));
 		draw_wall_slice(data, ray_v, r);
 	}
 	else
 	{
-		draw_line(data, ray_h.x * PIXELS_PER_CELL, ray_h.y * PIXELS_PER_CELL, convert_color(0, 0, 128, 0));
+		draw_line(data, ray_h.x * PIXELS_PER_CELL, ray_h.y * PIXELS_PER_CELL, convert_color(0, 238, 255, 230));
 		draw_wall_slice(data, ray_h, r);
 	}
 }

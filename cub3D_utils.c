@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:04:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/24 15:02:53 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 11:30:44 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ void	init_data(t_data *data)
 	data->text_data.east.addr = mlx_get_data_addr(data->text_data.east.img, &data->text_data.east.bits_per_pixel, &data->text_data.east.line_size, &data->text_data.east.endian);
 	data->text_data.west.img = mlx_xpm_file_to_image(data->mlx, data->env.we_texture, &data->text_data.west.width, &data->text_data.west.height);
 	data->text_data.west.addr = mlx_get_data_addr(data->text_data.west.img, &data->text_data.west.bits_per_pixel, &data->text_data.west.line_size, &data->text_data.west.endian);
+	if (data->env.door_texture)
+	{
+		data->text_data.door.img = mlx_xpm_file_to_image(data->mlx, data->env.door_texture, &data->text_data.door.width, &data->text_data.door.height);
+		data->text_data.door.addr = mlx_get_data_addr(data->text_data.door.img, &data->text_data.door.bits_per_pixel, &data->text_data.door.line_size, &data->text_data.door.endian);
+	}
 	data->player.mouse_x = CUB_WIDTH / 2;
 	data->player.mouse_y = CUB_HEIGHT / 2;
 	data->player.sprite.img.img = mlx_xpm_file_to_image(data->mlx, "./textures/weapon.xpm", &(data->player.sprite.img.width), &(data->player.sprite.img.height));

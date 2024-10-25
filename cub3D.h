@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/24 15:02:31 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 13:15:02 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,7 @@ typedef struct s_env
 	char		*so_texture;
 	char		*we_texture;
 	char		*ea_texture;
+	char		*door_texture;
 	t_color		floor;
 	t_color		ceiling;
 	char		**map;
@@ -155,7 +156,8 @@ typedef struct s_text_data
 	t_texture		north;
 	t_texture		south;
 	t_texture		east;
-	t_texture		west;	
+	t_texture		west;
+	t_texture		door;
 }	t_text_data;
 
 typedef struct s_keys

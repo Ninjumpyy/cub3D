@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpandipe <rpandie@student.42luxembourg.    +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 11:46:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/23 16:27:59 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/25 11:30:44 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ void	free_env(t_data *data)
 	{
 		free(data->env.ea_texture);
 		data->env.ea_texture = NULL;
+	}
+	if (data->env.door_texture)
+	{
+		free(data->env.door_texture);
+		data->env.door_texture = NULL;
 	}
 	if (data->env.map)
 	{

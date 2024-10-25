@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:11:18 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/22 11:21:10 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 13:04:38 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	map_closed(char **map, int width, int height)
 		while (x < width)
 		{
 			if (map[y][x] == '0' || map[y][x] == 'N' || map[y][x] == 'S' || \
-			map[y][x] == 'W' || map[y][x] == 'E')
+			map[y][x] == 'W' || map[y][x] == 'E' || map[y][x] == '2')
 			{
 				if (x == 0 || y == 0 || x == width - 1 || y == height - 1)
 					return (0);

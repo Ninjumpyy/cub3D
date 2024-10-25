@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:59:37 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/24 15:02:39 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/25 13:15:27 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	determine_hit_ray(t_data *data, t_ray *ray)
 {
 	while (ray->dof < 16)
 	{
-		if (ray->x < 0 || ray->x >= data->map_width || ray->y < 0 || ray->y >= data->map_height || data->env.map[(int)ray->y][(int)ray->x] == '1')
+		if (ray->x < 0 || ray->x >= data->map_width || ray->y < 0 || ray->y >= data->map_height || data->env.map[(int)ray->y][(int)ray->x] == '1' || data->env.map[(int)ray->y][(int)ray->x] == '2')
 		{
 			ray->dof = 16;
 			if (ray->x < 0)
@@ -99,6 +99,8 @@ void	determine_hit_ray(t_data *data, t_ray *ray)
 				ray->y = 0;
 			if (ray->y >= data->map_height)
 				ray->y = data->map_height - 1;
+			if (data->env.map[(int)ray->y][(int)ray->x] == '2')
+				ray->texture = data->text_data.door;
 		}
 		else
 		{
@@ -108,29 +110,6 @@ void	determine_hit_ray(t_data *data, t_ray *ray)
 		}
 	}
 }
-/*
-void	determine_hit_ray(t_data *data, t_ray *ray)
-{
-	while (ray->dof < 16)
-	{
-		if (ray->x < 0 || ray->x >= data->map_width || ray->y < 0 || ray->y >= data->map_height)
-		{
-			ray->dof = 16;
-			break;
-		}
-		else if (data->env.map[(int)ray->y][(int)ray->x] == '1')
-		{
-			ray->dof = 16;
-			break;
-		}
-		else
-		{
-			ray->x += ray->xo;
-			ray->y += ray->yo;
-			ray->dof += 1;
-		}
-	}
-}*/
 
 void	calculate_distance(t_data *data, t_ray *ray)
 {
