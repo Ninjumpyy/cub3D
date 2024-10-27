@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
+/*   By: rpandipe <rpandie@student.42luxembourg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:04:36 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 16:36:05 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/27 22:06:18 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ int	convert_color(int t, int r, int g, int b)
 void	redraw_minimap(t_data *data)
 {
 	mlx_clear_window(data->mlx, data->mlx_win);
+	if (data->state == GAME_START)
+	{
+		mlx_put_image_to_window(data->mlx, data->mlx_win, data->start.img, 0, 0);
+		mlx_string_put(data->mlx, data->mlx_win, CUB_WIDTH / 2 - 60, 600, 0xFF0000, "Press Enter to Start");
+		return ;
+	}
 	draw_background(data);
 	draw_minimap(data);
 	draw_cub_scene(data);

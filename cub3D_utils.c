@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
+/*   By: rpandipe <rpandie@student.42luxembourg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:04:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 16:27:52 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/27 21:41:04 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,13 @@ double	update_time(t_data *data)
 void	init_data(t_data *data)
 {
 	data->mlx = mlx_init();
+	data->state = GAME_START;
 	data->mlx_win = mlx_new_window(data->mlx, WIN_WIDTH, WIN_HEIGHT, "CUB3D");
 	data->minimap.img = mlx_new_image(data->mlx, MINIMAP_WIDTH, MINIMAP_HEIGHT);
 	data->minimap.addr = mlx_get_data_addr(data->minimap.img, &data->minimap.bits_per_pixel, &data->minimap.line_size, &data->minimap.endian);
 	data->cub.img = mlx_new_image(data->mlx, CUB_WIDTH, CUB_HEIGHT);
 	data->cub.addr = mlx_get_data_addr(data->cub.img, &data->cub.bits_per_pixel, &data->cub.line_size, &data->cub.endian);
+	data->start.img = mlx_xpm_file_to_image(data->mlx, "./textures/start.xpm", &data->start.width, &data->start.height);
 	data->text_data.north.img = mlx_xpm_file_to_image(data->mlx, data->env.no_texture, &data->text_data.north.width, &data->text_data.north.height);
 	data->text_data.north.addr = mlx_get_data_addr(data->text_data.north.img, &data->text_data.north.bits_per_pixel, &data->text_data.north.line_size, &data->text_data.north.endian);
 	data->text_data.south.img = mlx_xpm_file_to_image(data->mlx, data->env.so_texture, &data->text_data.south.width, &data->text_data.south.height);
