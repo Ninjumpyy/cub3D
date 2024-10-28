@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 11:46:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/28 13:46:55 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:08:10 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	free_doors(t_data *data)
 void	free_cub3d(t_data *data)
 {
 	free_env(data);
+	//mlx_mouse_hide(data->mlx, data->mlx_win);
 	free_doors(data);
 	mlx_loop_end(data->mlx);
 	mlx_destroy_image(data->mlx, data->minimap.img);
