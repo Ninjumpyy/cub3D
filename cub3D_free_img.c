@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_free_img.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:45:09 by rpandipe          #+#    #+#             */
-/*   Updated: 2024/10/28 14:15:48 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:39:20 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,9 @@ void	free_animation(t_player *ptr, t_data *data)
 	{
 		next = current->next;
 		mlx_destroy_image(data->mlx, current->img.img);
-		printf("destroyed image\n");
 		free(current);
 		current = NULL;
 		current = next;
-		printf("here\n");
 	}
 }
 
