@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/28 10:14:37 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 13:47:49 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,12 +224,15 @@ double	update_time(t_data *data);
 void	init_data(t_data *data);
 /* ****************************cub3D_err************************************* */
 void	err_parsing(char **line, int fd, t_data *data, t_lst **map_lst);
+void	err_cub3d(char *error, t_data *data);
 /* ****************************cub3D_free************************************ */
 void	free_get_next_line(int fd, char **line);
 void	free_env(t_data *data);
 void	free_map(t_data *data);
 void	free_lst(t_lst **map_lst);
 void	free_cub3d(t_data *data);
+/* ****************************cub3D_free_img************************************ */
+void	free_animation(t_player *ptr, t_data *data);
 /* ****************************parsing_file********************************** */
 void	parsing_file(char *filename, t_data *data);
 void	parse_texture_color(char **line, int fd, t_data *data);

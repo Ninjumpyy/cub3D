@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 11:46:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 14:35:51 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 13:46:55 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,19 @@ void	free_cub3d(t_data *data)
 	free_env(data);
 	free_doors(data);
 	mlx_loop_end(data->mlx);
-	//mlx_destroy_image(data->mlx, data->minimap.img);
+	mlx_destroy_image(data->mlx, data->minimap.img);
 	mlx_destroy_image(data->mlx, data->cub.img);
 	mlx_destroy_image(data->mlx, data->text_data.north.img);
 	mlx_destroy_image(data->mlx, data->text_data.south.img);
 	mlx_destroy_image(data->mlx, data->text_data.east.img);
 	mlx_destroy_image(data->mlx, data->text_data.west.img);
+	mlx_destroy_image(data->mlx, data->start.img);
+	free_animation(&data->player, data);
 	mlx_destroy_window(data->mlx, data->mlx_win);
-	mlx_destroy_display(data->mlx);
-	free(data->mlx);
+	if (data->mlx)
+	{
+		mlx_loop_end(data->mlx);
+		mlx_destroy_display(data->mlx);
+		free(data->mlx);
+	}
 }
