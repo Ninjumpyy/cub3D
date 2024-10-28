@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/28 10:04:43 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 10:14:37 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,6 +189,7 @@ typedef struct s_door
 	int				y;
 	float			open_amount;
 	int				opening;
+	int				closing;
 	struct s_door	*next;
 }	t_door;
 
@@ -310,7 +311,7 @@ int		is_open(t_data *data, t_ray *ray);
 void	add_door(t_data *data, int x, int y);
 void	init_door(t_data *data);
 void	update_doors(t_data *data, double delta_time);
-void	open_door(t_data *data);
+void	action_door(t_data *data);
 /* ****************************drawing_animation******************************* */
 void	load_animation(t_data *data);
 void	play_animation(t_data *data, t_sprite *ptr, void (*draw_asset)(t_data *, t_img *), double delta_time);

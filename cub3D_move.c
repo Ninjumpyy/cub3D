@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:49:33 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 13:22:10 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 10:38:03 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,20 @@ void	compute_directional_movement(t_data *data, double *move_x, double *move_y, 
 	}
 }
 
+int	if_door_not_open(t_data *data, int x, int y)
+{
+	t_door	*door;
+	
+	if (data->env.map[y][x] == '2')
+	{
+		door = find_door(data, x, y);
+		if (door->open_amount != 1.0)
+			return (1);
+		return (0);
+	}
+	return (0);
+}
+
 int	can_move_to(double move_x, double move_y, t_data *data)
 {
 	float	new_x;
@@ -69,15 +83,15 @@ int	can_move_to(double move_x, double move_y, t_data *data)
 	new_x = data->player.x + move_x;
 	new_y = data->player.y + move_y;
 	limit = (SIZE_PIXEL_PLAYER / 2 * CELLS_PER_PIXEL);
-	if (data->env.map[(int)(new_y - limit)][(int)(new_x - limit)] != '1' &&
-		data->env.map[(int)(new_y - limit)][(int)(new_x + limit)] != '1' &&
-		data->env.map[(int)(new_y + limit)][(int)(new_x - limit)] != '1' &&
-		data->env.map[(int)(new_y + limit)][(int)(new_x + limit)] != '1' &&
-		data->env.map[(int)(new_y - limit)][(int)(new_x - limit)] != '2' &&
-		data->env.map[(int)(new_y - limit)][(int)(new_x + limit)] != '2' &&
-		data->env.map[(int)(new_y + limit)][(int)(new_x - limit)] != '2' &&
-		data->env.map[(int)(new_y + limit)][(int)(new_x + limit)] != '2')
-		return (1);
-	else
+	if (data->env.map[(int)(new_y - limit)][(int)(new_x - limit)] == '1' ||
+		data->env.map[(int)(new_y - limit)][(int)(new_x + limit)] == '1' ||
+		data->env.map[(int)(new_y + limit)][(int)(new_x - limit)] == '1' ||
+		data->env.map[(int)(new_y + limit)][(int)(new_x + limit)] == '1' ||
+		if_door_not_open(data, (int)(new_x - limit), (int)(new_y - limit)) ||
+		if_door_not_open(data, (int)(new_x + limit), (int)(new_y - limit)) ||
+		if_door_not_open(data, (int)(new_x - limit), (int)(new_y + limit)) ||
+		if_door_not_open(data, (int)(new_x + limit), (int)(new_y + limit)))
 		return (0);
+	else
+		return (1);
 }

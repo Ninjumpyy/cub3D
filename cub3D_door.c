@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 16:45:25 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/28 09:59:45 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 10:40:20 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_door	*find_door(t_data *data, int x, int y)
 	return (door);
 }
 
-void	open_door(t_data *data)
+void	action_door(t_data *data)
 {
 	int		px;
 	int		py;
@@ -54,16 +54,18 @@ void	open_door(t_data *data)
 	door = NULL;
 	px = (int)data->player.x;
 	py = (int)data->player.y;
-	if ((data->player.angle >= (DR * 60)) && (data->player.angle <= (DR * 120)) && (data->env.map[py - 1][px] == '2'))
+	if (data->env.map[py - 1][px] == '2')
 		door = find_door(data, px, py - 1);
-	else if ((data->player.angle >= (DR * 240)) && (data->player.angle <= (DR * 300)) && (data->env.map[py + 1][px] == '2'))
+	else if (data->env.map[py + 1][px] == '2')
 		door = find_door(data, px, py + 1);
-	else if ((data->player.angle <= (DR * 30) || data->player.angle >= (DR * 330)) && (data->env.map[py][px - 1] == '2'))
+	else if (data->env.map[py][px - 1] == '2')
 		door = find_door(data, px - 1, py);
-	else if ((data->player.angle >= (DR * 150)) && (data->player.angle <= (DR * 210)) && (data->env.map[py][px + 1] == '2'))
+	else if (data->env.map[py][px + 1] == '2')
 		door = find_door(data, px + 1, py);
 	if (door && door->open_amount == 0.0)
 		door->opening = 1;
+	else if (door && door->open_amount == 1.0)
+		door->closing = 1;
 }
 
 void	update_doors(t_data *data, double delta_time)
@@ -77,7 +79,19 @@ void	update_doors(t_data *data, double delta_time)
 		{
 			door->open_amount += delta_time * DOOR_OPEN_SPEED;
 			if (door->open_amount > 1.0)
+			{
 				door->open_amount = 1.0;
+				door->opening = 0;
+			}
+		}
+		else if (door->closing && door->open_amount > 0.0)
+		{
+			door->open_amount -= delta_time * DOOR_OPEN_SPEED;
+			if (door->open_amount < 0.0)
+			{
+				door->open_amount = 0.0;
+				door->closing = 0;
+			}
 		}
 		door = door->next;
 	}

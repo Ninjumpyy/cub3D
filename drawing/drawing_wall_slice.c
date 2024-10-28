@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 11:46:43 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/28 09:48:35 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 10:09:09 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	calculate_texture_x_coordinate(t_data *data, t_ray *ray, t_texture_info *te
 
 	if (ray->open_amount != -1.0)
 	{
-			wall_hit_x += ( 1.0 - ray->open_amount);
+			wall_hit_x += ray->open_amount;
 	}
 	tex_info->tex_x = (int)(wall_hit_x * ray->texture.width);
 }

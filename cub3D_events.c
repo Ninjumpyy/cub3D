@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:36:34 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/28 10:04:32 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 10:13:42 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int	player_event(t_data *data)
 			data->player.angle += (2 * PI);
 	}
 	if (data->key.space == 1)
-		open_door(data);
+		action_door(data);
 	update_doors(data, delta_time);
 	if (data->key.mouse_left == 1)
 		play_animation(data, &data->player.current_sprite, draw_player_sprite, delta_time);
