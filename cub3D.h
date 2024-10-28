@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/28 10:14:37 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:51:04 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -271,6 +271,7 @@ int		convert_color(int t, int r, int g, int b);
 void	draw_crosshair(t_data *data);
 void	redraw_minimap(t_data *data);
 void	normalize_angle(t_ray *ray);
+void	hit_ray_logic(t_data *data, t_ray *ray);
 /* ****************************drawing_minimap******************************** */
 void	draw_minimap(t_data *data);
 int		find_cell_color(int x, int y, t_data *data);

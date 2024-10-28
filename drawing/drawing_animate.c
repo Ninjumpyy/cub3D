@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_animate.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 13:50:54 by rpandipe          #+#    #+#             */
-/*   Updated: 2024/10/25 17:30:31 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:35:24 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	allocate_sprite(t_data *data, t_sprite *ptr, int count)
 		sprite->next = malloc(sizeof(t_sprite));
 		if (!sprite->next)
 		{
-			ft_printf("Memory Allocation Failed\n");
+			ft_error("Error\nMemory Allocation Failed\n");
 			free_cub3d(data);
 			exit(EXIT_FAILURE);
 		}
@@ -40,7 +40,7 @@ void	load_image(t_data *data, t_img *img, char *path)
 									&img->width, &img->height);
 	if (!img->img)
 	{
-		ft_printf("Error loading player assets\n");
+		ft_error("Error loading player assets\n");
 		free_cub3d(data);
 		exit(EXIT_FAILURE);
 	}
@@ -48,7 +48,7 @@ void	load_image(t_data *data, t_img *img, char *path)
 									&img->line_size, &img->endian);
 	if (!img->addr)
 	{
-		ft_printf("Error loading player assets\n");
+		ft_error("Error loading player assets\n");
 		free_cub3d(data);
 		exit(EXIT_FAILURE);
 	}
@@ -56,7 +56,7 @@ void	load_image(t_data *data, t_img *img, char *path)
 
 void	load_animation(t_data *data)
 {
-	t_sprite *ptr;
+	t_sprite	*ptr;
 
 	ptr = &data->player.animation;
 	allocate_sprite(data, ptr, 9);

@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 11:05:52 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 11:30:43 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 12:00:14 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,9 @@ int	valid_line(char *line)
 	int	i;
 
 	i = 0;
-	while (line[i] == ' ' || line[i] == '0' || line[i] == '1' || \
-	line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W' || line[i] == '2')
+	while (line[i] == ' ' || line[i] == '0' || line[i] == '1'
+		|| line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W'
+		|| line[i] == '2')
 		i++;
 	if (line[i] != '\n' && line[i] != '\0')
 		return (0);

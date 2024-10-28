@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:11:18 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 13:04:38 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:58:34 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	check_map(t_lst **ptr, int *width, int *height, t_data *data)
 {
 	while (*ptr)
 	{
-		if (!check_player_and_width((*ptr)->line, width, &data->player, *height))
+		if (!check_player_and_width((*ptr)->line, width,
+				&data->player, *height))
 			return (0);
 		(*height)++;
 		*ptr = (*ptr)->next;

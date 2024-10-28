@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/04 16:20:53 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 15:55:47 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:31:21 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,20 @@ void	draw_line(t_data *data, float x_final, float y_final, int color)
 		draw_steep(data, dx, dy, color);
 }
 
+int	gradual_logic(int dx, int dy, int *d, int *px)
+{
+	if (dx > 0)
+		*px += 1;
+	else
+		*px -= 1;
+	if (*d < 0)
+	{
+		*d = *d + (2 * abs(dy));
+		return (1);
+	}
+	return (0);
+}
+
 void	draw_gradual(t_data *data, int dx, int dy, int color)
 {
 	int	d;
@@ -39,13 +53,7 @@ void	draw_gradual(t_data *data, int dx, int dy, int color)
 	draw_pixel(&(data)->cub, px, py, color);
 	while (i < abs(dx))
 	{
-		if (dx > 0)
-			px += 1;
-		else
-			px -= 1;
-		if (d < 0)
-			d = d + (2 * abs(dy));
-		else 
+		if (!gradual_logic(dx, dy, &d, &px))
 		{
 			if (dy > 0)
 				py += 1;
@@ -57,6 +65,20 @@ void	draw_gradual(t_data *data, int dx, int dy, int color)
 			draw_pixel(&(data)->minimap, px, py, color);
 		i++;
 	}
+}
+
+int	steep_logic(int dx, int dy, int *d, int *py)
+{
+	if (dy > 0)
+		*py += 1;
+	else
+		*py -= 1;
+	if (*d < 0)
+	{
+		*d = *d + (2 * abs(dx));
+		return (1);
+	}
+	return (0);
 }
 
 void	draw_steep(t_data *data, int dx, int dy, int color)
@@ -73,13 +95,7 @@ void	draw_steep(t_data *data, int dx, int dy, int color)
 	draw_pixel(&(data)->cub, px, py, color);
 	while (i < abs(dy))
 	{
-		if (dy > 0)
-			py += 1;
-		else
-			py -= 1;
-		if (d < 0)
-			d = d + (2 * abs(dx));
-		else
+		if (!steep_logic(dx, dy, &d, &py))
 		{
 			if (dx > 0)
 				px += 1;
