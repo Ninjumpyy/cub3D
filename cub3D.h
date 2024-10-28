@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/28 14:26:26 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:29:37 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,6 @@ typedef struct s_door
 	int				closing;
 	struct s_door	*next;
 }	t_door;
-
 
 typedef struct s_data
 {
