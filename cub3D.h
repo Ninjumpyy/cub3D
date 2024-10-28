@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/28 14:29:37 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:33:49 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef enum e_type
 	HORIZONTAL,
 }	t_type;
 
-typedef enum	e_gamestate
+typedef enum e_gamestate
 {
 	GAME_START,
 	GAME_RUNNING
@@ -154,7 +154,7 @@ typedef struct s_ray
 	int			dof;
 	float		open_amount;
 	t_texture	texture;
-	t_type	type;
+	t_type		type;
 }	t_ray;
 
 typedef struct s_text_data
@@ -212,7 +212,7 @@ typedef struct s_data
 /* ************************************************************************** */
 /* ****************************cub3D_utils*********************************** */
 void	check_arg(int argc, char **argv);
-void    ft_error(const char *str);
+void	ft_error(const char *str);
 double	get_time(void);
 double	update_time(t_data *data);
 /* ****************************cub3D_utils*********************************** */
@@ -227,7 +227,7 @@ void	free_env(t_data *data);
 void	free_map(t_data *data);
 void	free_lst(t_lst **map_lst);
 void	free_cub3d(t_data *data);
-/* ****************************cub3D_free_img************************************ */
+/* ****************************cub3D_free_img******************************** */
 void	free_animation(t_player *ptr, t_data *data);
 /* ****************************parsing_file********************************** */
 void	parsing_file(char *filename, t_data *data);
@@ -272,46 +272,50 @@ void	draw_crosshair(t_data *data);
 void	redraw_minimap(t_data *data);
 void	normalize_angle(t_ray *ray);
 void	hit_ray_logic(t_data *data, t_ray *ray);
-/* ****************************drawing_minimap******************************** */
+/* ****************************drawing_minimap******************************* */
 void	draw_minimap(t_data *data);
 int		find_cell_color(int x, int y, t_data *data);
 /* ****************************drawing_player******************************** */
 void	draw_player(t_data *data);
 void	draw_player_sprite(t_data *data, t_img *img);
-/* ****************************cub3D_move************************************* */
+/* ****************************cub3D_move************************************ */
 void	move_player(t_data *data, double delta_time);
-void	compute_directional_movement(t_data *data, double *move_x, double *move_y, double move_speed);
+void	compute_directional_movement(t_data *data, double *move_x,
+			double *move_y, double move_speed);
 int		can_move_to(double move_x, double move_y, t_data *data);
-/* ****************************drawing_background***************************** */
+/* ****************************drawing_background**************************** */
 void	draw_background(t_data *data);
 void	draw_ceiling(t_data *data);
 void	draw_floor(t_data *data);
-/* ****************************drawing_line*********************************** */
+/* ****************************drawing_line********************************** */
 void	draw_line(t_data *data, float x_final, float y_final, int color);
 void	draw_gradual(t_data *data, int dx, int dy, int color);
 void	draw_steep(t_data *data, int dx, int dy, int color);
-/* ****************************drawing_rays*********************************** */
+/* ****************************drawing_rays********************************** */
 void	init_ray_data(t_data *data, t_ray *ray, int reinit, t_type type);
 void	init_horizontal_ray(t_data *data, t_ray *ray, float px, float py);
 void	init_vertical_ray(t_data *data, t_ray *ray, float px, float py);
 void	determine_hit_ray(t_data *data, t_ray *ray);
 void	calculate_distance(t_data *data, t_ray *ray);
-/* ****************************drawing_cub_scene******************************* */
+/* ****************************drawing_cub_scene***************************** */
 void	draw_cub_scene(t_data *data);
-void	process_and_draw_wall_slice(t_data *data, t_ray ray_v, t_ray ray_h, int r);
-/* ****************************drawing_wall_slice******************************* */
+void	process_and_draw_wall_slice(t_data *data, t_ray ray_v,
+			t_ray ray_h, int r);
+/* ****************************drawing_wall_slice**************************** */
 void	draw_wall_slice(t_data *data, t_ray ray, int r);
-void	calculate_texture_scaling(t_texture_info *tex_info, float *wall_height, t_ray ray);
+void	calculate_texture_scaling(t_texture_info *tex_info,
+			float *wall_height, t_ray ray);
 void	determine_wall_slice_bounds(int *y, int *y_end, float wall_height);
-void	calculate_texture_x_coordinate(t_data *data, t_ray *ray, t_texture_info *tex_info);
-int 	get_texture_color(t_texture *texture, int x, int y);
-/* *****************************cub3D_door************************************** */
+void	calculate_texture_x_coordinate(t_data *data,
+			t_ray *ray, t_texture_info *tex_info);
+int		get_texture_color(t_texture *texture, int x, int y);
+/* *****************************cub3D_door*********************************** */
 t_door	*find_door(t_data *data, int x, int y);
 int		is_open(t_data *data, t_ray *ray);
 void	add_door(t_data *data, int x, int y);
 void	update_doors(t_data *data, double delta_time);
 void	action_door(t_data *data);
-/* ****************************drawing_animation******************************* */
+/* ****************************drawing_animation**************************** */
 void	load_animation(t_data *data);
 void	play_animation(t_data *data, t_sprite *ptr);
 
