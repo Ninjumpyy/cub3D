@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:53:15 by rpandipe          #+#    #+#             */
-/*   Updated: 2024/10/28 13:58:03 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:16:36 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ void	draw_player_sprite(t_data *data, t_img *img)
 	px = (CUB_WIDTH / 2) - (img->width / 2);
 	py = (CUB_HEIGHT) - (img->height);
 	if (px < 0 || px >= CUB_WIDTH || py < 0 || py >= CUB_HEIGHT)
-	{
-		printf("Player position is out of bounds, px: %f, py: %f\n", px, py);
-        return;
-	}
+		return;
 	while (y < img->height)
 	{
 		x = 0;
@@ -78,4 +75,3 @@ void	draw_player_sprite(t_data *data, t_img *img)
 		y++;
 	}
 }
-
