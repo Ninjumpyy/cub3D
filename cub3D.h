@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/28 09:48:22 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 10:04:43 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ typedef enum e_type
 	VERTICAL,
 	HORIZONTAL,
 }	t_type;
+
+typedef enum	e_gamestate
+{
+	GAME_START,
+	GAME_RUNNING
+}	t_gamestate;
 
 typedef struct s_texture_info
 {
@@ -193,6 +199,7 @@ typedef struct s_data
 	void		*mlx_win;
 	t_img		minimap;
 	t_img		cub;
+	t_img		start;
 	t_text_data	text_data;
 	t_env		env;
 	t_player	player;
@@ -202,6 +209,7 @@ typedef struct s_data
 	double		last_frame_time;
 	t_door		*doors;
 	double		animation_time;
+	t_gamestate	state;
 }	t_data;
 
 /* ************************************************************************** */

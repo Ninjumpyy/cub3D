@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/30 16:36:34 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 17:46:47 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 10:04:32 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,28 @@ int	key_pressed(int keycode, void *param)
 		free_cub3d(data);
 		exit(EXIT_SUCCESS);
 	}
-	if (keycode == 119) // W
-		data->key.w = 1;
-	if (keycode == 115) // S
-		data->key.s = 1;
-	if (keycode == 97) // A
-		data->key.a = 1;
-	if (keycode == 100) // D
-		data->key.d = 1;
-	if (keycode == 65363) // right
-		data->key.right = 1;
-	if (keycode == 65361) // left
-		data->key.left = 1;
-	if (keycode == 32) // space
-		data->key.space = 1;
+	if (data->state == GAME_START)
+	{
+		if (keycode == 65293)
+			data->state = GAME_RUNNING;
+	}
+	else
+	{
+		if (keycode == 119) // W
+			data->key.w = 1;
+		if (keycode == 115) // S
+			data->key.s = 1;
+		if (keycode == 97) // A
+			data->key.a = 1;
+		if (keycode == 100) // D
+			data->key.d = 1;
+		if (keycode == 65363) // right
+			data->key.right = 1;
+		if (keycode == 65361) // left
+			data->key.left = 1;
+		if (keycode == 32) // space
+			data->key.space = 1;
+	}
 	return (0);
 }
 
