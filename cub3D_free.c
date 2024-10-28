@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 11:46:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/28 14:08:10 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:15:28 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,6 @@ void	free_get_next_line(int fd, char **line)
 			free(*line);
 			*line = get_next_line(fd);
 		}
-	}
-}
-
-void	free_env(t_data *data)
-{
-	if (data->env.no_texture)
-	{
-		free(data->env.no_texture);
-		data->env.no_texture = NULL;
-	}
-	if (data->env.so_texture)
-	{
-		free(data->env.so_texture);
-		data->env.so_texture = NULL;
-	}
-	if (data->env.we_texture)
-	{
-		free(data->env.we_texture);
-		data->env.we_texture = NULL;
-	}
-	if (data->env.ea_texture)
-	{
-		free(data->env.ea_texture);
-		data->env.ea_texture = NULL;
-	}
-	if (data->env.door_texture)
-	{
-		free(data->env.door_texture);
-		data->env.door_texture = NULL;
-	}
-	if (data->env.map)
-	{
-		free_map(data);
-		data->env.map = NULL;
 	}
 }
 
@@ -103,7 +69,6 @@ void	free_doors(t_data *data)
 void	free_cub3d(t_data *data)
 {
 	free_env(data);
-	//mlx_mouse_hide(data->mlx, data->mlx_win);
 	free_doors(data);
 	mlx_loop_end(data->mlx);
 	mlx_destroy_image(data->mlx, data->minimap.img);

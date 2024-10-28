@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_animate.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 13:50:54 by rpandipe          #+#    #+#             */
-/*   Updated: 2024/10/28 11:35:24 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:22:02 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,14 +83,11 @@ void	load_animation(t_data *data)
 	data->player.current_sprite = data->player.animation;
 }
 
-void	play_animation(t_data *data, t_sprite *sprite, \
-					void (*draw_asset)(t_data *, t_img *), double delta_time)
+void	play_animation(t_data *data, t_sprite *sprite)
 {
 	double		current_time;
 	double		diff;
 
-	(void) draw_asset;
-	(void) delta_time;
 	current_time = get_time();
 	diff = current_time - data->animation_time;
 	if (diff > 0.05)

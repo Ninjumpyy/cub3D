@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_move.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/02 15:49:33 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/28 10:38:03 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:18:07 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,24 +36,25 @@ void	move_player(t_data *data, double delta_time)
 	}
 }
 
-void	compute_directional_movement(t_data *data, double *move_x, double *move_y, double move_speed)
+void	compute_directional_movement(t_data *data, double *move_x, \
+								double *move_y, double move_speed)
 {
-	if (data->key.w == 1) // W
+	if (data->key.w == 1)
 	{
 		*move_x += cos(data->player.angle) * move_speed;
 		*move_y -= sin(data->player.angle) * move_speed;
 	}
-	if (data->key.s == 1) // S
+	if (data->key.s == 1)
 	{
 		*move_x -= cos(data->player.angle) * move_speed;
 		*move_y += sin(data->player.angle) * move_speed;
 	}
-	if (data->key.a == 1) // A
+	if (data->key.a == 1)
 	{
 		*move_x += sin(data->player.angle) * move_speed;
 		*move_y += cos(data->player.angle) * move_speed;
 	}
-	if (data->key.d == 1) // D
+	if (data->key.d == 1)
 	{
 		*move_x -= sin(data->player.angle) * move_speed;
 		*move_y -= cos(data->player.angle) * move_speed;
@@ -63,7 +64,7 @@ void	compute_directional_movement(t_data *data, double *move_x, double *move_y, 
 int	if_door_not_open(t_data *data, int x, int y)
 {
 	t_door	*door;
-	
+
 	if (data->env.map[y][x] == '2')
 	{
 		door = find_door(data, x, y);

@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/28 13:56:28 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:26:26 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -216,6 +216,8 @@ void	check_arg(int argc, char **argv);
 void    ft_error(const char *str);
 double	get_time(void);
 double	update_time(t_data *data);
+/* ****************************cub3D_utils*********************************** */
+void	init_door(t_data *data);
 void	init_data(t_data *data);
 /* ****************************cub3D_err************************************* */
 void	err_parsing(char **line, int fd, t_data *data, t_lst **map_lst);
@@ -258,11 +260,12 @@ int		valid_line(char *line);
 /* ****************************cub3D_events********************************** */
 int		mouse_event(int x, int y, void *param);
 int		button_pressed(int button, int x, int y, void *param);
-int		button_released(int button, int x, int y, void *param);
-int		key_pressed(int keycode, void *param);
-int		key_released(int keycode, void *param);
 int		player_event(t_data *data);
 int		close_event(void *param);
+/* ****************************cub3D_keys********************************* */
+void	key_move(int keycode, t_data *data);
+int		key_pressed(int keycode, void *param);
+int		key_released(int keycode, void *param);
 /* ****************************drawing_utils********************************* */
 void	draw_pixel(t_img *img, int x, int y, int color);
 int		convert_color(int t, int r, int g, int b);
@@ -307,11 +310,10 @@ int 	get_texture_color(t_texture *texture, int x, int y);
 t_door	*find_door(t_data *data, int x, int y);
 int		is_open(t_data *data, t_ray *ray);
 void	add_door(t_data *data, int x, int y);
-void	init_door(t_data *data);
 void	update_doors(t_data *data, double delta_time);
 void	action_door(t_data *data);
 /* ****************************drawing_animation******************************* */
 void	load_animation(t_data *data);
-void	play_animation(t_data *data, t_sprite *ptr, void (*draw_asset)(t_data *, t_img *), double delta_time);
+void	play_animation(t_data *data, t_sprite *ptr);
 
 #endif

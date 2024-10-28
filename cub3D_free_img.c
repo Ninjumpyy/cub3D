@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:45:09 by rpandipe          #+#    #+#             */
-/*   Updated: 2024/10/28 14:03:53 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:15:48 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	free_animation(t_player *ptr, t_data *data)
 {
-	t_sprite *current;
-	t_sprite *next;
+	t_sprite	*current;
+	t_sprite	*next;
 
 	current = &ptr->animation;
 	mlx_destroy_image(data->mlx, current->img.img);
@@ -32,4 +32,25 @@ void	free_animation(t_player *ptr, t_data *data)
 	}
 }
 
+void	free_texture(char *tx)
+{
+	if (tx)
+	{
+		free(tx);
+		tx = NULL;
+	}
+}
 
+void	free_env(t_data *data)
+{
+	free_texture(data->env.no_texture);
+	free_texture(data->env.so_texture);
+	free_texture(data->env.ea_texture);
+	free_texture(data->env.we_texture);
+	free_texture(data->env.door_texture);
+	if (data->env.map)
+	{
+		free_map(data);
+		data->env.map = NULL;
+	}
+}

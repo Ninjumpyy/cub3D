@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:04:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/28 13:06:06 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:17:00 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,29 +41,26 @@ void	ft_error(const char *str)
 		str++;
 	}
 }
- 
+
 double	get_time(void)
 {
-	struct timeval tv;
+	struct timeval	tv;
 
-    if (gettimeofday(&tv, NULL) == -1)
+	if (gettimeofday(&tv, NULL) == -1)
 	{
 		if (write(2, "Error\ngettimeofday() error\n", 27))
 			perror("Error\nFailed to write error message");
 	}
-    return (tv.tv_sec + (double)tv.tv_usec / 1000000);
+	return (tv.tv_sec + (double)tv.tv_usec / 1000000);
 }
 
 double	update_time(t_data *data)
 {
 	double	current_time;
 	double	delta_time;
-	
-	//printf("in t1 %d\n", data->key.mouse_left);
+
 	current_time = get_time();
-	//printf("in t2 %d\n", data->key.mouse_left);
 	delta_time = current_time - data->last_frame_time;
 	data->last_frame_time = current_time;
-	//printf("in t3 %d\n", data->key.mouse_left);
 	return (delta_time);
 }

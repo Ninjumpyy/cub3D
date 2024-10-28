@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:12:58 by rpandipe          #+#    #+#             */
-/*   Updated: 2024/10/28 13:29:53 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:19:50 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,25 @@ void	init_image(t_data *data, char *path, t_texture *tx)
 									&tx->line_size, &tx->endian);
 	if (!tx->addr)
 		err_cub3d("Error\nMemory allocation failed\n", data);
+}
+
+void	init_door(t_data *data)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < data->map_height)
+	{
+		x = 0;
+		while (x < data->map_width)
+		{
+			if (data->env.map[y][x] == '2')
+				add_door(data, x, y);
+			x++;
+		}
+		y++;
+	}
 }
 
 void	init_data(t_data *data)

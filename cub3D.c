@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 10:03:18 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/28 14:08:16 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:27:11 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	main(int argc, char **argv)
 	draw_cub_scene(&data);
 	draw_crosshair(&data);
 	draw_player_sprite(&data, &data.player.sprite.img);
-	//mlx_mouse_hide(data.mlx, data.mlx_win);
 	mlx_hook(data.mlx_win, 6, 1L << 6, mouse_event, &data);
 	mlx_hook(data.mlx_win, 4, 1L << 2, button_pressed, &data);
 	mlx_hook(data.mlx_win, 2, 1L << 0, key_pressed, &data);
