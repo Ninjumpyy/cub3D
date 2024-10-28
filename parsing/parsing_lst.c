@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_lst.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thomas <thomas@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 14:32:30 by thomas            #+#    #+#             */
-/*   Updated: 2024/09/19 16:28:08 by thomas           ###   ########.fr       */
+/*   Updated: 2024/10/28 11:58:09 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,3 @@ int	get_map_lst(char **line, int fd, t_lst **map_lst)
 		return (0);
 	return (1);
 }
-

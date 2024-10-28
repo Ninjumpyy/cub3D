@@ -6,7 +6,7 @@
 /*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/28 14:30:19 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/28 13:47:49 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/28 13:56:28 by rpandipe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,14 @@
 
 # define PI					3.1415926535
 # define DR					0.0174533
-
 # define WIN_WIDTH			1080
 # define WIN_HEIGHT			720
-
 # define MINIMAP_WIDTH		128
 # define MINIMAP_HEIGHT		128
-# define PIXELS_PER_CELL	8 // minimap size (x,y) / number of cells in my map : 128/16
-# define CELLS_PER_PIXEL	0.125 // number of cells in my map / minimap size (x,y) : 16/128
-
+# define PIXELS_PER_CELL	8
+# define CELLS_PER_PIXEL	0.125
 # define CUB_WIDTH			1080
 # define CUB_HEIGHT			720
-
 # define SIZE_PIXEL_PLAYER	5
 # define MOVE_SPEED			4
 # define ROTATION_SPEED		2
@@ -47,7 +43,6 @@
 # define CROSSHAIR_LEN		10
 # define CROSSHAIR_COLOR	0xFFFFFF
 # define SCALING			30
-# define EPSILON			0.0001
 # define DOF_MAX			32
 # define DOOR_OPEN_SPEED	1.5
 
@@ -274,6 +269,7 @@ int		convert_color(int t, int r, int g, int b);
 void	draw_crosshair(t_data *data);
 void	redraw_minimap(t_data *data);
 void	normalize_angle(t_ray *ray);
+void	hit_ray_logic(t_data *data, t_ray *ray);
 /* ****************************drawing_minimap******************************** */
 void	draw_minimap(t_data *data);
 int		find_cell_color(int x, int y, t_data *data);
@@ -307,8 +303,7 @@ void	calculate_texture_scaling(t_texture_info *tex_info, float *wall_height, t_r
 void	determine_wall_slice_bounds(int *y, int *y_end, float wall_height);
 void	calculate_texture_x_coordinate(t_data *data, t_ray *ray, t_texture_info *tex_info);
 int 	get_texture_color(t_texture *texture, int x, int y);
-
-
+/* *****************************cub3D_door************************************** */
 t_door	*find_door(t_data *data, int x, int y);
 int		is_open(t_data *data, t_ray *ray);
 void	add_door(t_data *data, int x, int y);

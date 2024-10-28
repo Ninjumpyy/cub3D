@@ -6,11 +6,11 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/18 13:59:37 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/28 09:48:32 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 11:52:51 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../cub3D.h"
+#include "../cub3D.h"
 
 void	init_ray_data(t_data *data, t_ray *ray, int reinit, t_type type)
 {
@@ -35,7 +35,7 @@ void	init_horizontal_ray(t_data *data, t_ray *ray, float px, float py)
 	float	cotan;
 
 	cotan = 1 / tan(ray->angle);
-	if (ray->angle < PI) // Looking up
+	if (ray->angle < PI)
 	{
 		ray->y = (int)data->player.y - 0.0001;
 		ray->x = (ray->y - py) * -1 * cotan + px;
@@ -43,7 +43,7 @@ void	init_horizontal_ray(t_data *data, t_ray *ray, float px, float py)
 		ray->xo = ray->yo * (-1 * cotan);
 		ray->texture = data->text_data.south;
 	}
-	else if (ray->angle > PI) // Looking down
+	else if (ray->angle > PI)
 	{
 		ray->y = (int)(data->player.y + 1);
 		ray->x = (ray->y - py) * -1 * cotan + px;
@@ -51,7 +51,7 @@ void	init_horizontal_ray(t_data *data, t_ray *ray, float px, float py)
 		ray->xo = ray->yo * (-1 * cotan);
 		ray->texture = data->text_data.north;
 	}
-	if (ray->angle == 0 || ray->angle == PI) // Looking straight left or right
+	if (ray->angle == 0 || ray->angle == PI)
 	{
 		ray->x = px;
 		ray->y = py;
@@ -61,57 +61,42 @@ void	init_horizontal_ray(t_data *data, t_ray *ray, float px, float py)
 
 void	init_vertical_ray(t_data *data, t_ray *ray, float px, float py)
 {
-	if (ray->angle < (PI / 2) || ray->angle > (3 * PI / 2)) // Looking right
-		{
-			ray->x = (int)(data->player.x + 1);
-			ray->y = (ray->x - px) * -1 * tan(ray->angle) + py;
-			ray->xo = 1;
-			ray->yo = ray->xo * -1 * tan(ray->angle); 
-			ray->texture = data->text_data.west;
-		}
-		else if (ray->angle > (PI / 2) && ray->angle < (3 * PI / 2)) // Looking left
-		{
-			ray->x = (int)data->player.x - 0.0001;
-			ray->y = (ray->x - px) * -1 * tan(ray->angle) + py;
-			ray->xo = -1;
-			ray->yo = ray->xo * -1 * tan(ray->angle);
-			ray->texture = data->text_data.east;
-		}
-		if ((ray->angle == (PI / 2)) || (ray->angle == (3 * PI / 2))) // Looking up or down
-		{
-			ray->x = px;
-			ray->y = py;
-			ray->dof = DOF_MAX;
-		}
+	if (ray->angle < (PI / 2) || ray->angle > (3 * PI / 2))
+	{
+		ray->x = (int)(data->player.x + 1);
+		ray->y = (ray->x - px) * -1 * tan(ray->angle) + py;
+		ray->xo = 1;
+		ray->yo = ray->xo * -1 * tan(ray->angle);
+		ray->texture = data->text_data.west;
+	}
+	else if (ray->angle > (PI / 2) && ray->angle < (3 * PI / 2))
+	{
+		ray->x = (int)data->player.x - 0.0001;
+		ray->y = (ray->x - px) * -1 * tan(ray->angle) + py;
+		ray->xo = -1;
+		ray->yo = ray->xo * -1 * tan(ray->angle);
+		ray->texture = data->text_data.east;
+	}
+	if ((ray->angle == (PI / 2)) || (ray->angle == (3 * PI / 2)))
+	{
+		ray->x = px;
+		ray->y = py;
+		ray->dof = DOF_MAX;
+	}
 }
 
 void	determine_hit_ray(t_data *data, t_ray *ray)
 {
 	while (ray->dof < DOF_MAX)
 	{
-		if (ray->x < 0 || ray->x >= data->map_width || ray->y < 0 || ray->y >= data->map_height || data->env.map[(int)ray->y][(int)ray->x] == '1')
+		if (ray->x < 0 || ray->x >= data->map_width || ray->y < 0
+			|| ray->y >= data->map_height
+			|| data->env.map[(int)ray->y][(int)ray->x] == '1')
+			hit_ray_logic(data, ray);
+		else if (data->env.map[(int)ray->y][(int)ray->x] == '2'
+			&& !is_open(data, ray))
 		{
-			ray->dof = DOF_MAX;
-			if (ray->x < 0)
-				ray->x = 0;
-			if (ray->x >= data->map_width)
-				ray->x = data->map_width - 1;
-			if (ray->y < 0)
-				ray->y = 0;
-			if (ray->y >= data->map_height)
-				ray->y = data->map_height - 1;
-		}
-		else if (data->env.map[(int)ray->y][(int)ray->x] == '2' && !is_open(data, ray))
-		{
-			ray->dof = DOF_MAX;
-			if (ray->x < 0)
-				ray->x = 0;
-			if (ray->x >= data->map_width)
-				ray->x = data->map_width - 1;
-			if (ray->y < 0)
-				ray->y = 0;
-			if (ray->y >= data->map_height)
-				ray->y = data->map_height - 1;
+			hit_ray_logic(data, ray);
 			ray->texture = data->text_data.door;
 		}
 		else
@@ -130,5 +115,6 @@ void	calculate_distance(t_data *data, t_ray *ray)
 
 	px = data->player.x;
 	py = data->player.y;
-	ray->dist = sqrt((ray->x - px) * (ray->x - px) + (ray->y - py) * (ray->y - py)) * SCALING;
+	ray->dist = sqrt((ray->x - px) * (ray->x - px)
+			+ (ray->y - py) * (ray->y - py)) * SCALING;
 }

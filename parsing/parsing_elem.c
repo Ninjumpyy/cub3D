@@ -6,7 +6,7 @@
 /*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:00:03 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/25 13:01:50 by tle-moel         ###   ########.fr       */
+/*   Updated: 2024/10/28 13:05:18 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ int	check_elem(char *line, t_env *env)
 	res = check_texture(line, env);
 	if (res != 2)
 		return (res);
+	if (ft_strncmp(line, "DO ", 3) == 0)
+	{
+		if (env->door_texture != NULL || !get_texture(line, &env->door_texture))
+			return (-1);
+		return (0);
+	}
 	res = check_color(line, env);
 	return (res);
 }
@@ -52,12 +58,6 @@ int	check_texture(char *line, t_env *env)
 		if (env->ea_texture != NULL || !get_texture(line, &env->ea_texture))
 			return (-1);
 		return (1);
-	}
-	if (ft_strncmp(line, "DO ", 3) == 0)
-	{
-		if (env->door_texture != NULL || !get_texture(line, &env->door_texture))
-			return (-1);
-		return (0);
 	}
 	return (2);
 }
@@ -94,20 +94,14 @@ int	check_color(char *line, t_env *env)
 	if (ft_strncmp(line, "F ", 2) == 0)
 	{
 		if (env->floor.is_set || !get_color(line, &env->floor))
-		{
-			printf("prob color f\n");
 			return (-1);
-		}
 		env->floor.is_set = 1;
 		return (1);
 	}
 	if (ft_strncmp(line, "C ", 2) == 0)
 	{
 		if (env->ceiling.is_set || !get_color(line, &env->ceiling))
-		{
-			printf("prob color c\n");
 			return (-1);
-		}
 		env->ceiling.is_set = 1;
 		return (1);
 	}
