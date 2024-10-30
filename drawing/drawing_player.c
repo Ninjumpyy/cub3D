@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   drawing_player.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 14:53:15 by rpandipe          #+#    #+#             */
-/*   Updated: 2024/10/28 14:41:12 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/28 14:51:10 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	draw_player_sprite(t_data *data, t_img *img)
 		x = 0;
 		while (x < img->width)
 		{
-			draw_player_pixels((int[2]){x, y}, img, (int[2]){px, py}, data);
+			draw_player_pixels((int [2]){x, y}, img, (int [2]){px, py}, data);
 			x++;
 		}
 		y++;

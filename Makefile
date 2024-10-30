@@ -6,7 +6,7 @@
 #    By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/26 16:10:23 by tle-moel          #+#    #+#              #
-#    Updated: 2024/10/28 14:26:50 by rpandipe         ###   ########.fr        #
+#    Updated: 2024/10/30 11:14:15 by tle-moel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LDFLAG = -Lminilibx-linux -lmlx_Linux -L/usr/lib -Imlx_linux -lXext -lX11 -lm -l
 RM = rm -rf
 SRCS = cub3D.c cub3D_utils.c cub3D_err.c cub3D_free.c cub3D_events.c \
 	   cub3D_move.c cub3D_door.c cub3D_init.c  cub3D_free_img.c \
-	   cub3d_keys.c \
+	   cub3D_keys.c \
 	   $(wildcard parsing/*.c) $(wildcard drawing/*.c)
 OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))

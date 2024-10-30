@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_free.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 11:46:39 by thomas            #+#    #+#             */
-/*   Updated: 2024/10/28 14:15:28 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/30 10:47:33 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	free_doors(t_data *data)
 		free(data->doors);
 		data->doors = ptr;
 	}
+	if (data->text_data.door.img)
+		mlx_destroy_image(data->mlx, data->text_data.door.img);
 }
 
 void	free_cub3d(t_data *data)

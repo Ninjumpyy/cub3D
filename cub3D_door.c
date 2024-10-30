@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_door.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 16:45:25 by tle-moel          #+#    #+#             */
-/*   Updated: 2024/10/28 14:18:38 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/30 10:48:22 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ void	add_door(t_data *data, int x, int y)
 	door->y = y;
 	door->open_amount = 0.0f;
 	door->opening = 0;
+	door->closing = 0;
 	door->next = data->doors;
 	data->doors = door;
 }

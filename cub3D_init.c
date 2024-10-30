@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rpandipe <rpandipe.student.42luxembourg    +#+  +:+       +#+        */
+/*   By: tle-moel <tle-moel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 11:12:58 by rpandipe          #+#    #+#             */
-/*   Updated: 2024/10/28 14:19:50 by rpandipe         ###   ########.fr       */
+/*   Updated: 2024/10/30 10:57:40 by tle-moel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,12 @@ void	init_door(t_data *data)
 		while (x < data->map_width)
 		{
 			if (data->env.map[y][x] == '2')
-				add_door(data, x, y);
+			{
+				if (data->text_data.door.img)
+					add_door(data, x, y);
+				else
+					data->env.map[y][x] = '1';
+			}
 			x++;
 		}
 		y++;
